@@ -108,102 +108,88 @@ if "boardgames" not in st.session_state:
 # DỮ LIỆU MENU ĐỦ 15 MÓN NƯỚC & 5 MÓN BÁNH
 # ==========================================
 DRINKS_MENU = {
-    "Cà Phê Muối Fontaine": {
+    "Cà Phê Muối": {
         "price": 40000,
         "elem": "hydro",
-        "desc": "Hương vị mặn mòi dòng nước nguyên thủy.",
         "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80",
     },
-    "Bạc Xỉu Nguyệt Quang": {
+    "Bạc Xỉu": {
         "price": 40000,
         "elem": "cryo",
-        "desc": "Ngọt ngào và mát lạnh như sương sớm Mondstadt.",
         "img": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&auto=format&fit=crop&q=80",
     },
-    "Espresso Địa Mạch": {
+    "Cà phê sữa": {
         "price": 35000,
         "elem": "pyro",
-        "desc": "Đánh thức sức mạnh hỏa diệm nguyên tố.",
         "img": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&auto=format&fit=crop&q=80",
     },
-    "Trà Đào Hỏa Nguyên": {
-        "price": 40000,
+    "Cà phê đen": {
+        "price": 30000,
         "elem": "pyro",
-        "desc": "Bùng nổ vị giác với đào tươi và thạch lửa.",
         "img": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&auto=format&fit=crop&q=80",
     },
-    "Soda Băng Giá Cryo": {
-        "price": 45000,
+    "Trà Đào": {
+        "price": 35000,
         "elem": "cryo",
-        "desc": "Soda chanh thanh mát sảng khoái băng giá.",
         "img": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80",
     },
-    "Matcha Latte Sumeru": {
-        "price": 50000,
+    "Matcha Latte": {
+        "price": 40000,
         "elem": "dendro",
         "desc": "Hương trà xanh nguyên bản đậm đà học viện.",
         "img": "https://images.unsplash.com/photo-1536256263959-770b48d82b08?w=600&auto=format&fit=crop&q=80",
     },
-    "Sinh Tố Xoài Natlan": {
-        "price": 45000,
+    "Trà Sữa Olong": {
+        "price": 35000,
         "elem": "pyro",
-        "desc": "Xoài chín ngọt ngào dưới ánh nắng rực lửa.",
         "img": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=600&auto=format&fit=crop&q=80",
     },
-    "Trà Sữa Khoai Môn Inazuma": {
+    "Trà Sữa Gạo Rang": {
         "price": 35000,
         "elem": "electro",
-        "desc": "Khoai môn bùi béo kết hợp trà sữa truyền thống.",
         "img": "https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=600&auto=format&fit=crop&q=80",
     },
-    "Nước Ép Việt Quất": {
+    "Trà Sen Vàng": {
         "price": 35000,
         "elem": "hydro",
-        "desc": "Việt quất tươi mọng nước giàu vitamin.",
         "img": "https://images.unsplash.com/photo-1527661591475-527312dd65f5?w=600&auto=format&fit=crop&q=80",
     },
     "Hồng Trà Kem Cheese": {
-        "price": 40000,
+        "price": 35000,
         "elem": "cryo",
         "desc": "Lớp kem mặn bồng bềnh phủ trên hồng trà.",
         "img": "https://images.unsplash.com/photo-1556742049-0a67d553c2a5?w=600&auto=format&fit=crop&q=80",
     },
-    "Cacao Nóng Vực Thẳm": {
-        "price": 45000,
+    "Yaourt Việt Quất": {
+        "price": 40000,
         "elem": "pyro",
-        "desc": "Socola đắng nhẹ nguyên chất từ cõi tối.",
         "img": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=600&auto=format&fit=crop&q=80",
     },
-    "Cold Brew Trái Cây": {
-        "price": 55000,
+    "Trà Sữa Thái Xanh": {
+        "price": 35000,
         "elem": "dendro",
-        "desc": "Cà phê ủ lạnh kết hợp trái cây nhiệt đới.",
         "img": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&auto=format&fit=crop&q=80",
     },
-    "Trà Xanh Hoa Nhài": {
-        "price": 40000,
+    "Trà Chanh Lô Hội": {
+        "price": 30000,
         "elem": "anemo",
-        "desc": "Thanh tao hương nhài bay bổng gió trời.",
         "img": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&auto=format&fit=crop&q=80",
     },
     "Sữa Tươi Trân Châu": {
-        "price": 40000,
+        "price": 35000,
         "elem": "geo",
-        "desc": "Sữa tươi thanh paster kèm trân châu đường đen.",
         "img": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=600&auto=format&fit=crop&q=80",
     },
-    "Nước Chanh Mật Ong": {
-        "price": 38000,
+    "Phindi Hạnh Nhân": {
+        "price": 40000,
         "elem": "anemo",
-        "desc": "Giải khát thanh lọc cơ thể tức thì.",
         "img": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&auto=format&fit=crop&q=80",
     },
 }
 
 DESSERTS_MENU = {
-    "Mousse Trà Xanh": {
-        "price": 35000,
-        "desc": "Mềm mịn vị matcha nguyên bản từ đảo Narukami.",
+    "Mousse Chanh Dây": {
+        "price": 30000,
         "img": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&auto=format&fit=crop&q=80",
     },
     "Tiramisu Việt Quất": {
@@ -211,17 +197,17 @@ DESSERTS_MENU = {
         "desc": "Hương vị lãng mạn kinh điển xứ sở nghệ thuật.",
         "img": "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&auto=format&fit=crop&q=80",
     },
-    "Su Kem Mondstadt": {
-        "price": 30000,
+    "Su Kem": {
+        "price": 25000,
         "desc": "Tan chảy ngay từ miếng cắn đầu tiên.",
         "img": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80",
     },
-    "Tart Trứng Liyue": {
+    "Tart Trứng": {
         "price": 30000,
         "desc": "Vỏ ngàn lớp giòn rụm, nhân trứng béo ngậy.",
         "img": "https://images.unsplash.com/photo-1519869325930-281384150729?w=600&auto=format&fit=crop&q=80",
     },
-    "Donut Socola": {
+    "Donut": {
         "price": 25000,
         "desc": "Socola nguyên chất đậm sâu kích thích vị giác.",
         "img": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format&fit=crop&q=80",
@@ -286,7 +272,7 @@ st.markdown(
 # SIDEBAR
 # ==========================================
 with st.sidebar:
-    st.markdown("### 🌟 TRUNG TÂM LỮ KHÁCH")
+    st.markdown("### 🌟 NƠI DỪNG CHÂN LỮ KHÁCH")
     current_user_gems = st.session_state.primogems_db.get(
         st.session_state.customer_name, 0
     )
