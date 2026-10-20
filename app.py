@@ -133,15 +133,22 @@ if "discount_percent" not in st.session_state:
     st.session_state.discount_percent = 0
 if "user_primogems" not in st.session_state:
     st.session_state.user_primogems = 0
+
+# CẬP NHẬT TÊN BÀN THEO ĐÚNG BẢN ĐỒ TRONG ẢNH
 if "table_status" not in st.session_state:
     st.session_state.table_status = {
-        "Ban 01 (Quan ruou Angel's Share)": True,
-        "Ban 02 (Cang Liyue)": False,
-        "Ban 03 (Den Narukami Inazuma)": True,
-        "Ban 04 (Hoc vien Sumeru)": True,
-        "Ban 05 (Nha hat Fontaine)": False,
-        "Ban VIP Natlan": True,
+        "Mondstadt": True,
+        "Liyue": False,
+        "Inazuma": True,
+        "Sumeru": True,
+        "Fontaine": False,
+        "Natlan": True,
+        "Nod-Krai": True,
+        "Snezhnaya": False,
+        "Enkanomiya": True,
+        "Vực Đá Sâu - Khu Mỏ Ngầm": False,
     }
+
 if "boardgames" not in st.session_state:
     st.session_state.boardgames = {
         "Bai Ma So (Ultimate Werewolf)": True,
@@ -237,7 +244,6 @@ DESSERTS_MENU = {
     },
 }
 
-# DỮ LIỆU TRÒ CHƠI VỚI HÌNH ẢNH MINH HỌA ĐÚNG CHUẨN TỪNG TỰA GAME
 BOARDGAMES_DATA = {
     "Bai Ma So (Ultimate Werewolf)": {
         "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn đông người.",
@@ -623,13 +629,13 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 4. SƠ ĐỒ BÀN TRỐNG QUÁN
+# 4. SƠ ĐỒ BÀN TRỐNG QUÁN (CẬP NHẬT TÊN VÙNG ĐẤT TEYVAT)
 # ==========================================
 elif nav_option == "🪑 Sơ Đồ Bàn Trống Quán":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🪑 Bản Đồ Ghế Ngồi Tại Quán Limdim")
+    st.markdown("## 🪑 Bản Đồ Vùng Đất & Ghế Ngồi Teyvat")
     st.write(
-        "Kiểm tra bàn trống thời gian thực để chọn không gian ngồi phù hợp."
+        "Kiểm tra trạng thái chỗ ngồi tại các khu vực nổi tiếng của đại lục."
     )
 
     cols = st.columns(3)
@@ -640,15 +646,15 @@ elif nav_option == "🪑 Sơ Đồ Bàn Trống Quán":
                 f"<div style='background: rgba(15, 23, 42, 0.7); padding: 16px; border-radius: 14px; margin-bottom: 15px; border: 1px solid rgba(245, 158, 11, 0.3); text-align: center;'>",
                 unsafe_allow_html=True,
             )
-            st.markdown(f"**{table_name}**")
+            st.markdown(f"**Vùng: {table_name}**")
             if is_empty:
                 st.markdown(
-                    "<p style='color: #4ade80; font-weight: bold; margin: 8px 0;'>🟢 CÒN TRỐNG</p>",
+                    "<p style='color: #4ade80; font-weight: bold; margin: 8px 0;'>🟢 BÀN TRỐNG</p>",
                     unsafe_allow_html=True,
                 )
                 if st.button(f"Đặt bàn", key=f"book_{table_name}"):
                     st.session_state.table_status[table_name] = False
-                    st.success(f"Đã giữ chỗ {table_name}!")
+                    st.success(f"Đã giữ chỗ tại {table_name}!")
                     st.rerun()
             else:
                 st.markdown(
@@ -657,7 +663,7 @@ elif nav_option == "🪑 Sơ Đồ Bàn Trống Quán":
                 )
                 if st.button(f"Trống bàn", key=f"free_{table_name}"):
                     st.session_state.table_status[table_name] = True
-                    st.success(f"{table_name} đã trống!")
+                    st.success(f"Khu vực {table_name} đã trống!")
                     st.rerun()
             st.markdown("</div>", unsafe_allow_html=True)
         idx += 1
