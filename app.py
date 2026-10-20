@@ -364,7 +364,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
     with col_order_right:
         st.markdown(
-            '<div class="genshin-card"><h3>🧋 Tùy Chỉnh & Gọi Món</h3>',
+            '<div class="genshin-card"><h3>🧋 Gọi Món</h3>',
             unsafe_allow_html=True,
         )
         input_name = st.text_input(
@@ -651,7 +651,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
 # ==========================================
 elif nav_option == "🪑 Sơ Đồ Bàn Trống":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🪑 Sơ Đồ Bàn Trống (Teyvat Regions)")
+    st.markdown("## 🪑 Sơ Đồ Bàn Trống")
     st.write(
         "Trạng thái thực tế của 12 bàn theo các vùng đất trong game."
     )
