@@ -66,10 +66,10 @@ st.markdown(
 
     /* Khung thẻ kính mờ Glassmorphism */
     .genshin-card {
-        background: rgba(15, 23, 42, 0.8);
+        background: rgba(15, 23, 42, 0.85);
         border: 2px solid rgba(245, 158, 11, 0.4);
         border-radius: 20px;
-        padding: 24px;
+        padding: 20px;
         backdrop-filter: blur(16px);
         margin-bottom: 20px;
         animation: cardGlow 5s infinite ease-in-out;
@@ -80,11 +80,11 @@ st.markdown(
         background: linear-gradient(135deg, #d97706 0%, #b45309 50%, #78350f 100%);
         color: #fffdf0;
         border: 1px solid #fde047;
-        border-radius: 14px;
+        border-radius: 12px;
         font-family: 'Cinzel', serif;
         font-weight: 700;
         letter-spacing: 1px;
-        padding: 0.7rem 1.5rem;
+        padding: 0.6rem 1.2rem;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 4px 20px rgba(217, 119, 6, 0.4);
     }
@@ -136,12 +136,12 @@ if "user_primogems" not in st.session_state:
     st.session_state.user_primogems = 0
 if "table_status" not in st.session_state:
     st.session_state.table_status = {
-        "Ban 01 (Quan ruou Angel's Share - Mondstadt)": True,
-        "Ban 02 (Cang Liyue - Nguy Hai Gian)": False,
-        "Ban 03 (Den Narukami - Inazuma)": True,
-        "Ban 04 (Hoc vien Sumeru - Akademiya)": True,
-        "Ban 05 (Nha hat Opera Fontaine)": False,
-        "Ban VIP Hoang Gia Natlan": True,
+        "Ban 01 (Quan ruou Angel's Share)": True,
+        "Ban 02 (Cang Liyue)": False,
+        "Ban 03 (Den Narukami Inazuma)": True,
+        "Ban 04 (Hoc vien Sumeru)": True,
+        "Ban 05 (Nha hat Fontaine)": False,
+        "Ban VIP Natlan": True,
     }
 
 # ==========================================
@@ -160,8 +160,8 @@ DRINKS_MENU = {
         "price": 35000, "elem": "pyro", "desc": "Dinh thuc suc manh hoa diem nguyen to.",
         "img": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=600&q=80"
     },
-    "Cold Brew Trai Cay Phong Than": {
-        "price": 50000, "elem": "dendro", "desc": "Thanh mat huong co cay tu rung sau Sumeru.",
+    "Cold Brew Trái Cây Phong Thần": {
+        "price": 50000, "elem": "dendro", "desc": "Thanh mát hương cỏ cây từ rừng sâu Sumeru.",
         "img": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=80"
     },
     "Tra Dao Hoa Nguyen To": {
@@ -190,9 +190,6 @@ DRINKS_MENU = {
     }
 }
 
-# ==========================================
-# DỮ LIỆU BÁNH NGỌT TRÁNG MIỆNG BẮT MẮT
-# ==========================================
 DESSERTS_MENU = {
     "Banh Mousse Tra Xanh Inazuma": {
         "price": 45000, "desc": "Mem min vi matcha nguyen ban tu dao Narukami.",
@@ -213,17 +210,13 @@ DESSERTS_MENU = {
     "Banh Brownie Socola Vuc Tham": {
         "price": 48000, "desc": "Socola dang nhe nguyen chat dam sau kich thich vi giac.",
         "img": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
-    },
-    "Banh Macaron Cau Vong Sumeru": {
-        "price": 42000, "desc": "Ngot ngao day mau sac tu hoc vien tri thuc.",
-        "img": "https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=600&q=80"
     }
 }
 
 TOPPINGS = {
     "Tran chau den hoang gia (+8k)": 8000,
     "Tran chau trang suong mu (+8k)": 8000,
-    "Thach dua nha đam nguyen to (+10k)": 10000,
+    "Thach dua nha dam nguyen to (+10k)": 10000,
     "Kem Cheese beo ngay thuong hang (+12k)": 12000,
     "Pudding trung beo tan chay (+10k)": 10000,
     "Thach Thuy Tinh Pha Le (+10k)": 10000,
@@ -270,18 +263,17 @@ with st.sidebar:
         st.rerun()
 
 # ==========================================
-# TÍNH NĂNG 1: KHÁM PHÁ MENU & GỌI MÓN (TRỰC QUAN & ĐỀ XUẤT BÁNH KÈM NGAY KẾ BÊN)
+# TÍNH NĂNG 1: KHÁM PHÁ MENU & GỌI MÓN (3 CỘT: MENU NƯỚC | GỢI Ý BÁNH NGỌT | HÓA ĐƠN GỌN GÀNG)
 # ==========================================
 if nav_option == "🛒 Khám Phá Menu & Gọi Món":
-    col_menu, col_bill = st.columns([1.4, 1])
+    col_menu, col_cake_suggest, col_bill = st.columns([1.1, 1, 0.9])
 
+    # CỘT 1: MENU NƯỚC & CẤU HÌNH ORDER
     with col_menu:
-        st.markdown('<div class="genshin-card"><h3>📜 Sổ Tay Thực Đơn Teyvat (Hiển Thị Trực Quan)</h3>', unsafe_allow_html=True)
-        
-        st.markdown("#### 🍹 Danh sách Thức Uống Nguyên Tố:")
+        st.markdown('<div class="genshin-card"><h3>🍹 Thức Uống Teyvat</h3>', unsafe_allow_html=True)
         drink_keys = list(DRINKS_MENU.keys())
         
-        # Hiển thị lưới hình ảnh nước uống bắt mắt hoàn toàn không có nút chọn rườm rà
+        # Hiển thị trực quan danh sách món nước
         for i in range(0, len(drink_keys), 2):
             c1, c2 = st.columns(2)
             for c_idx, col_slot in enumerate([c1, c2]):
@@ -292,48 +284,18 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                         st.image(d_info["img"], use_column_width=True)
                         st.markdown(f"**{d_name}**")
                         st.markdown(f"<span class='element-tag {d_info['elem']}'>{d_info['elem'].upper()}</span> <b style='color: #fde047;'>{d_info['price']:,.0f}đ</b>", unsafe_allow_html=True)
-                        st.caption(d_info['desc'])
 
         st.markdown("---")
-        st.markdown("### 🧋 Khu Vực Order & Gợi Ý Bánh Ngọt Đi Kèm")
-        
-        # Bố trí phần order nước và gợi ý bánh ngọt ngay kế bên nhau (chia 2 cột)
-        col_order_drink, col_suggest_cake = st.columns(2)
+        st.markdown("#### 🧋 Tùy Chỉnh Ly Nước:")
+        selected_drink = st.selectbox("Chọn món nước:", drink_keys)
+        drink_info = DRINKS_MENU[selected_drink]
 
-        with col_order_drink:
-            st.markdown("#### 1. Chọn món nước:")
-            selected_drink = st.selectbox("Món nước:", drink_keys)
-            drink_info = DRINKS_MENU[selected_drink]
+        sugar = st.selectbox("Độ ngọt", ["100%", "70%", "50%", "30%", "0%"])
+        ice = st.selectbox("Lượng đá", ["Bình thường", "Ít đá", "Đá riêng", "Không đá"])
+        size = st.selectbox("Size ly", ["M (Tiêu chuẩn)", "L (+7,000đ)", "XL (+15,000đ)"])
 
-            sugar = st.selectbox("Độ ngọt", ["100%", "70%", "50%", "30%", "0%"])
-            ice = st.selectbox("Lượng đá", ["Bình thường", "Ít đá", "Đá riêng", "Không đá"])
-            size = st.selectbox("Size ly", ["M (Tiêu chuẩn)", "L (+7,000đ)", "XL (+15,000đ)"])
-
-        with col_suggest_cake:
-            st.markdown("#### 2. 🍰 Gợi ý bánh ăn kèm:")
-            cake_keys = list(DESSERTS_MENU.keys())
-            selected_cake_name = st.selectbox(
-                "Chọn bánh ngọt:",
-                ["-- Không dùng bánh ngọt --"] + cake_keys,
-                format_func=lambda x: f"✨ {x} ({DESSERTS_MENU[x]['price']:,.0f}đ)" if x != "-- Không dùng bánh ngọt --" else x
-            )
-            
-            cake_data = None
-            if selected_cake_name != "-- Không dùng bánh ngọt --":
-                c_info = DESSERTS_MENU[selected_cake_name]
-                st.image(c_info["img"], use_column_width=True)
-                st.caption(f"**{selected_cake_name}**\n{c_info['desc']}")
-                cake_data = {
-                    "name": selected_cake_name,
-                    "price": c_info["price"],
-                    "desc": c_info["desc"]
-                }
-            else:
-                st.info("💡 Gợi ý: Thêm một chiếc bánh ngọt sẽ giúp trải nghiệm vị giác trọn vẹn hơn!")
-
-        st.markdown("---")
         selected_toppings = []
-        st.markdown("✨ **Thêm Topping Thần Kỳ:**")
+        st.markdown("✨ **Topping Thần Kỳ:**")
         top_cols = st.columns(2)
         idx = 0
         for top_name, top_price in TOPPINGS.items():
@@ -343,8 +305,35 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             idx += 1
 
         qty = st.number_input("Số lượng", min_value=1, max_value=20, value=1)
-        note = st.text_input("Ghi chú cho Bartender", placeholder="VD: ít ngọt, mang ra bàn chính...")
+        note = st.text_input("Ghi chú Bartender", placeholder="VD: ít đá...")
+        st.markdown("</div>", unsafe_allow_html=True)
 
+    # CỘT 2: GỢI Ý BÁNH NGỌT KÈM HÌNH ẢNH NGAY KẾ BÊN
+    with col_cake_suggest:
+        st.markdown('<div class="genshin-card"><h3>🍰 Gợi Ý Bánh Ngọt</h3>', unsafe_allow_html=True)
+        cake_keys = list(DESSERTS_MENU.keys())
+        
+        selected_cake_name = st.selectbox(
+            "Chọn bánh ngọt ăn kèm:",
+            ["-- Không dùng bánh ngọt --"] + cake_keys,
+            format_func=lambda x: f"✨ {x} ({DESSERTS_MENU[x]['price']:,.0f}đ)" if x != "-- Không dùng bánh ngọt --" else x
+        )
+        
+        cake_data = None
+        if selected_cake_name != "-- Không dùng bánh ngọt --":
+            c_info = DESSERTS_MENU[selected_cake_name]
+            st.image(c_info["img"], use_column_width=True)
+            st.markdown(f"**{selected_cake_name}** — <b style='color: #4ade80;'>{c_info['price']:,.0f} VNĐ</b>", unsafe_allow_html=True)
+            st.caption(c_info["desc"])
+            cake_data = {
+                "name": selected_cake_name,
+                "price": c_info["price"],
+                "desc": c_info["desc"]
+            }
+        else:
+            st.info("💡 Thêm bánh ngọt giúp tăng trải nghiệm vị giác và tích lũy thêm Nguyên Thạch nhanh chóng!")
+
+        st.markdown("---")
         if st.button("➕ THÊM VÀO HÓA ĐƠN", use_container_width=True):
             actual_price = drink_info["price"]
             if "L (+7,000đ)" in size:
@@ -371,74 +360,56 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             st.success(f"Đã thêm **{selected_drink}**{' và bánh ngọt' if cake_data else ''} vào bill!")
         st.markdown("</div>", unsafe_allow_html=True)
 
+    # CỘT 3: HÓA ĐƠN GỌN GÀNG VỪA VĂN
     with col_bill:
-        st.markdown('<div class="genshin-card"><h3>🧾 Hóa Đơn Lữ Khách</h3>', unsafe_allow_html=True)
+        st.markdown('<div class="genshin-card"><h3>🧾 Hóa Đơn</h3>', unsafe_allow_html=True)
         if not st.session_state.cart:
-            st.warning("Giỏ hàng chưa có món nào. Hãy chọn món bên trái nhé!")
+            st.warning("Giỏ hàng trống!")
         else:
             subtotal = 0
             for i, cart_item in enumerate(st.session_state.cart):
                 st.markdown(f"**{i+1}. {cart_item['name']}** x{cart_item['qty']}")
-                st.caption(f"Size: {cart_item['size']} | Đường: {cart_item['sugar']} | Đá: {cart_item['ice']}")
-                if cart_item["toppings"]:
-                    top_names = ", ".join([t["name"] for t in cart_item["toppings"]])
-                    st.caption(f"Topping: {top_names}")
                 if cart_item["paired_cake"]:
-                    st.caption(f"🍰 Bánh kèm: {cart_item['paired_cake']['name']} ({cart_item['paired_cake']['price']:,.0f}đ)")
+                    st.caption(f"🍰 + {cart_item['paired_cake']['name']} ({cart_item['paired_cake']['price']:,.0f}đ)")
                     subtotal += cart_item["paired_cake"]["price"]
-                if cart_item["note"]:
-                    st.caption(f"📝 *{cart_item['note']}*")
-                
-                st.markdown(
-                    f"<div style='text-align: right; color: #fde047; font-weight: bold;'>{cart_item['total_price']:,.0f} VNĐ</div>",
-                    unsafe_allow_html=True,
-                )
                 subtotal += cart_item["total_price"]
-                st.markdown("<hr style='margin: 6px 0; opacity: 0.15;'>", unsafe_allow_html=True)
+                st.markdown("<hr style='margin: 4px 0; opacity: 0.1;'>", unsafe_allow_html=True)
 
             if st.session_state.discount_percent > 0:
-                st.success(f"🎉 Voucher kích hoạt: **{st.session_state.discount_code}** (-{st.session_state.discount_percent}%)")
                 discount_amount = subtotal * (st.session_state.discount_percent / 100)
+                st.success(f"Voucher: -{st.session_state.discount_percent}%")
             else:
                 discount_amount = 0
 
             final_total = subtotal - discount_amount
 
-            st.markdown(f"**Tạm tính:** {subtotal:,.0f} VNĐ")
-            if discount_amount > 0:
-                st.markdown(f"**Giảm giá:** -{discount_amount:,.0f} VNĐ", unsafe_allow_html=True)
             st.markdown(
-                f"<h2 style='color: #4ade80; text-align: right;'>Tổng Bill: {final_total:,.0f} VNĐ</h2>",
+                f"<h3 style='color: #4ade80; text-align: right; margin-top: 10px;'>Tổng: {final_total:,.0f} đ</h3>",
                 unsafe_allow_html=True,
             )
 
-            st.markdown("---")
-            st.markdown("### 💳 Phương thức thanh toán")
-            pay_method = st.radio("Chọn hình thức:", ["Tiền mặt tại quầy", "Chuyển khoản VietQR Ngân hàng"])
-
-            if pay_method == "Chuyển khoản VietQR Ngân hàng":
+            pay_method = st.radio("Thanh toán:", ["Tiền mặt", "VietQR Ngân hàng"])
+            if pay_method == "VietQR Ngân hàng":
                 st.markdown(
                     """
-                    <div style="text-align: center; background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(226,232,240,0.9) 100%); padding: 18px; border-radius: 16px; color: #000; box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);">
-                        <img src="https://api.vietqr.io/image/970422-0391234567-xxxx.jpg?accountName=LIMDIM%20COFFEE&amount="""
+                    <div style="text-align: center; background: white; padding: 10px; border-radius: 10px; color: black;">
+                        <img src="https://api.vietqr.io/image/970422-0391234567-xxxx.jpg?accountName=LIMDIM&amount="""
                     + str(int(final_total))
-                    + """&addInfo=Thanh%20toan%20Bill%20Limdim" width="190px">
-                        <p style="margin-top: 8px; font-weight: bold; color: #111;">Quét mã VietQR thanh toán tự động</p>
-                        <p style="font-size: 0.85rem; color: #555;">MB Bank | STK: 0391234567<br>Chủ tài khoản: LIMDIM COFFEE</p>
+                    + """" width="140px">
+                        <p style="font-size: 0.8rem; margin: 4px 0; font-weight: bold;">Quét mã VietQR</p>
                     </div>
                     """,
                     unsafe_allow_html=True,
                 )
 
-            if st.button("🚀 Gửi Order Cho Bartender", use_container_width=True):
+            if st.button("🚀 Gửi Order", use_container_width=True):
                 if not st.session_state.cart:
-                    st.error("Giỏ hàng trống!")
+                    st.error("Trống!")
                 else:
                     earned_primogems = int(final_total // 25000) * 16
                     st.session_state.user_primogems += earned_primogems
-                    
                     st.balloons()
-                    st.success(f"🎉 Đặt món thành công! Bạn nhận được thêm **+{earned_primogems} 💎 Nguyên Thạch** vào ví tích lũy!")
+                    st.success(f"Thành công! +{earned_primogems} 💎 Nguyên Thạch!")
                     st.session_state.cart = []
                     st.session_state.discount_code = None
                     st.session_state.discount_percent = 0
