@@ -364,7 +364,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             unsafe_allow_html=True,
         )
         input_name = st.text_input(
-            "👤 Tên Lữ Khách (Nhập tên của bạn):",
+            "👤 Tên Lữ Khách:",
             value=st.session_state.customer_name,
             placeholder="Ví dụ: Aether, Lumine...",
         )
