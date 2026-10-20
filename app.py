@@ -97,8 +97,6 @@ if "boardgames" not in st.session_state:
         "Bài True or Dare": True,
         "Bài Uno": True,
         "Mèo Nổ": False,
-        "Cờ vua": True.
-        "Cờ tướng": False,
     }
 
 # ==========================================
