@@ -211,7 +211,7 @@ DESSERTS_MENU = {
 BOARDGAMES_DATA = {
     "Bài Ma Sói": {
         "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn.",
-        "img": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=80",
+        "img": "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=600&auto=format&fit=crop&q=80",
     },
     "Cờ Cá Ngựa": {
         "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
@@ -330,9 +330,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     d_name = drink_keys[i + c_idx]
                     d_info = DRINKS_MENU[d_name]
                     with col_slot:
-                        st.image(
-                            d_info["img"], use_column_width=True, width=250
-                        )
+                        st.image(d_info["img"], use_column_width=True)
                         st.markdown(f"**{d_name}**")
                         st.markdown(
                             f"<span class='element-tag {d_info['elem']}'>{d_info['elem'].upper()}</span> <b style='color: #fde047;'>{d_info['price']:,.0f}đ</b>",
@@ -352,9 +350,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     c_name = cake_keys[i + c_idx]
                     c_info = DESSERTS_MENU[c_name]
                     with col_slot:
-                        st.image(
-                            c_info["img"], use_column_width=True, width=250
-                        )
+                        st.image(c_info["img"], use_column_width=True)
                         st.markdown(f"**{c_name}**")
                         st.markdown(
                             f"<b style='color: #4ade80;'>{c_info['price']:,.0f}đ</b>",
@@ -619,9 +615,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
                         f"<div style='background: rgba(15, 23, 42, 0.7); padding: 14px; border-radius: 14px; margin-bottom: 15px; border: 1px solid rgba(245, 158, 11, 0.3); text-align: center;'>",
                         unsafe_allow_html=True,
                     )
-                    st.image(
-                        g_info["img"], use_column_width=True, width=250
-                    )
+                    st.image(g_info["img"], use_column_width=True)
                     st.markdown(f"**{g_name}**")
                     st.caption(g_info["desc"])
 
