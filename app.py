@@ -12,14 +12,14 @@ st.set_page_config(
 )
 
 # ==========================================
-# GIAO DIỆN & HIỆU ỨNG NỀN ĐỘNG PHIÊU LƯU (GENSHIN STYLE)
+# GIAO DIỆN & HIỆU NỨNG NỀN ĐỘNG PHIÊU LƯU (GENSHIN STYLE)
 # ==========================================
 st.markdown(
     """
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
 
-    /* Nền động chuyển động mượt mà phong cách phiêu lưu thế giới mở Teyvat */
+    /* Nền động chuyển màu mượt mà phong cách thế giới mở Teyvat */
     .stApp {
         background: linear-gradient(-45deg, #070913, #0d1b2a, #1b1128, #111827);
         background-size: 400% 400%;
@@ -110,6 +110,7 @@ st.markdown(
     .cryo { background: rgba(56, 189, 248, 0.25); color: #38bdf8; border: 1px solid #0284c7; }
     .electro { background: rgba(168, 85, 247, 0.25); color: #c084fc; border: 1px solid #a855f7; }
     .dendro { background: rgba(34, 197, 94, 0.25); color: #4ade80; border: 1px solid #22c55e; }
+    .geo { background: rgba(234, 179, 8, 0.25); color: #facc15; border: 1px solid #eab308; }
 
     /* Thanh sidebar */
     [data-testid="stSidebar"] {
@@ -131,7 +132,7 @@ if "discount_code" not in st.session_state:
 if "discount_percent" not in st.session_state:
     st.session_state.discount_percent = 0
 if "user_primogems" not in st.session_state:
-    st.session_state.user_primogems = 1600
+    st.session_state.user_primogems = 0  # Bắt đầu với 0 nguyên thạch để tích lũy
 if "table_status" not in st.session_state:
     st.session_state.table_status = {
         "Bàn 01 (Quán rượu Angel's Share - Mondstadt)": True,
@@ -143,72 +144,69 @@ if "table_status" not in st.session_state:
     }
 
 # ==========================================
-# DỮ LIỆU MENU KÈM HÌNH ẢNH MINH HỌA THỰC TẾ
+# DỮ LIỆU MENU NƯỚC UỐNG & TOPPING ĐA DẠNG
 # ==========================================
 DRINKS_MENU = {
     "Năng Lượng Cà Phê Muối (Sứ giả Fontaine)": {
-        "price": 45000, 
-        "elem": "hydro", 
-        "desc": "Hương vị mặn mòi dòng nước nguyên thủy.",
+        "price": 45000, "elem": "hydro", "desc": "Hương vị mặn mòi dòng nước nguyên thủy.",
         "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80"
     },
     "Bạc Xỉu Tinh Thể Nguyệt Quang": {
-        "price": 42000, 
-        "elem": "cryo", 
-        "desc": "Ngọt ngào và mát lạnh như sương sớm Mondstadt.",
+        "price": 42000, "elem": "cryo", "desc": "Ngọt ngào và mát lạnh như sương sớm Mondstadt.",
         "img": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=600&q=80"
     },
     "Espresso Phong Ấn Địa Mạch": {
-        "price": 35000, 
-        "elem": "pyro", 
-        "desc": "Đánh thức sức mạnh hỏa diệm nguyên tố.",
+        "price": 35000, "elem": "pyro", "desc": "Đánh thức sức mạnh hỏa diệm nguyên tố.",
         "img": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=600&q=80"
     },
     "Cold Brew Trái Cây Phong Thần": {
-        "price": 50000, 
-        "elem": "dendro", 
-        "desc": "Thanh mát hương cỏ cây từ rừng sâu Sumeru.",
+        "price": 50000, "elem": "dendro", "desc": "Thanh mát hương cỏ cây từ rừng sâu Sumeru.",
         "img": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=80"
     },
     "Trà Đào Hỏa Nguyên Tố": {
-        "price": 48000, 
-        "elem": "pyro", 
-        "desc": "Bùng nổ vị giác với đào tươi và thạch lửa.",
+        "price": 48000, "elem": "pyro", "desc": "Bùng nổ vị giác với đào tươi và thạch lửa.",
         "img": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80"
     },
     "Trà Sữa Trân Châu Lôi Nguyên Tố": {
-        "price": 52000, 
-        "elem": "electro", 
-        "desc": "Tia chớp tím béo ngậy từ đảo Inazuma.",
+        "price": 52000, "elem": "electro", "desc": "Tia chớp tím béo ngậy từ đảo Inazuma.",
         "img": "https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&w=600&q=80"
     },
+    "Trà Sữa Oánh Trống Natlan": {
+        "price": 55000, "elem": "geo", "desc": "Vị cacao đậm đà kèm trân châu dung nham nóng bỏng.",
+        "img": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80"
+    },
+    "Nước Ép Thần Tinh Linh Fontaine": {
+        "price": 58000, "elem": "hydro", "desc": "Thức uống kỳ ảo ban phước từ suối nguồn nước tinh khiết.",
+        "img": "https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=600&q=80"
+    }
 }
 
+# MENU BÁNH NGỌT KÈM ẢNH MINH HỌA BẮT MẮT
 DESSERTS_MENU = {
     "Bánh Mousse Trà Xanh Inazuma": {
-        "price": 45000, 
-        "elem": "dendro", 
-        "desc": "Mềm mịn vị matcha nguyên bản từ đảo Narukami.",
+        "price": 45000, "desc": "Mềm mịn vị matcha nguyên bản từ đảo Narukami.",
         "img": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80"
     },
     "Bánh Tiramisu Hạt Dẻ Fontaine": {
-        "price": 50000, 
-        "elem": "hydro", 
-        "desc": "Hương vị lãng mạn kinh điển xứ sở nghệ thuật.",
+        "price": 50000, "desc": "Hương vị lãng mạn kinh điển xứ sở nghệ thuật.",
         "img": "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=600&q=80"
     },
     "Bánh Su Kem Ngọt Ngào Mondstadt": {
-        "price": 35000, 
-        "elem": "cryo", 
-        "desc": "Tan chảy ngay từ miếng cắn đầu tiên.",
+        "price": 35000, "desc": "Tan chảy ngay từ miếng cắn đầu tiên với lớp kem sữa tươi.",
         "img": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80"
     },
     "Bánh Tart Trứng Liyue Thơm Phức": {
-        "price": 32000, 
-        "elem": "pyro", 
-        "desc": "Vỏ ngàn lớp giòn rụm, nhân trứng béo ngậy.",
+        "price": 32000, "desc": "Vỏ ngàn lớp giòn rụm, nhân trứng béo ngậy thơm nức mũi.",
         "img": "https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80"
     },
+    "Bánh Brownie Socola Vực Thẳm": {
+        "price": 48000, "desc": "Socola đắng nhẹ nguyên chất đậm sâu kích thích vị giác.",
+        "img": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
+    },
+    "Bánh Macaron Cầu Vồng Sumeru": {
+        "price": 42000, "desc": "Ngọt ngào đầy màu sắc từ học viện tri thức.",
+        "img": "https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=600&q=80"
+    }
 }
 
 TOPPINGS = {
@@ -217,6 +215,8 @@ TOPPINGS = {
     "Thạch dừa nha đam nguyên tố (+10k)": 10000,
     "Kem Cheese béo ngậy thượng hạng (+12k)": 12000,
     "Pudding trứng béo tan chảy (+10k)": 10000,
+    "Thạch Thủy Tinh Pha Lê (+10k)": 10000,
+    "Trân Châu Dung Nam Natlan (+12k)": 12000,
 }
 
 # ==========================================
@@ -230,8 +230,15 @@ st.markdown('<div class="genshin-subtitle">"Hành trình phiêu lưu vị giác 
 # ==========================================
 with st.sidebar:
     st.markdown("### 🌟 TRUNG TÂM LỮ KHÁCH TEYVAT")
-    st.info(f"💎 Nguyên Thạch: **{st.session_state.user_primogems} ✨**")
     
+    # Hiển thị số Nguyên Thạch đang tích lũy
+    st.info(f"💎 Nguyên Thạch tích lũy: **{st.session_state.user_primogems} / 160 ✨**")
+    if st.session_state.user_primogems >= 160:
+        st.success("🎉 Bạn đã đủ 160 Nguyên Thạch! Hãy sang mục **Cổng Gacha** để đổi lượt quay miễn phí!")
+    else:
+        needed = 160 - st.session_state.user_primogems
+        st.caption(f"💡 Cần thêm `{needed} 💎` nữa để đổi 1 lượt Gacha (Mỗi 25k tiền bill = 16 Nguyên Thạch).")
+
     nav_option = st.radio(
         "Chọn không gian:",
         [
@@ -254,7 +261,7 @@ with st.sidebar:
         st.rerun()
 
 # ==========================================
-# TÍNH NĂNG 1: KHÁM PHÁ MENU & GỌI MÓN (CÓ ĐỀ XUẤT BÁNH KÈM THEO)
+# TÍNH NĂNG 1: KHÁM PHÁ MENU & GỌI MÓN (ĐỀ XUẤT BÁNH KÈM HÌNH ẢNH)
 # ==========================================
 if nav_option == "🛒 Khám Phá Menu & Gọi Món":
     col1, col2 = st.columns([1.3, 1])
@@ -262,7 +269,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
     with col1:
         st.markdown('<div class="genshin-card"><h3>📜 Sổ Tay Thực Đơn Teyvat</h3>', unsafe_allow_html=True)
         
-        selected_item = st.selectbox("Chọn thức uống:", list(DRINKS_MENU.keys()))
+        selected_item = st.selectbox("Chọn thức uống nguyên tố:", list(DRINKS_MENU.keys()))
         item_info = DRINKS_MENU[selected_item]
         
         # Hình ảnh minh họa nước uống
@@ -302,15 +309,16 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
         qty = st.number_input("Số lượng", min_value=1, max_value=20, value=1)
         note = st.text_input("Ghi chú cho Bartender", placeholder="VD: ít ngọt, mang ra bàn chính...")
 
-        # ĐỀ XUẤT BÁNH NGỌT TRÁNG MIỆNG ĂN KÈM
+        # ĐỀ XUẤT BÁNH NGỌT TRÁNG MIỆNG KÈM ẢNH MINH HỌA RÕ RÀNG
         st.markdown("---")
-        st.markdown("🍰 **Gợi Ý Bánh Ngọt Tráng Miệng Phù Hợp:**")
+        st.markdown("🍰 **Gợi Ý Bánh Ngọt Tráng Miệng Ăn Kèm:**")
         sug_cake_name = st.selectbox("Chọn bánh kèm theo (Tùy chọn):", ["-- Không dùng bánh --"] + list(DESSERTS_MENU.keys()))
         
         cake_data = None
         if sug_cake_name != "-- Không dùng bánh --":
             cake_info = DESSERTS_MENU[sug_cake_name]
-            st.image(cake_info["img"], use_column_width=True, caption=f"{sug_cake_name} ({cake_info['price']:,.0f}đ)")
+            # Hiển thị ảnh minh họa bánh cực kỳ bắt mắt
+            st.image(cake_info["img"], use_column_width=True, caption=f"✨ {sug_cake_name} — {cake_info['price']:,.0f} VNĐ\n({cake_info['desc']})")
             cake_data = {
                 "name": sug_cake_name,
                 "price": cake_info["price"],
@@ -389,7 +397,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             pay_method = st.radio("Chọn hình thức:", ["Tiền mặt tại quầy", "Chuyển khoản VietQR Ngân hàng"])
 
             if pay_method == "Chuyển khoản VietQR Ngân hàng":
-                # Nền thanh toán động tinh tú phiêu lưu thế giới mở
                 st.markdown(
                     """
                     <div style="text-align: center; background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(226,232,240,0.9) 100%); padding: 18px; border-radius: 16px; color: #000; box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);">
@@ -407,8 +414,12 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 if not st.session_state.cart:
                     st.error("Giỏ hàng trống!")
                 else:
+                    # Tích lũy Nguyên Thạch: Cứ mỗi 25,000đ = 16 Nguyên Thạch
+                    earned_primogems = int(final_total // 25000) * 16
+                    st.session_state.user_primogems += earned_primogems
+                    
                     st.balloons()
-                    st.success("🎉 Đặt món thành công! Các Master Bartender tại Limdim đang pha chế ngay lập tức!")
+                    st.success(f"🎉 Đặt món thành công! Bạn nhận được thêm **+{earned_primogems} 💎 Nguyên Thạch** vào ví tích lũy!")
                     st.session_state.cart = []
                     st.session_state.discount_code = None
                     st.session_state.discount_percent = 0
@@ -420,7 +431,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 elif nav_option == "✨ Cổng Gacha Wish (5 Sao)":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
     st.markdown("## ✨ Cổng Cầu Nguyện Tinh Tú (Gacha Wish System)")
-    st.write("Sử dụng Nguyên Thạch để quay ra các mức giảm giá độc quyền siêu cấp (3 sao, 4 sao, 5 sao huyền thoại)!")
+    st.write("Sử dụng Nguyên Thạch (160 💎 / lần quay) để quay ra các mức giảm giá độc quyền siêu cấp (3 sao, 4 sao, 5 sao huyền thoại)!")
 
     col_w1, col_w2 = st.columns([1, 1])
     with col_w1:
@@ -437,10 +448,10 @@ elif nav_option == "✨ Cổng Gacha Wish (5 Sao)":
         st.markdown("<div style='text-align: center; padding-top: 15px;'>", unsafe_allow_html=True)
         if st.button("🌠 CẦU NGUYỆN 1 LẦN (160 💎)"):
             if st.session_state.user_primogems < 160:
-                st.error("Không đủ Nguyên Thạch! Hãy ghé quầy check-in để nhận thêm.")
+                st.error("❌ Không đủ Nguyên Thạch! Hãy đặt thêm món nước/bánh ngọt để tích lũy đủ 160 💎 nhé.")
             else:
                 st.session_state.user_primogems -= 160
-                with st.spinner("🌌 Mở cổng không gian Teyvat... Sao băng xuất hiện..."):
+                with st.spinner("🌌 Mở cổng không gian Teyvat... Sao băng vàng xuất hiện..."):
                     time.sleep(1.5)
 
                 roll = random.randint(1, 100)
