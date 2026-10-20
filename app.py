@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 
-# HÀM ĐỌC VÀ MÃ HÓA VIDEO THÀNH BASE64 (GIÚP HIỂN THỊ TRÊN STREAMLIT CLOUD)
+# HÀM ĐỌC VÀ MÃ HÓA VIDEO NỀN ĐỘNG (BASE64)
 def set_background_video(video_file):
     try:
         with open(video_file, "rb") as f:
@@ -119,7 +119,7 @@ def set_background_video(video_file):
         )
 
 
-# Gọi hàm kích hoạt video nền động
+# Kích hoạt video nền động
 set_background_video("teyvat.mp4")
 
 # ==========================================
@@ -237,14 +237,15 @@ DESSERTS_MENU = {
     },
 }
 
+# DỮ LIỆU TRÒ CHƠI VỚI HÌNH ẢNH MINH HỌA ĐÚNG CHUẨN TỪNG TỰA GAME
 BOARDGAMES_DATA = {
     "Bai Ma So (Ultimate Werewolf)": {
         "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn đông người.",
-        "img": "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?auto=format&fit=crop&w=600&q=80",
+        "img": "https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=600&q=80",
     },
     "Co Ca Ngua Hoang Gia": {
-        "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
-        "img": "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80",
+        "desc": "Trò chơi bàn cờ cá ngựa quen thuộc gắn liền tuổi thơ.",
+        "img": "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?auto=format&fit=crop&w=600&q=80",
     },
     "Khoi Rubik Thach Anh": {
         "desc": "Thử thách tư duy logic và tốc độ xoay khối lập phương.",
@@ -255,12 +256,20 @@ BOARDGAMES_DATA = {
         "img": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80",
     },
     "Bai Uno Teyvat": {
-        "desc": "Bài Uno phiên bản nguyên tố lật ngược tình thế.",
+        "desc": "Bài Uno lật ngược tình thế bất ngờ cùng chiến hữu.",
         "img": "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&w=600&q=80",
     },
     "Meo No (Exploding Kittens)": {
         "desc": "Game thẻ bài mèo nổ hài hước đầy may rủi.",
         "img": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80",
+    },
+    "Co Vua Chien Thuat": {
+        "desc": "Đấu trí đỉnh cao trên bàn cờ vua hoàng gia.",
+        "img": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80",
+    },
+    "Co Tuong Liyue": {
+        "desc": "Trận chiến tướng sĩ tượng xe pháo mã truyền thống.",
+        "img": "https://images.unsplash.com/photo-1586165368502-1bad197a6461?auto=format&fit=crop&w=600&q=80",
     },
 }
 
@@ -295,9 +304,7 @@ with st.sidebar:
         st.success("🎉 Đủ 160 Nguyên Thạch! Đổi lượt Gacha ngay!")
     else:
         needed = 160 - st.session_state.user_primogems
-        st.caption(
-            f"💡 Cần thêm `{needed} 💎` nữa để đổi 1 lượt Gacha (Mỗi 25k tiền bill = 16 Nguyên Thạch)."
-        )
+        st.caption(f"💡 Cần thêm `{needed} 💎` nữa để đổi 1 lượt Gacha.")
 
     nav_option = st.radio(
         "Chọn không gian:",
