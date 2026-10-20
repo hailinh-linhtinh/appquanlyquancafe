@@ -3,6 +3,7 @@ import random
 import time
 import pandas as pd
 import streamlit as st
+from fpdf import FPDF
 
 # Cấu hình trang Streamlit
 st.set_page_config(
@@ -61,6 +62,87 @@ def set_background_video(video_file):
 
 set_background_video("teyvat.mp4")
 
+
+# ==========================================
+# HÀM TẠO FILE PDF HÓA ĐƠN THẬT
+# ==========================================
+class PDFInvoice(FPDF):
+
+    def header(self):
+        self.set_font("Arial", "B", 16)
+        self.cell(0, 10, "LIMDIM COFFEE • TEYVAT STATION", 0, 1, "C")
+        self.set_font("Arial", "I", 10)
+        self.cell(
+            0,
+            6,
+            "Hoa don thanh toan chinh thuc tu Dai luc nguyen to",
+            0,
+            1,
+            "C",
+        )
+        self.ln(5)
+
+    def footer(self):
+        self.set_y(-15)
+        self.set_font("Arial", "I", 8)
+        self.cell(
+            0,
+            10,
+            "Cam on Lu khach da ghe tham quan tra & ca phe Limdim!",
+            0,
+            0,
+            "C",
+        )
+
+
+def generate_pdf_invoice(customer, cart_items, total_amt):
+    pdf = PDFInvoice()
+    pdf.add_page()
+    pdf.set_font("Arial", "", 11)
+
+    pdf.cell(0, 8, f"Khach hang (Lu khach): {customer}", 0, 1, "L")
+    pdf.cell(
+        0,
+        8,
+        f"Thoi gian: {time.strftime('%d/%m/%Y %H:%M:%S', time.localtime())}",
+        0,
+        1,
+        "L",
+    )
+    pdf.ln(5)
+
+    # Bảng chi tiết món
+    pdf.set_font("Arial", "B", 10)
+    pdf.cell(100, 8, "Ten Mon", 1, 0, "L")
+    pdf.cell(20, 8, "SL", 1, 0, "C")
+    pdf.cell(40, 8, "Thanh Tien", 1, 1, "R")
+
+    pdf.set_font("Arial", "", 10)
+    for item in cart_items:
+        pdf.cell(100, 8, str(item["name"] + " (" + item["size"] + ")"), 1, 0, "L")
+        pdf.cell(20, 8, str(item["qty"]), 1, 0, "C")
+        pdf.cell(40, 8, f"{item['total_price']:,.0f}d", 1, 1, "R")
+        if item["paired_cake"]:
+            pdf.cell(
+                100,
+                7,
+                f"  + Banh kem: {item['paired_cake']['name']}",
+                1,
+                0,
+                "L",
+            )
+            pdf.cell(20, 7, "1", 1, 0, "C")
+            pdf.cell(
+                40, 7, f"{item['paired_cake']['price']:,.0f}d", 1, 1, "R"
+            )
+
+    pdf.ln(5)
+    pdf.set_font("Arial", "B", 12)
+    pdf.cell(120, 10, "TONG THANH TOAN:", 0, 0, "R")
+    pdf.cell(40, 10, f"{total_amt:,.0f} VND", 0, 1, "R")
+    return pdf.output(dest="S").encode("latin1")
+
+
 # ==========================================
 # KHỞI TẠO SESSION STATE
 # ==========================================
@@ -75,7 +157,6 @@ if "customer_name" not in st.session_state:
 if "primogems_db" not in st.session_state:
     st.session_state.primogems_db = {}
 
-# Sơ đồ 12 bàn chuẩn theo vùng đất Teyvat
 if "table_status" not in st.session_state:
     st.session_state.table_status = {
         "Bàn 01: Mondstadt": True,
@@ -105,7 +186,7 @@ if "boardgames" not in st.session_state:
     }
 
 # ==========================================
-# DỮ LIỆU MENU ĐỦ 15 MÓN NƯỚC & 5 MÓN BÁNH
+# DỮ LIỆU MENU
 # ==========================================
 DRINKS_MENU = {
     "Cà Phê Muối": {
@@ -287,7 +368,7 @@ with st.sidebar:
     else:
         needed = 160 - current_user_gems
         st.caption(
-            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (80k bill = 160 💎)."
+            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (25k bill = 16 💎)."
         )
 
     nav_option = st.radio(
@@ -360,11 +441,11 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
     with col_order_right:
         st.markdown(
-            '<div class="genshin-card"><h3>🧋 Gọi Món</h3>',
+            '<div class="genshin-card"><h3>🧋 Tùy Chỉnh & Gọi Món</h3>',
             unsafe_allow_html=True,
         )
         input_name = st.text_input(
-            "👤 Tên Lữ Khách:",
+            "👤 Tên Lữ Khách (Nhập tên của bạn):",
             value=st.session_state.customer_name,
             placeholder="Ví dụ: Aether, Lumine...",
         )
@@ -485,7 +566,20 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             pay_method = st.radio(
                 "Thanh toán:", ["Tiền mặt", "VietQR Ngân hàng"]
             )
-           # NÚT TẢI XUỐNG HÓA ĐƠN PDF CỐ ĐỊNH (LUÔN SẴN SÀNG KHI CÓ GIỎ HÀNG)
+            if pay_method == "VietQR Ngân hàng":
+                st.markdown(
+                    """
+                    <div style="text-align: center; background: white; padding: 10px; border-radius: 10px; color: black;">
+                        <img src="https://api.vietqr.io/image/970422-0391234567-xxxx.jpg?accountName=LIMDIM&amount="""
+                    + str(int(final_total))
+                    + """" width="140px">
+                        <p style="font-size: 0.8rem; margin: 4px 0; font-weight: bold;">Quét mã VietQR</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+            # NÚT TẢI XUỐNG HÓA ĐƠN PDF CỐ ĐỊNH (LUÔN SẴN SÀNG KHI CÓ GIỎ HÀNG)
             pdf_data = generate_pdf_invoice(
                 st.session_state.customer_name
                 if st.session_state.customer_name
@@ -500,6 +594,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 mime="application/pdf",
                 use_container_width=True,
             )
+
             if st.button(
                 "🚀 XÁC NHẬN THANH TOÁN & TÍCH NGUYÊN THẠCH",
                 use_container_width=True,
@@ -529,7 +624,11 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 # ==========================================
 elif nav_option == "✨ Cổng Gacha Wish":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    active_name = st.session_state.customer_name if st.session_state.customer_name else "Lữ Khách"
+    active_name = (
+        st.session_state.customer_name
+        if st.session_state.customer_name
+        else "Lữ Khách"
+    )
     st.markdown(f"## ✨ Cổng Cầu Nguyện của: {active_name}")
 
     current_user_gems = st.session_state.primogems_db.get(
@@ -548,7 +647,9 @@ elif nav_option == "✨ Cổng Gacha Wish":
             * **⭐⭐⭐⭐⭐ Pro:** Giảm **50%** (Tỷ lệ 5%)
             """
         )
-        st.info(f"Số Nguyên Thạch của **{active_name}**: **{current_user_gems} 💎**")
+        st.info(
+            f"Số Nguyên Thạch của **{active_name}**: **{current_user_gems} 💎**"
+        )
 
     with col_w2:
         st.markdown(
@@ -557,9 +658,13 @@ elif nav_option == "✨ Cổng Gacha Wish":
         )
         if st.button("🌠 CẦU NGUYỆN 1 LẦN (160 💎)"):
             if not st.session_state.customer_name.strip():
-                st.error("❌ Vui lòng nhập tên Lữ Khách ở phần Gọi Món trước khi quay Gacha!")
+                st.error(
+                    "❌ Vui lòng nhập tên Lữ Khách ở phần Gọi Món trước khi quay Gacha!"
+                )
             elif current_user_gems < 160:
-                st.error("❌ Bạn không đủ 160 Nguyên Thạch! Hãy xuất thêm hóa đơn để tích lũy.")
+                st.error(
+                    "❌ Bạn không đủ 160 Nguyên Thạch! Hãy xuất thêm hóa đơn để tích lũy."
+                )
             else:
                 st.session_state.primogems_db[
                     st.session_state.customer_name
@@ -597,7 +702,7 @@ elif nav_option == "✨ Cổng Gacha Wish":
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 3. KHO TRÒ CHƠI BOARDGAME & CỜ (ĐÃ FIX TRIỆT ĐỂ LỖI KHUNG ĐEN)
+# 3. KHO TRÒ CHƠI BOARDGAME & CỜ
 # ==========================================
 elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
@@ -650,7 +755,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
 # ==========================================
 elif nav_option == "🪑 Sơ Đồ Bàn Trống":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🪑 Sơ Đồ Bàn Trống")
+    st.markdown("## 🪑 Sơ Đồ Bàn Trống (Teyvat Regions)")
     st.write(
         "Trạng thái thực tế của 12 bàn theo các vùng đất trong game."
     )
