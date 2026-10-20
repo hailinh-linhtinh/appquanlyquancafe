@@ -118,12 +118,12 @@ DRINKS_MENU = {
         "elem": "cryo",
         "img": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&auto=format&fit=crop&q=80",
     },
-    "Cà phê sữa": {
+    "Cà Phê Sữa": {
         "price": 35000,
         "elem": "pyro",
         "img": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&auto=format&fit=crop&q=80",
     },
-    "Cà phê đen": {
+    "Cà Phê Đen": {
         "price": 30000,
         "elem": "pyro",
         "img": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&auto=format&fit=crop&q=80",
@@ -157,7 +157,6 @@ DRINKS_MENU = {
     "Hồng Trà Kem Cheese": {
         "price": 35000,
         "elem": "cryo",
-        "desc": "Lớp kem mặn bồng bềnh phủ trên hồng trà.",
         "img": "https://images.unsplash.com/photo-1556742049-0a67d553c2a5?w=600&auto=format&fit=crop&q=80",
     },
     "Yaourt Việt Quất": {
@@ -194,57 +193,45 @@ DESSERTS_MENU = {
     },
     "Tiramisu Việt Quất": {
         "price": 40000,
-        "desc": "Hương vị lãng mạn kinh điển xứ sở nghệ thuật.",
         "img": "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&auto=format&fit=crop&q=80",
     },
     "Su Kem": {
         "price": 25000,
-        "desc": "Tan chảy ngay từ miếng cắn đầu tiên.",
         "img": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80",
     },
     "Tart Trứng": {
         "price": 30000,
-        "desc": "Vỏ ngàn lớp giòn rụm, nhân trứng béo ngậy.",
         "img": "https://images.unsplash.com/photo-1519869325930-281384150729?w=600&auto=format&fit=crop&q=80",
     },
     "Donut": {
         "price": 25000,
-        "desc": "Socola nguyên chất đậm sâu kích thích vị giác.",
         "img": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format&fit=crop&q=80",
     },
 }
 
 BOARDGAMES_DATA = {
     "Bài Ma Sói": {
-        "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn.",
         "img": "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=600&auto=format&fit=crop&q=80",
     },
     "Cờ Cá Ngựa": {
-        "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
         "img": "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=600&auto=format&fit=crop&q=80",
     },
     "Cờ Vua": {
-        "desc": "Đấu trí đỉnh cao trên bàn cờ vua chiến thuật.",
         "img": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=600&auto=format&fit=crop&q=80",
     },
     "Cờ Tướng": {
-        "desc": "Trận chiến tướng sĩ tượng xe pháo mã truyền thống.",
         "img": "https://images.unsplash.com/photo-1586165368502-1bad197a6461?w=600&auto=format&fit=crop&q=80",
     },
     "Khối Rubik": {
-        "desc": "Thử thách tư duy logic và tốc độ xoay khối.",
         "img": "https://images.unsplash.com/photo-1591991564624-370c242e8bbd?w=600&auto=format&fit=crop&q=80",
     },
     "True or Dare": {
-        "desc": "Bộ bài thử thách Thật hay Thách vui nhộn.",
         "img": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&auto=format&fit=crop&q=80",
     },
     "Bài Uno": {
-        "desc": "Bài Uno lật ngược tình thế bất ngờ cùng chiến hữu.",
         "img": "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=600&auto=format&fit=crop&q=80",
     },
     "Mèo Nổ": {
-        "desc": "Game thẻ bài mèo nổ hài hước đầy may rủi.",
         "img": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80",
     },
 }
@@ -254,6 +241,8 @@ TOPPINGS = {
     "Trân châu trắng (+5k)": 5000,
     "Phô mai viên (+7k)": 7000,
     "Kem Cheese (+10k)": 10000,
+    "Bánh flan (+7k)": 7000,
+    "Hạt nổ củ năng (+5k)": 5000,
 }
 
 # ==========================================
@@ -652,7 +641,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
 # ==========================================
 elif nav_option == "🪑 Sơ Đồ Bàn Trống":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🪑 Sơ Đồ Bàn Trống (Teyvat Regions)")
+    st.markdown("## 🪑 Sơ Đồ Bàn Trống")
     st.write(
         "Trạng thái thực của 12 bàn theo các vùng đất."
     )
