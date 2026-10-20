@@ -12,7 +12,111 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Kích hoạt video nền động
+
+# HÀM NẠP VIDEO NỀN ĐỘNG (BASE64)
+def set_background_video(video_file):
+    try:
+        with open(video_file, "rb") as f:
+            video_bytes = f.read()
+        encoded_video = base64.b64encode(video_bytes).decode()
+        video_html = f"""
+        <style>
+        .stApp {{
+            background: transparent !important;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #f1f5f9;
+        }}
+        #bg-video {{
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -999;
+            object-fit: cover;
+            filter: brightness(0.5) contrast(1.1);
+        }}
+        @keyframes cardGlow {{
+            0% {{ border-color: rgba(245, 158, 11, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); }}
+            50% {{ border-color: rgba(245, 158, 11, 0.8); box-shadow: 0 12px 40px rgba(245, 158, 11, 0.3); }}
+            100% {{ border-color: rgba(245, 158, 11, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); }}
+        }}
+        .genshin-title {{
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            background: linear-gradient(180deg, #ffffff 0%, #fde047 50%, #ca8a04 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 4px 25px rgba(234, 179, 8, 0.8);
+            text-align: center;
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 0px;
+        }}
+        .genshin-subtitle {{
+            text-align: center;
+            color: #cbd5e1;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            font-family: 'Cinzel', serif;
+        }}
+        .genshin-card {{
+            background: rgba(11, 15, 25, 0.84);
+            border: 2px solid rgba(245, 158, 11, 0.4);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(14px);
+            margin-bottom: 20px;
+            animation: cardGlow 5s infinite ease-in-out;
+        }}
+        .stButton>button {{
+            background: linear-gradient(135deg, #d97706 0%, #b45309 50%, #78350f 100%);
+            color: #fffdf0;
+            border: 1px solid #fde047;
+            border-radius: 12px;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 0.6rem 1.2rem;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(217, 119, 6, 0.4);
+        }}
+        .stButton>button:hover {{
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+            border-color: #ffffff;
+            box-shadow: 0 0 30px rgba(253, 224, 71, 0.9);
+            transform: translateY(-3px);
+        }}
+        .element-tag {{
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 4px;
+            text-transform: uppercase;
+        }}
+        .pyro {{ background: rgba(239, 68, 68, 0.25); color: #f87171; border: 1px solid #ef4444; }}
+        .hydro {{ background: rgba(59, 130, 246, 0.25); color: #60a5fa; border: 1px solid #3b82f6; }}
+        .cryo {{ background: rgba(56, 189, 248, 0.25); color: #38bdf8; border: 1px solid #0284c7; }}
+        .electro {{ background: rgba(168, 85, 247, 0.25); color: #c084fc; border: 1px solid #a855f7; }}
+        .dendro {{ background: rgba(34, 197, 94, 0.25); color: #4ade80; border: 1px solid #22c55e; }}
+        .anemo {{ background: rgba(45, 212, 191, 0.25); color: #2dd4bf; border: 1px solid #14b8a6; }}
+        [data-testid="stSidebar"] {{
+            background: rgba(7, 9, 19, 0.92);
+            border-right: 2px solid rgba(245, 158, 11, 0.25);
+        }}
+        </style>
+        <video autoplay muted loop id="bg-video">
+          <source src="data:video/mp4;base64,{encoded_video}" type="video/mp4">
+        </video>
+        """
+        st.markdown(video_html, unsafe_allow_html=True)
+    except FileNotFoundError:
+        pass
+
+
 set_background_video("teyvat.mp4")
 
 # ==========================================
@@ -26,22 +130,15 @@ if "discount_percent" not in st.session_state:
     st.session_state.discount_percent = 0
 if "user_primogems" not in st.session_state:
     st.session_state.user_primogems = 0
-
-# CẬP NHẬT TÊN BÀN THEO ĐÚNG BẢN ĐỒ TRONG ẢNH
 if "table_status" not in st.session_state:
     st.session_state.table_status = {
-        "Mondstadt": True,
-        "Liyue": False,
-        "Inazuma": True,
-        "Sumeru": True,
-        "Fontaine": False,
-        "Natlan": True,
-        "Nod-Krai": True,
-        "Snezhnaya": False,
-        "Enkanomiya": True,
-        "Vực Đá Sâu - Khu Mỏ Ngầm": False,
+        "Bàn 1: Mondstadt": True,
+        "Bàn 2: Liyue": False,
+        "Bàn 3: Inazuma": True,
+        "Bàn 4: Sumeru": True,
+        "Bàn 5: Fontaine": False,
+        "Bàn 6: Natlan": True,
     }
-
 if "boardgames" not in st.session_state:
     st.session_state.boardgames = {
         "Bai Ma So (Ultimate Werewolf)": True,
@@ -223,7 +320,7 @@ with st.sidebar:
         st.session_state.cart = []
         st.session_state.discount_code = None
         st.session_state.discount_percent = 0
-        st.success("Đã xóa sạch giỏ hàng!")
+        st.success("Đã làm sạch giỏ hàng!")
         st.rerun()
 
 # ==========================================
@@ -507,7 +604,6 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
                         )
                         if st.button(f"Mượn chơi", key=f"borrow_{g_name}"):
                             st.session_state.boardgames[g_name] = False
-                            st.success(f"Đã mượn {g_name}!")
                             st.rerun()
                     else:
                         st.markdown(
@@ -516,19 +612,18 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
                         )
                         if st.button(f"Trả lại", key=f"return_{g_name}"):
                             st.session_state.boardgames[g_name] = True
-                            st.success(f"Đã nhận lại {g_name}!")
                             st.rerun()
                     st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 4. SƠ ĐỒ BÀN TRỐNG QUÁN (CẬP NHẬT TÊN VÙNG ĐẤT TEYVAT)
+# 4. SƠ ĐỒ BÀN TRỐNG QUÁN
 # ==========================================
 elif nav_option == "🪑 Sơ Đồ Bàn Trống Quán":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🪑 Bản Đồ Vùng Đất & Ghế Ngồi Teyvat")
+    st.markdown("## 🪑 Bản Đồ Ghế Ngồi Tại Quán Limdim")
     st.write(
-        "Kiểm tra trạng thái chỗ ngồi tại các khu vực nổi tiếng của đại lục."
+        "Kiểm tra bàn trống thời gian thực theo các khu vực đại lục Teyvat."
     )
 
     cols = st.columns(3)
@@ -539,15 +634,14 @@ elif nav_option == "🪑 Sơ Đồ Bàn Trống Quán":
                 f"<div style='background: rgba(15, 23, 42, 0.7); padding: 16px; border-radius: 14px; margin-bottom: 15px; border: 1px solid rgba(245, 158, 11, 0.3); text-align: center;'>",
                 unsafe_allow_html=True,
             )
-            st.markdown(f"**Vùng: {table_name}**")
+            st.markdown(f"**{table_name}**")
             if is_empty:
                 st.markdown(
-                    "<p style='color: #4ade80; font-weight: bold; margin: 8px 0;'>🟢 BÀN TRỐNG</p>",
+                    "<p style='color: #4ade80; font-weight: bold; margin: 8px 0;'>🟢 CÒN TRỐNG</p>",
                     unsafe_allow_html=True,
                 )
                 if st.button(f"Đặt bàn", key=f"book_{table_name}"):
                     st.session_state.table_status[table_name] = False
-                    st.success(f"Đã giữ chỗ tại {table_name}!")
                     st.rerun()
             else:
                 st.markdown(
@@ -556,7 +650,6 @@ elif nav_option == "🪑 Sơ Đồ Bàn Trống Quán":
                 )
                 if st.button(f"Trống bàn", key=f"free_{table_name}"):
                     st.session_state.table_status[table_name] = True
-                    st.success(f"Khu vực {table_name} đã trống!")
                     st.rerun()
             st.markdown("</div>", unsafe_allow_html=True)
         idx += 1
