@@ -6,7 +6,7 @@ import streamlit as st
 
 # Cấu hình trang Streamlit
 st.set_page_config(
-    page_title="Limdim Coffee • Teyvat Edition",
+    page_title="limdim Coffee • Teyvat Edition",
     page_icon="⭐",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -91,12 +91,14 @@ if "table_status" not in st.session_state:
 
 if "boardgames" not in st.session_state:
     st.session_state.boardgames = {
-        "Bài Ma Sói (Ultimate Werewolf)": True,
-        "Cờ Cá Ngựa Hoàng Gia": True,
-        "Khối Rubik Thạch Anh": False,
-        "True or Dare (Thách Thức)": True,
-        "Bài Uno Teyvat": True,
-        "Mèo Nổ (Exploding Kittens)": False,
+        "Ma Sói": True,
+        "Cờ Cá Ngựa": True,
+        "Rubik": False,
+        "Bài True or Dare": True,
+        "Bài Uno": True,
+        "Mèo Nổ": False,
+        "Cờ vua": True.
+        "Cờ tướng": False,
     }
 
 # ==========================================
@@ -183,44 +185,44 @@ DESSERTS_MENU = {
 }
 
 BOARDGAMES_DATA = {
-    "Bài Ma Sói (Ultimate Werewolf)": {
+    "Bài Ma Sói": {
         "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn.",
         "img": "https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=600&q=80",
     },
-    "Cờ Cá Ngựa Hoàng Gia": {
+    "Cờ Cá Ngựa": {
         "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
         "img": "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?auto=format&fit=crop&w=600&q=80",
     },
-    "Khối Rubik Thạch Anh": {
+    "Rubik": {
         "desc": "Thử thách tư duy logic và tốc độ xoay khối.",
         "img": "https://images.unsplash.com/photo-1591991564624-370c242e8bbd?auto=format&fit=crop&w=600&q=80",
     },
-    "True or Dare (Thách Thức)": {
+    "True or Dare": {
         "desc": "Bộ bài thử thách Thật hay Thách cực kỳ vui nhộn.",
         "img": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80",
     },
-    "Bài Uno Teyvat": {
+    "Bài Uno": {
         "desc": "Bài Uno lật ngược tình thế bất ngờ cùng chiến hữu.",
         "img": "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&w=600&q=80",
     },
-    "Mèo Nổ (Exploding Kittens)": {
+    "Mèo Nổ": {
         "desc": "Game thẻ bài mèo nổ hài hước đầy may rủi.",
         "img": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80",
     },
 }
 
 TOPPINGS = {
-    "Trân châu đen (+8k)": 8000,
-    "Trân châu trắng (+8k)": 8000,
-    "Thạch dừa (+10k)": 10000,
-    "Kem Cheese (+12k)": 12000,
+    "Trân châu đen (+5k)": 5000,
+    "Trân châu trắng (+5k)": 5000,
+    "Phô mai viên (+7k)": 7000,
+    "Kem Cheese (+10k)": 10000,
 }
 
 # ==========================================
 # HEADER
 # ==========================================
 st.markdown(
-    '<div class="genshin-title">☕ LIMDIM COFFEE • TEYVAT STATION</div>',
+    '<div class="genshin-title">✨ LIMDIM COFFEE • TEYVAT STATION</div>',
     unsafe_allow_html=True,
 )
 st.markdown(
@@ -241,16 +243,16 @@ with st.sidebar:
     else:
         needed = 160 - st.session_state.user_primogems
         st.caption(
-            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (25k bill = 16 💎)."
+            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (16k bill = 16 💎)."
         )
 
     nav_option = st.radio(
         "Chọn không gian:",
         [
             "🛒 Khám Phá Menu & Gọi Món",
-            "✨ Cổng Gacha Wish (5 Sao)",
+            "✨ Cổng Gacha Wish",
             "🎲 Kho Trò Chơi Boardgame & Cờ",
-            "🪑 Sơ Đồ Bàn Trống Quán",
+            "🪑 Sơ Đồ Bàn Trống",
         ],
     )
 
@@ -314,18 +316,18 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
     with col_order_right:
         st.markdown(
-            '<div class="genshin-card"><h3>🧋 Tùy Chỉnh & Gọi Món</h3>',
+            '<div class="genshin-card"><h3>🧋 Gọi Món</h3>',
             unsafe_allow_html=True,
         )
         selected_drink = st.selectbox("Chọn món nước:", drink_keys)
         drink_info = DRINKS_MENU[selected_drink]
 
-        sugar = st.selectbox("Độ ngọt", ["100%", "70%", "50%", "30%", "0%"])
+        sugar = st.selectbox("Độ ngọt", ["100%", "75%", "50%", "25%", "0%"])
         ice = st.selectbox(
             "Lượng đá", ["Bình thường", "Ít đá", "Đá riêng", "Không đá"]
         )
         size = st.selectbox(
-            "Size ly", ["M (Tiêu chuẩn)", "L (+7,000đ)", "XL (+15,000đ)"]
+            "Size ly", ["M (Tiêu chuẩn)", "L (+5,000đ)", "XL (+10,000đ)"]
         )
 
         selected_cake = st.selectbox(
@@ -437,7 +439,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 )
 
             if st.button("🚀 GỬI ORDER NGAY", use_container_width=True):
-                earned_primogems = int(final_total // 25000) * 16
+                earned_primogems = int(final_total // 16000) * 16
                 st.session_state.user_primogems += earned_primogems
                 st.balloons()
                 st.success(
@@ -451,9 +453,9 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 # ==========================================
 # 2. CỔNG GACHA WISH (5 SAO)
 # ==========================================
-elif nav_option == "✨ Cổng Gacha Wish (5 Sao)":
+elif nav_option == "✨ Cổng Gacha Wish":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## ✨ Cổng Cầu Nguyện Tinh Tú (Gacha Wish)")
+    st.markdown("## ✨ Cổng Cầu Nguyện (Gacha Wish)")
     st.write(
         "Sử dụng Nguyên Thạch (160 💎 / lần quay) để nhận mã giảm giá độc quyền!"
     )
@@ -563,7 +565,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
 # ==========================================
 # 4. SƠ ĐỒ BÀN TRỐNG QUÁN (12 BÀN THEO BẢN ĐỒ TEYVAT)
 # ==========================================
-elif nav_option == "🪑 Sơ Đồ Bàn Trống Quán":
+elif nav_option == "🪑 Sơ Đồ Bàn Trống":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
     st.markdown("## 🪑 Sơ Đồ Bàn Trống (Teyvat Regions)")
     st.write(
@@ -593,7 +595,7 @@ elif nav_option == "🪑 Sơ Đồ Bàn Trống Quán":
                     "<p style='color: #f87171; font-weight: bold; margin: 8px 0;'>🔴 ĐÃ CÓ KHÁCH</p>",
                     unsafe_allow_html=True,
                 )
-                if st.button(f"Trống bàn", key=f"free_{table_name}"):
+                if st.button(f"Hết bàn", key=f"free_{table_name}"):
                     st.session_state.table_status[table_name] = True
                     st.success(f"{table_name} đã trống!")
                     st.rerun()
@@ -606,6 +608,6 @@ elif nav_option == "🪑 Sơ Đồ Bàn Trống Quán":
 # ==========================================
 st.markdown("---")
 st.markdown(
-    "<p style='text-align: center; color: #64748b; font-size: 0.9rem;'>☕ Limdim Coffee • Teyvat Exploration Experience • Powered by Streamlit</p>",
+    "<p style='text-align: center; color: #64748b; font-size: 0.9rem;'>✨ Limdim Coffee • Teyvat Exploration Experience • Powered by Streamlit</p>",
     unsafe_allow_html=True,
 )
