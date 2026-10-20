@@ -12,14 +12,14 @@ st.set_page_config(
 )
 
 # ==========================================
-# GIAO DIỆN & VIDEO NỀN ĐỘNG (GENSHIN IMPACT)
+# GIAO DIỆN & VIDEO NỀN ĐỘNG (TEYVAT.MP4)
 # ==========================================
 st.markdown(
     """
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
 
-    /* Làm trong suốt nền Streamlit để hiện video phía sau */
+    /* Làm trong suốt nền Streamlit để lộ video background */
     .stApp {
         background: transparent !important;
         font-family: 'Plus Jakarta Sans', sans-serif;
@@ -35,7 +35,7 @@ st.markdown(
         min-height: 100%;
         z-index: -999;
         object-fit: cover;
-        filter: brightness(0.55) contrast(1.1);
+        filter: brightness(0.5) contrast(1.1);
     }
 
     @keyframes cardGlow {
@@ -67,7 +67,7 @@ st.markdown(
     }
 
     .genshin-card {
-        background: rgba(11, 15, 25, 0.82);
+        background: rgba(11, 15, 25, 0.84);
         border: 2px solid rgba(245, 158, 11, 0.4);
         border-radius: 20px;
         padding: 20px;
@@ -117,9 +117,10 @@ st.markdown(
     }
     </style>
 
-    <!-- Nhúng video phong cảnh Teyvat làm nền động phía sau -->
+    <!-- Nhúng file video teyvat.mp4 làm nền động -->
     <video autoplay muted loop id="bg-video">
-      <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-sunset-41624-large.mp4" type="video/mp4">
+      <source src="teyvat.mp4" type="video/mp4">
+      Trình duyệt của bạn không hỗ trợ video nền.
     </video>
     """,
     unsafe_allow_html=True,
