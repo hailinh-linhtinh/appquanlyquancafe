@@ -514,6 +514,13 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     st.success(
                         f"🎉 Xuất hóa đơn thành công cho **{st.session_state.customer_name}**! +{earned_primogems} 💎 Nguyên Thạch đã cộng vào ví cá nhân!"
                     )
+                    # Nút tải xuống file PDF hóa đơn thật
+                    st.download_button(
+                        label="📥 TẢI XUỐNG HÓA ĐƠN PDF",
+                        data=pdf_data,
+                        file_name=f"HoaDon_{st.session_state.customer_name}.pdf",
+                        mime="application/pdf",
+                    )
                     st.session_state.cart = []
                     st.session_state.discount_code = None
                     st.session_state.discount_percent = 0
