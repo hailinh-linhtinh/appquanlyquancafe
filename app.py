@@ -100,7 +100,9 @@ def generate_pdf_invoice(customer, cart_items, total_amt):
     pdf.add_page()
     pdf.set_font("Arial", "", 11)
 
-    pdf.cell(0, 8, f"Khach hang (Lu khach): {customer}", 0, 1, "L")
+    pdf.cell(
+        0, 8, f"Khach hang (Lu khach): {customer}", 0, 1, "L"
+    )
     pdf.cell(
         0,
         8,
@@ -126,7 +128,7 @@ def generate_pdf_invoice(customer, cart_items, total_amt):
             pdf.cell(
                 100,
                 7,
-                f"  + Banh kem: {item['paired_cake']['name']}",
+                f"  + Kem/Banh: {item['paired_cake']['name']}",
                 1,
                 0,
                 "L",
@@ -579,28 +581,9 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     unsafe_allow_html=True,
                 )
 
-            # NÚT TẢI XUỐNG HÓA ĐƠN PDF CỐ ĐỊNH (LUÔN SẴN SÀNG KHI CÓ GIỎ HÀNG)
-            pdf_data = generate_pdf_invoice(
-                st.session_state.customer_name
-                if st.session_state.customer_name
-                else "Khách Lẻ",
-                st.session_state.cart,
-                final_total,
-            )
-            st.download_button(
-                label="📥 TẢI XUỐNG HÓA ĐƠN PDF",
-                data=pdf_data,
-                file_name=f"HoaDon_{st.session_state.customer_name if st.session_state.customer_name else 'Limdim'}.pdf",
-                mime="application/pdf",
-                use_container_width=True,
-            )
-
-            if st.button(
-                "🚀 XÁC NHẬN THANH TOÁN & TÍCH NGUYÊN THẠCH",
-                use_container_width=True,
-            ):
+            if st.button("🚀 XUẤT HÓA ĐƠN & TÍCH NGUYÊN THẠCH", use_container_width=True):
                 if not st.session_state.customer_name.strip():
-                    st.error("❌ Vui lòng nhập tên Lữ Khách trước khi thanh toán!")
+                    st.error("❌ Vui lòng nhập tên Lữ Khách trước khi xuất hóa đơn!")
                 else:
                     earned_primogems = int(final_total // 25000) * 16
                     curr_gems = st.session_state.primogems_db.get(
@@ -610,10 +593,26 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                         curr_gems + earned_primogems
                     )
 
+                    # Tạo file PDF thực tế cho hóa đơn
+                    pdf_data = generate_pdf_invoice(
+                        st.session_state.customer_name,
+                        st.session_state.cart,
+                        final_total,
+                    )
+
                     st.balloons()
                     st.success(
-                        f"🎉 Thanh toán thành công cho **{st.session_state.customer_name}**! +{earned_primogems} 💎 Nguyên Thạch đã cộng vào ví cá nhân!"
+                        f"🎉 Xuất hóa đơn thành công cho **{st.session_state.customer_name}**! +{earned_primogems} 💎 Nguyên Thạch đã cộng vào ví cá nhân!"
                     )
+
+                    # Nút tải xuống file PDF hóa đơn thật
+                    st.download_button(
+                        label="📥 TẢI XUỐNG HÓA ĐƠN PDF",
+                        data=pdf_data,
+                        file_name=f"HoaDon_{st.session_state.customer_name}.pdf",
+                        mime="application/pdf",
+                    )
+
                     st.session_state.cart = []
                     st.session_state.discount_code = None
                     st.session_state.discount_percent = 0
@@ -624,11 +623,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 # ==========================================
 elif nav_option == "✨ Cổng Gacha Wish":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    active_name = (
-        st.session_state.customer_name
-        if st.session_state.customer_name
-        else "Lữ Khách"
-    )
+    active_name = st.session_state.customer_name if st.session_state.customer_name else "Lữ Khách"
     st.markdown(f"## ✨ Cổng Cầu Nguyện của: {active_name}")
 
     current_user_gems = st.session_state.primogems_db.get(
@@ -647,9 +642,7 @@ elif nav_option == "✨ Cổng Gacha Wish":
             * **⭐⭐⭐⭐⭐ Pro:** Giảm **50%** (Tỷ lệ 5%)
             """
         )
-        st.info(
-            f"Số Nguyên Thạch của **{active_name}**: **{current_user_gems} 💎**"
-        )
+        st.info(f"Số Nguyên Thạch của **{active_name}**: **{current_user_gems} 💎**")
 
     with col_w2:
         st.markdown(
@@ -658,13 +651,9 @@ elif nav_option == "✨ Cổng Gacha Wish":
         )
         if st.button("🌠 CẦU NGUYỆN 1 LẦN (160 💎)"):
             if not st.session_state.customer_name.strip():
-                st.error(
-                    "❌ Vui lòng nhập tên Lữ Khách ở phần Gọi Món trước khi quay Gacha!"
-                )
+                st.error("❌ Vui lòng nhập tên Lữ Khách ở phần Gọi Món trước khi quay Gacha!")
             elif current_user_gems < 160:
-                st.error(
-                    "❌ Bạn không đủ 160 Nguyên Thạch! Hãy xuất thêm hóa đơn để tích lũy."
-                )
+                st.error("❌ Bạn không đủ 160 Nguyên Thạch! Hãy xuất thêm hóa đơn để tích lũy.")
             else:
                 st.session_state.primogems_db[
                     st.session_state.customer_name
