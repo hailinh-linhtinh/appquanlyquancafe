@@ -592,7 +592,7 @@ elif nav_option == "✨ Cổng Gacha Wish":
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 3. KHO TRÒ CHƠI BOARDGAME & CỜ (ĐÃ FIX LỖI HIỂN THỊ ẢNH)
+# 3. KHO TRÒ CHƠI BOARDGAME & CỜ (ĐÃ FIX TRIỆT ĐỂ LỖI KHUNG ĐEN)
 # ==========================================
 elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
