@@ -287,7 +287,7 @@ with st.sidebar:
     else:
         needed = 160 - current_user_gems
         st.caption(
-            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (25k bill = 16 💎)."
+            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (80k bill = 160 💎)."
         )
 
     nav_option = st.radio(
@@ -506,7 +506,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 if not st.session_state.customer_name.strip():
                     st.error("❌ Vui lòng nhập tên Lữ Khách trước khi xuất hóa đơn để tích lũy Nguyên Thạch!")
                 else:
-                    earned_primogems = int(final_total // 25000) * 16
+                    earned_primogems = int(final_total // 8000) * 16
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
                     )
