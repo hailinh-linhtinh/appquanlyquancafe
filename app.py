@@ -104,6 +104,7 @@ st.markdown(
     .cryo { background: rgba(56, 189, 248, 0.25); color: #38bdf8; border: 1px solid #0284c7; }
     .electro { background: rgba(168, 85, 247, 0.25); color: #c084fc; border: 1px solid #a855f7; }
     .dendro { background: rgba(34, 197, 94, 0.25); color: #4ade80; border: 1px solid #22c55e; }
+    .anemo { background: rgba(45, 212, 191, 0.25); color: #2dd4bf; border: 1px solid #14b8a6; }
 
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #060910 0%, #0f172a 100%);
@@ -135,18 +136,19 @@ if "table_status" not in st.session_state:
         "Ban VIP Natlan": True,
     }
 if "boardgames" not in st.session_state:
-    # Trạng thái kho boardgame & cờ (True: Sẵn sàng, False: Đang được mượn)
     st.session_state.boardgames = {
+        "Bai Ma So (Ultimate Werewolf)": True,
+        "Co Ca Ngua Hoang Gia": True,
+        "Khoi Rubik Thach Anh": False,
+        "The True or Dare (Thach Thuc)": True,
         "Bai Uno Teyvat": True,
         "Meo No (Exploding Kittens)": False,
-        "Ma So (Codenames)": True,
-        "Co Vua Hoang Gia": True,
+        "Co Vua Chien Thuat": True,
         "Co Tuong Liyue": False,
-        "Co Ty Phu Monopol": True,
     }
 
 # ==========================================
-# DỮ LIỆU MENU
+# DỮ LIỆU MENU (BỔ SUNG THÊM 5 MÓN NƯỚC MỚI)
 # ==========================================
 DRINKS_MENU = {
     "Nang Luong Ca Phe Muoi (Fontaine)": {
@@ -164,6 +166,27 @@ DRINKS_MENU = {
     "Tra Dao Hoa Nguyen To": {
         "price": 48000, "elem": "pyro", "desc": "Bung no vi giac voi dao tuoi va thach lua.",
         "img": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80"
+    },
+    # 5 Món nước mới bổ sung thêm
+    "Soda Xanh Băng Gia (Cryo Spark)": {
+        "price": 46000, "elem": "cryo", "desc": "Soda chanh thanh mát sảng khoái băng giá.",
+        "img": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80"
+    },
+    "Matcha Latte Thao Moc Sumeru": {
+        "price": 50000, "elem": "dendro", "desc": "Hương trà xanh nguyên bản đậm đà phong vị học viện.",
+        "img": "https://images.unsplash.com/photo-1536256263959-770b48d82b08?auto=format&fit=crop&w=600&q=80"
+    },
+    "Sinh To Xoai Hoang Kim Natlan": {
+        "price": 54000, "elem": "pyro", "desc": "Xoài chín ngọt ngào dưới ánh nắng rực lửa vùng đất lửa.",
+        "img": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=80"
+    },
+    "Tra Sua Kho Mon Inazuma": {
+        "price": 52000, "elem": "electro", "desc": "Kho môn bùi béo kết hợp trà sữa truyền thống.",
+        "img": "https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&w=600&q=80"
+    },
+    "Nuoc Ep Viet Quat Tinh Tu": {
+        "price": 49000, "elem": "hydro", "desc": "Việt quất tươi mọng nước giàu vitamin nguyên tố.",
+        "img": "https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&w=600&q=80"
     }
 }
 
@@ -183,6 +206,41 @@ DESSERTS_MENU = {
     "Banh Tart Trung Liyue Thom Phuc": {
         "price": 32000, "desc": "Vo ngan lop gion rum, nhan trung beo ngay.",
         "img": "https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80"
+    }
+}
+
+BOARDGAMES_DATA = {
+    "Bai Ma So (Ultimate Werewolf)": {
+        "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn đông người.",
+        "img": "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?auto=format&fit=crop&w=600&q=80"
+    },
+    "Co Ca Ngua Hoang Gia": {
+        "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
+        "img": "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80"
+    },
+    "Khoi Rubik Thach Anh": {
+        "desc": "Thử thách tư duy logic và tốc độ xoay khối lập phương.",
+        "img": "https://images.unsplash.com/photo-1591991564624-370c242e8bbd?auto=format&fit=crop&w=600&q=80"
+    },
+    "The True or Dare (Thach Thuc)": {
+        "desc": "Bộ bài thử thách Thật hay Thách cực kỳ lầy lội và vui nhộn.",
+        "img": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80"
+    },
+    "Bai Uno Teyvat": {
+        "desc": "Bài Uno phiên bản nguyên tố lật ngược tình thế bất ngờ.",
+        "img": "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&w=600&q=80"
+    },
+    "Meo No (Exploding Kittens)": {
+        "desc": "Game thẻ bài mèo nổ hài hước đầy may rủi.",
+        "img": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"
+    },
+    "Co Vua Chien Thuat": {
+        "desc": "Đấu trí đỉnh cao trên bàn cờ vua hoàng gia.",
+        "img": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80"
+    },
+    "Co Tuong Liyue": {
+        "desc": "Trận chiến tướng sĩ tượng xe pháo mã truyền thống.",
+        "img": "https://images.unsplash.com/photo-1586165368502-1bad197a6461?auto=format&fit=crop&w=600&q=80"
     }
 }
 
@@ -233,12 +291,11 @@ with st.sidebar:
         st.rerun()
 
 # ==========================================
-# 1. KHÁM PHÁ MENU & GỌI MÓN (2 CỘT: CỘT TRÁI NƯỚC + BÁNH | CỘT PHẢI ORDER & HÓA ĐƠN BÊN DƯỚI)
+# 1. KHÁM PHÁ MENU & GỌI MÓN (2 CỘT: TRÁI NƯỚC + BÁNH | PHẢI ORDER & HÓA ĐƠN)
 # ==========================================
 if nav_option == "🛒 Khám Phá Menu & Gọi Món":
     col_menu_left, col_order_right = st.columns([1.3, 1])
 
-    # CỘT TRÁI: HIỆN HẲN ẢNH NƯỚC UỐNG VÀ BÁNH NGỌT RA NGOÀI TRỰC QUAN
     with col_menu_left:
         st.markdown('<div class="genshin-card"><h3>🍹 Thức Uống Teyvat</h3>', unsafe_allow_html=True)
         drink_keys = list(DRINKS_MENU.keys())
@@ -268,7 +325,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                         st.markdown(f"<b style='color: #4ade80;'>{c_info['price']:,.0f}đ</b>", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # CỘT PHẢI: TÙY CHỈNH ORDER NƯỚC, CHỌN BÁNH VÀ HÓA ĐƠN NGAY PHÍA DƯỚI
     with col_order_right:
         st.markdown('<div class="genshin-card"><h3>🧋 Tùy Chỉnh & Gọi Món</h3>', unsafe_allow_html=True)
         selected_drink = st.selectbox("Chọn món nước:", drink_keys)
@@ -324,7 +380,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             st.success(f"Đã thêm **{selected_drink}** vào bill!")
         st.markdown("</div>", unsafe_allow_html=True)
 
-        # KHUNG HÓA ĐƠN NGAY PHÍA DƯỚI CỘT PHẢI
         st.markdown('<div class="genshin-card"><h3>🧾 Hóa Đơn & Thanh Toán</h3>', unsafe_allow_html=True)
         if not st.session_state.cart:
             st.warning("Giỏ hàng trống!")
@@ -420,36 +475,44 @@ elif nav_option == "✨ Cổng Gacha Wish (5 Sao)":
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 3. KHO TRÒ CHƠI BOARDGAME & CỜ
+# 3. KHO TRÒ CHƠI BOARDGAME & CỜ (CÓ HÌNH ẢNH MINH HỌA)
 # ==========================================
 elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🎲 Kho Boardgame & Các Loại Cờ Giải Trí")
-    st.write("Kiểm tra trạng thái các tựa game bài và cờ nhóm tại quán. Bạn có thể mượn trực tiếp tại bàn!")
+    st.markdown("## 🎲 Kho Trò Chơi Boardgame & Cờ Giải Trí")
+    st.write("Kiểm tra hình ảnh và trạng thái các tựa game bài, Ma Sói, Rubik, Cờ tại quán để mượn chơi cùng nhóm bạn!")
 
-    cols = st.columns(3)
-    idx = 0
-    for game_name, is_available in st.session_state.boardgames.items():
-        with cols[idx % 3]:
-            st.markdown(
-                f"<div style='background: rgba(15, 23, 42, 0.7); padding: 16px; border-radius: 14px; margin-bottom: 15px; border: 1px solid rgba(245, 158, 11, 0.3); text-align: center;'>",
-                unsafe_allow_html=True,
-            )
-            st.markdown(f"**{game_name}**")
-            if is_available:
-                st.markdown("<p style='color: #4ade80; font-weight: bold; margin: 8px 0;'>🟢 CÓ SẴN ĐỂ MƯỢN</p>", unsafe_allow_html=True)
-                if st.button(f"Mượn chơi", key=f"borrow_{game_name}"):
-                    st.session_state.boardgames[game_name] = False
-                    st.success(f"Đã mượn thành công {game_name}!")
-                    st.rerun()
-            else:
-                st.markdown("<p style='color: #f87171; font-weight: bold; margin: 8px 0;'>🔴 ĐANG CÓ NHÓM MƯỢN</p>", unsafe_allow_html=True)
-                if st.button(f"Trả lại", key=f"return_{game_name}"):
-                    st.session_state.boardgames[game_name] = True
-                    st.success(f"Đã nhận lại {game_name}!")
-                    st.rerun()
-            st.markdown("</div>", unsafe_allow_html=True)
-        idx += 1
+    game_keys = list(BOARDGAMES_DATA.keys())
+    for i in range(0, len(game_keys), 3):
+        cols = st.columns(3)
+        for c_idx, col_slot in enumerate(cols):
+            if i + c_idx < len(game_keys):
+                g_name = game_keys[i + c_idx]
+                g_info = BOARDGAMES_DATA[g_name]
+                is_available = st.session_state.boardgames[g_name]
+                
+                with col_slot:
+                    st.markdown(
+                        f"<div style='background: rgba(15, 23, 42, 0.7); padding: 14px; border-radius: 14px; margin-bottom: 15px; border: 1px solid rgba(245, 158, 11, 0.3); text-align: center;'>",
+                        unsafe_allow_html=True,
+                    )
+                    st.image(g_info["img"], use_column_width=True)
+                    st.markdown(f"**{g_name}**")
+                    st.caption(g_info["desc"])
+                    
+                    if is_available:
+                        st.markdown("<p style='color: #4ade80; font-weight: bold; margin: 6px 0;'>🟢 CÓ SẴN ĐỂ MƯỢN</p>", unsafe_allow_html=True)
+                        if st.button(f"Mượn chơi", key=f"borrow_{g_name}"):
+                            st.session_state.boardgames[g_name] = False
+                            st.success(f"Đã mượn {g_name}!")
+                            st.rerun()
+                    else:
+                        st.markdown("<p style='color: #f87171; font-weight: bold; margin: 6px 0;'>🔴 ĐANG CÓ NHÓM MƯỢN</p>", unsafe_allow_html=True)
+                        if st.button(f"Trả lại", key=f"return_{g_name}"):
+                            st.session_state.boardgames[g_name] = True
+                            st.success(f"Đã nhận lại {g_name}!")
+                            st.rerun()
+                    st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
