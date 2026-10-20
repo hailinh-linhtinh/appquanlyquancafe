@@ -485,24 +485,29 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             pay_method = st.radio(
                 "Thanh toán:", ["Tiền mặt", "VietQR Ngân hàng"]
             )
-            if pay_method == "VietQR Ngân hàng":
-                st.markdown(
-                    """
-                    <div style="text-align: center; background: white; padding: 10px; border-radius: 10px; color: black;">
-                        <img src="https://api.vietqr.io/image/970422-0391234567-xxxx.jpg?accountName=LIMDIM&amount="""
-                    + str(int(final_total))
-                    + """" width="140px">
-                        <p style="font-size: 0.8rem; margin: 4px 0; font-weight: bold;">Quét mã VietQR</p>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-
-            if st.button("🚀 XUẤT HÓA ĐƠN & TÍCH NGUYÊN THẠCH", use_container_width=True):
+           # NÚT TẢI XUỐNG HÓA ĐƠN PDF CỐ ĐỊNH (LUÔN SẴN SÀNG KHI CÓ GIỎ HÀNG)
+            pdf_data = generate_pdf_invoice(
+                st.session_state.customer_name
+                if st.session_state.customer_name
+                else "Khách Lẻ",
+                st.session_state.cart,
+                final_total,
+            )
+            st.download_button(
+                label="📥 TẢI XUỐNG HÓA ĐƠN PDF",
+                data=pdf_data,
+                file_name=f"HoaDon_{st.session_state.customer_name if st.session_state.customer_name else 'Limdim'}.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+            )
+            if st.button(
+                "🚀 XÁC NHẬN THANH TOÁN & TÍCH NGUYÊN THẠCH",
+                use_container_width=True,
+            ):
                 if not st.session_state.customer_name.strip():
-                    st.error("❌ Vui lòng nhập tên Lữ Khách trước khi xuất hóa đơn để tích lũy Nguyên Thạch!")
+                    st.error("❌ Vui lòng nhập tên Lữ Khách trước khi thanh toán!")
                 else:
-                    earned_primogems = int(final_total // 8000) * 16
+                    earned_primogems = int(final_total // 25000) * 16
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
                     )
@@ -512,14 +517,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
                     st.balloons()
                     st.success(
-                        f"🎉 Xuất hóa đơn thành công cho **{st.session_state.customer_name}**! +{earned_primogems} 💎 Nguyên Thạch đã cộng vào ví cá nhân!"
-                    )
-                    # Nút tải xuống file PDF hóa đơn thật
-                    st.download_button(
-                        label="📥 TẢI XUỐNG HÓA ĐƠN PDF",
-                        data=pdf_data,
-                        file_name=f"HoaDon_{st.session_state.customer_name}.pdf",
-                        mime="application/pdf",
+                        f"🎉 Thanh toán thành công cho **{st.session_state.customer_name}**! +{earned_primogems} 💎 Nguyên Thạch đã cộng vào ví cá nhân!"
                     )
                     st.session_state.cart = []
                     st.session_state.discount_code = None
