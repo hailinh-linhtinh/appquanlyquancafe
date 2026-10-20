@@ -12,31 +12,36 @@ st.set_page_config(
 )
 
 # ==========================================
-# GIAO DIỆN & HIỆU NỨNG NỀN ĐỘNG PHIÊU LƯU (GENSHIN STYLE)
+# GIAO DIỆN & VIDEO NỀN ĐỘNG (GENSHIN IMPACT)
 # ==========================================
 st.markdown(
     """
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
 
+    /* Làm trong suốt nền Streamlit để hiện video phía sau */
     .stApp {
-        background: linear-gradient(-45deg, #070913, #0d1b2a, #1b1128, #111827);
-        background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
+        background: transparent !important;
         font-family: 'Plus Jakarta Sans', sans-serif;
         color: #f1f5f9;
     }
 
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    /* Video background cố định toàn màn hình, mờ nhẹ để nổi bật nội dung */
+    #bg-video {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -999;
+        object-fit: cover;
+        filter: brightness(0.55) contrast(1.1);
     }
 
     @keyframes cardGlow {
-        0% { border-color: rgba(245, 158, 11, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
-        50% { border-color: rgba(245, 158, 11, 0.8); box-shadow: 0 12px 40px rgba(245, 158, 11, 0.25); }
-        100% { border-color: rgba(245, 158, 11, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
+        0% { border-color: rgba(245, 158, 11, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); }
+        50% { border-color: rgba(245, 158, 11, 0.8); box-shadow: 0 12px 40px rgba(245, 158, 11, 0.3); }
+        100% { border-color: rgba(245, 158, 11, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); }
     }
 
     .genshin-title {
@@ -45,7 +50,7 @@ st.markdown(
         background: linear-gradient(180deg, #ffffff 0%, #fde047 50%, #ca8a04 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-shadow: 0px 4px 25px rgba(234, 179, 8, 0.6);
+        text-shadow: 0px 4px 25px rgba(234, 179, 8, 0.8);
         text-align: center;
         font-size: 2.8rem;
         letter-spacing: 2px;
@@ -62,11 +67,11 @@ st.markdown(
     }
 
     .genshin-card {
-        background: rgba(15, 23, 42, 0.85);
+        background: rgba(11, 15, 25, 0.82);
         border: 2px solid rgba(245, 158, 11, 0.4);
         border-radius: 20px;
         padding: 20px;
-        backdrop-filter: blur(16px);
+        backdrop-filter: blur(14px);
         margin-bottom: 20px;
         animation: cardGlow 5s infinite ease-in-out;
     }
@@ -80,13 +85,13 @@ st.markdown(
         font-weight: 700;
         letter-spacing: 1px;
         padding: 0.6rem 1.2rem;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 4px 20px rgba(217, 119, 6, 0.4);
     }
     .stButton>button:hover {
         background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
         border-color: #ffffff;
-        box-shadow: 0 0 30px rgba(253, 224, 71, 0.8);
+        box-shadow: 0 0 30px rgba(253, 224, 71, 0.9);
         transform: translateY(-3px);
     }
 
@@ -107,10 +112,15 @@ st.markdown(
     .anemo { background: rgba(45, 212, 191, 0.25); color: #2dd4bf; border: 1px solid #14b8a6; }
 
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #060910 0%, #0f172a 100%);
-        border-right: 2px solid rgba(245, 158, 11, 0.2);
+        background: rgba(7, 9, 19, 0.92);
+        border-right: 2px solid rgba(245, 158, 11, 0.25);
     }
     </style>
+
+    <!-- Nhúng video phong cảnh Teyvat làm nền động phía sau -->
+    <video autoplay muted loop id="bg-video">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-sunset-41624-large.mp4" type="video/mp4">
+    </video>
     """,
     unsafe_allow_html=True,
 )
@@ -148,7 +158,7 @@ if "boardgames" not in st.session_state:
     }
 
 # ==========================================
-# DỮ LIỆU MENU (BỔ SUNG THÊM 5 MÓN NƯỚC MỚI)
+# DỮ LIỆU MENU (ĐẦY ĐỦ THỨC UỐNG & BÁNH NGỌT)
 # ==========================================
 DRINKS_MENU = {
     "Nang Luong Ca Phe Muoi (Fontaine)": {
@@ -167,7 +177,6 @@ DRINKS_MENU = {
         "price": 48000, "elem": "pyro", "desc": "Bung no vi giac voi dao tuoi va thach lua.",
         "img": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80"
     },
-    # 5 Món nước mới bổ sung thêm
     "Soda Xanh Băng Gia (Cryo Spark)": {
         "price": 46000, "elem": "cryo", "desc": "Soda chanh thanh mát sảng khoái băng giá.",
         "img": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80"
@@ -223,24 +232,16 @@ BOARDGAMES_DATA = {
         "img": "https://images.unsplash.com/photo-1591991564624-370c242e8bbd?auto=format&fit=crop&w=600&q=80"
     },
     "The True or Dare (Thach Thuc)": {
-        "desc": "Bộ bài thử thách Thật hay Thách cực kỳ lầy lội và vui nhộn.",
+        "desc": "Bộ bài thử thách Thật hay Thách cực kỳ lầy lội.",
         "img": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80"
     },
     "Bai Uno Teyvat": {
-        "desc": "Bài Uno phiên bản nguyên tố lật ngược tình thế bất ngờ.",
+        "desc": "Bài Uno phiên bản nguyên tố lật ngược tình thế.",
         "img": "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&w=600&q=80"
     },
     "Meo No (Exploding Kittens)": {
         "desc": "Game thẻ bài mèo nổ hài hước đầy may rủi.",
         "img": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"
-    },
-    "Co Vua Chien Thuat": {
-        "desc": "Đấu trí đỉnh cao trên bàn cờ vua hoàng gia.",
-        "img": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80"
-    },
-    "Co Tuong Liyue": {
-        "desc": "Trận chiến tướng sĩ tượng xe pháo mã truyền thống.",
-        "img": "https://images.unsplash.com/photo-1586165368502-1bad197a6461?auto=format&fit=crop&w=600&q=80"
     }
 }
 
@@ -291,7 +292,7 @@ with st.sidebar:
         st.rerun()
 
 # ==========================================
-# 1. KHÁM PHÁ MENU & GỌI MÓN (2 CỘT: TRÁI NƯỚC + BÁNH | PHẢI ORDER & HÓA ĐƠN)
+# 1. KHÁM PHÁ MENU & GỌI MÓN
 # ==========================================
 if nav_option == "🛒 Khám Phá Menu & Gọi Món":
     col_menu_left, col_order_right = st.columns([1.3, 1])
@@ -475,7 +476,7 @@ elif nav_option == "✨ Cổng Gacha Wish (5 Sao)":
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 3. KHO TRÒ CHƠI BOARDGAME & CỜ (CÓ HÌNH ẢNH MINH HỌA)
+# 3. KHO TRÒ CHƠI BOARDGAME & CỜ
 # ==========================================
 elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
