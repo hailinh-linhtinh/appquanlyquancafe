@@ -71,7 +71,7 @@ if "discount_code" not in st.session_state:
 if "discount_percent" not in st.session_state:
     st.session_state.discount_percent = 0
 if "customer_name" not in st.session_state:
-    st.session_state.customer_name = ""  # Để trống hoàn toàn theo yêu cầu
+    st.session_state.customer_name = ""
 if "primogems_db" not in st.session_state:
     st.session_state.primogems_db = {}
 
@@ -108,130 +108,157 @@ if "boardgames" not in st.session_state:
 # DỮ LIỆU MENU ĐỦ 15 MÓN NƯỚC & 5 MÓN BÁNH
 # ==========================================
 DRINKS_MENU = {
-    "Cà Phê Muối": {
-        "price": 40000,
+    "Cà Phê Muối Fontaine": {
+        "price": 45000,
         "elem": "hydro",
+        "desc": "Hương vị mặn mòi dòng nước nguyên thủy.",
         "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80",
     },
-    "Bạc Xỉu": {
-        "price": 40000,
+    "Bạc Xỉu Nguyệt Quang": {
+        "price": 42000,
         "elem": "cryo",
+        "desc": "Ngọt ngào và mát lạnh như sương sớm Mondstadt.",
         "img": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&auto=format&fit=crop&q=80",
     },
-    "Cà Phê Sữa": {
+    "Espresso Địa Mạch": {
         "price": 35000,
         "elem": "pyro",
+        "desc": "Đánh thức sức mạnh hỏa diệm nguyên tố.",
         "img": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&auto=format&fit=crop&q=80",
     },
-    "Cà Phê Đen": {
-        "price": 30000,
+    "Trà Đào Hỏa Nguyên": {
+        "price": 48000,
         "elem": "pyro",
+        "desc": "Bùng nổ vị giác với đào tươi và thạch lửa.",
         "img": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&auto=format&fit=crop&q=80",
     },
-    "Trà Đào": {
-        "price": 35000,
+    "Soda Băng Giá Cryo": {
+        "price": 46000,
         "elem": "cryo",
+        "desc": "Soda chanh thanh mát sảng khoái băng giá.",
         "img": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80",
     },
-    "Matcha Latte": {
-        "price": 40000,
+    "Matcha Latte Sumeru": {
+        "price": 50000,
         "elem": "dendro",
         "desc": "Hương trà xanh nguyên bản đậm đà học viện.",
         "img": "https://images.unsplash.com/photo-1536256263959-770b48d82b08?w=600&auto=format&fit=crop&q=80",
     },
-    "Trà Sữa Olong": {
-        "price": 35000,
+    "Sinh Tố Xoài Natlan": {
+        "price": 54000,
         "elem": "pyro",
+        "desc": "Xoài chín ngọt ngào dưới ánh nắng rực lửa.",
         "img": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=600&auto=format&fit=crop&q=80",
     },
-    "Trà Sữa Gạo Rang": {
-        "price": 35000,
+    "Trà Sữa Khoai Môn Inazuma": {
+        "price": 52000,
         "elem": "electro",
+        "desc": "Khoai môn bùi béo kết hợp trà sữa truyền thống.",
         "img": "https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=600&auto=format&fit=crop&q=80",
     },
-    "Trà Sen Vàng": {
-        "price": 35000,
+    "Nước Ép Việt Quất": {
+        "price": 49000,
         "elem": "hydro",
+        "desc": "Việt quất tươi mọng nước giàu vitamin.",
         "img": "https://images.unsplash.com/photo-1527661591475-527312dd65f5?w=600&auto=format&fit=crop&q=80",
     },
     "Hồng Trà Kem Cheese": {
-        "price": 35000,
+        "price": 53000,
         "elem": "cryo",
+        "desc": "Lớp kem mặn bồng bềnh phủ trên hồng trà.",
         "img": "https://images.unsplash.com/photo-1556742049-0a67d553c2a5?w=600&auto=format&fit=crop&q=80",
     },
-    "Yaourt Việt Quất": {
-        "price": 40000,
+    "Cacao Nóng Vực Thẳm": {
+        "price": 48000,
         "elem": "pyro",
+        "desc": "Socola đắng nhẹ nguyên chất từ cõi tối.",
         "img": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=600&auto=format&fit=crop&q=80",
     },
-    "Trà Sữa Thái Xanh": {
-        "price": 35000,
+    "Cold Brew Trái Cây": {
+        "price": 55000,
         "elem": "dendro",
+        "desc": "Cà phê ủ lạnh kết hợp trái cây nhiệt đới.",
         "img": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&auto=format&fit=crop&q=80",
     },
-    "Trà Chanh Lô Hội": {
-        "price": 30000,
+    "Trà Xanh Hoa Nhài": {
+        "price": 40000,
         "elem": "anemo",
+        "desc": "Thanh tao hương nhài bay bổng gió trời.",
         "img": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&auto=format&fit=crop&q=80",
     },
     "Sữa Tươi Trân Châu": {
-        "price": 35000,
+        "price": 50000,
         "elem": "geo",
+        "desc": "Sữa tươi thanh paster kèm trân châu đường đen.",
         "img": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=600&auto=format&fit=crop&q=80",
     },
-    "Phindi Hạnh Nhân": {
-        "price": 40000,
+    "Nước Chanh Mật Tông": {
+        "price": 38000,
         "elem": "anemo",
+        "desc": "Giải khát thanh lọc cơ thể tức thì.",
         "img": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&auto=format&fit=crop&q=80",
     },
 }
 
 DESSERTS_MENU = {
-    "Mousse Chanh Dây": {
-        "price": 30000,
+    "Mousse Trà Xanh": {
+        "price": 45000,
+        "desc": "Mềm mịn vị matcha nguyên bản từ đảo Narukami.",
         "img": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&auto=format&fit=crop&q=80",
     },
-    "Tiramisu Việt Quất": {
-        "price": 40000,
+    "Tiramisu Hạt Dẻ": {
+        "price": 50000,
+        "desc": "Hương vị lãng mạn kinh điển xứ sở nghệ thuật.",
         "img": "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&auto=format&fit=crop&q=80",
     },
-    "Su Kem": {
-        "price": 25000,
+    "Su Kem Mondstadt": {
+        "price": 35000,
+        "desc": "Tan chảy ngay từ miếng cắn đầu tiên.",
         "img": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80",
     },
-    "Tart Trứng": {
-        "price": 30000,
+    "Tart Trứng Liyue": {
+        "price": 32000,
+        "desc": "Vỏ ngàn lớp giòn rụm, nhân trứng béo ngậy.",
         "img": "https://images.unsplash.com/photo-1519869325930-281384150729?w=600&auto=format&fit=crop&q=80",
     },
-    "Donut": {
-        "price": 25000,
+    "Brownie Socola": {
+        "price": 48000,
+        "desc": "Socola nguyên chất đậm sâu kích thích vị giác.",
         "img": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format&fit=crop&q=80",
     },
 }
 
 BOARDGAMES_DATA = {
     "Bài Ma Sói": {
+        "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn.",
         "img": "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=600&auto=format&fit=crop&q=80",
     },
     "Cờ Cá Ngựa": {
+        "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
         "img": "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=600&auto=format&fit=crop&q=80",
     },
     "Cờ Vua": {
+        "desc": "Đấu trí đỉnh cao trên bàn cờ vua chiến thuật.",
         "img": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=600&auto=format&fit=crop&q=80",
     },
     "Cờ Tướng": {
+        "desc": "Trận chiến tướng sĩ tượng xe pháo mã truyền thống.",
         "img": "https://images.unsplash.com/photo-1586165368502-1bad197a6461?w=600&auto=format&fit=crop&q=80",
     },
     "Khối Rubik": {
+        "desc": "Thử thách tư duy logic và tốc độ xoay khối.",
         "img": "https://images.unsplash.com/photo-1591991564624-370c242e8bbd?w=600&auto=format&fit=crop&q=80",
     },
     "True or Dare": {
+        "desc": "Bộ bài thử thách Thật hay Thách vui nhộn.",
         "img": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&auto=format&fit=crop&q=80",
     },
     "Bài Uno": {
+        "desc": "Bài Uno lật ngược tình thế bất ngờ cùng chiến hữu.",
         "img": "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=600&auto=format&fit=crop&q=80",
     },
     "Mèo Nổ": {
+        "desc": "Game thẻ bài mèo nổ hài hước đầy may rủi.",
         "img": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80",
     },
 }
@@ -280,7 +307,7 @@ with st.sidebar:
     else:
         needed = 160 - current_user_gems
         st.caption(
-            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (8k bill = 16 💎)."
+            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (25k bill = 16 💎)."
         )
 
     nav_option = st.radio(
@@ -323,7 +350,9 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     d_name = drink_keys[i + c_idx]
                     d_info = DRINKS_MENU[d_name]
                     with col_slot:
-                        st.image(d_info["img"], use_column_width=True)
+                        st.image(
+                            d_info["img"], use_column_width=True, width=250
+                        )
                         st.markdown(f"**{d_name}**")
                         st.markdown(
                             f"<span class='element-tag {d_info['elem']}'>{d_info['elem'].upper()}</span> <b style='color: #fde047;'>{d_info['price']:,.0f}đ</b>",
@@ -343,7 +372,9 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     c_name = cake_keys[i + c_idx]
                     c_info = DESSERTS_MENU[c_name]
                     with col_slot:
-                        st.image(c_info["img"], use_column_width=True)
+                        st.image(
+                            c_info["img"], use_column_width=True, width=250
+                        )
                         st.markdown(f"**{c_name}**")
                         st.markdown(
                             f"<b style='color: #4ade80;'>{c_info['price']:,.0f}đ</b>",
@@ -353,10 +384,9 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
     with col_order_right:
         st.markdown(
-            '<div class="genshin-card"><h3>🧋 Gọi Món</h3>',
+            '<div class="genshin-card"><h3>🧋 Tùy Chỉnh & Gọi Món</h3>',
             unsafe_allow_html=True,
         )
-        # Ô nhập tên Lữ Khách (bỏ chữ Lữ Khách Vô Danh, để trống tự điền)
         input_name = st.text_input(
             "👤 Tên Lữ Khách (Nhập tên của bạn):",
             value=st.session_state.customer_name,
@@ -497,8 +527,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 if not st.session_state.customer_name.strip():
                     st.error("❌ Vui lòng nhập tên Lữ Khách trước khi xuất hóa đơn để tích lũy Nguyên Thạch!")
                 else:
-                    earned_primogems = int(final_total // 8000) * 16
-
+                    earned_primogems = int(final_total // 25000) * 16
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
                     )
@@ -588,13 +617,13 @@ elif nav_option == "✨ Cổng Gacha Wish":
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 3. KHO TRÒ CHƠI BOARDGAME & CỜ
+# 3. KHO TRÒ CHƠI BOARDGAME & CỜ (ĐÃ FIX LỖI ẢNH)
 # ==========================================
 elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
     st.markdown("## 🎲 Kho Trò Chơi Boardgame & Cờ Giải Trí")
     st.write(
-        "Trạng thái các tựa game tại quán để mượn chơi!"
+        "Trạng thái các tựa game tại quán để mượn chơi cùng nhóm bạn!"
     )
 
     game_keys = list(BOARDGAMES_DATA.keys())
@@ -611,7 +640,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
                         f"<div style='background: rgba(15, 23, 42, 0.7); padding: 14px; border-radius: 14px; margin-bottom: 15px; border: 1px solid rgba(245, 158, 11, 0.3); text-align: center;'>",
                         unsafe_allow_html=True,
                     )
-                    st.image(g_info["img"], use_column_width=True)
+                    st.image(g_info["img"], use_column_width=True, width=250)
                     st.markdown(f"**{g_name}**")
                     st.caption(g_info["desc"])
 
@@ -641,9 +670,9 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
 # ==========================================
 elif nav_option == "🪑 Sơ Đồ Bàn Trống":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🪑 Sơ Đồ Bàn Trống")
+    st.markdown("## 🪑 Sơ Đồ Bàn Trống (Teyvat Regions)")
     st.write(
-        "Trạng thái thực của 12 bàn theo các vùng đất."
+        "Trạng thái thực tế của 12 bàn theo các vùng đất trong game."
     )
 
     cols = st.columns(3)
