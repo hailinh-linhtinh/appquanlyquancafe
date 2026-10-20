@@ -136,56 +136,56 @@ if "user_primogems" not in st.session_state:
     st.session_state.user_primogems = 0
 if "table_status" not in st.session_state:
     st.session_state.table_status = {
-        "Bàn 01 (Quán rượu Angel's Share - Mondstadt)": True,
-        "Bàn 02 (Cảng Liyue - Nguy Hải Gian)": False,
-        "Bàn 03 (Đền Narukami - Inazuma)": True,
-        "Bàn 04 (Học viện Sumeru - Akademiya)": True,
-        "Bàn 05 (Nhà hát Opera Fontaine)": False,
-        "Bàn VIP Hoàng Gia Natlan": True,
+        "Ban 01 (Quan ruou Angel's Share - Mondstadt)": True,
+        "Ban 02 (Cang Liyue - Nguy Hai Gian)": False,
+        "Ban 03 (Den Narukami - Inazuma)": True,
+        "Ban 04 (Hoc vien Sumeru - Akademiya)": True,
+        "Ban 05 (Nha hat Opera Fontaine)": False,
+        "Ban VIP Hoang Gia Natlan": True,
     }
 
 # ==========================================
 # DỮ LIỆU MENU NƯỚC UỐNG MỞ RỘNG
 # ==========================================
 DRINKS_MENU = {
-    "Năng Lượng Cà Phê Muối (Fontaine)": {
-        "price": 45000, "elem": "hydro", "desc": "Hương vị mặn mòi dòng nước nguyên thủy.",
+    "Nang Luong Ca Phe Muoi (Fontaine)": {
+        "price": 45000, "elem": "hydro", "desc": "Huong vi man moi dong nuoc nguyen thuy.",
         "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80"
     },
-    "Bạc Xỉu Tinh Thể Nguyệt Quang": {
-        "price": 42000, "elem": "cryo", "desc": "Ngọt ngào và mát lạnh như sương sớm Mondstadt.",
+    "Bac Xiu Tinh The Nguyet Quang": {
+        "price": 42000, "elem": "cryo", "desc": "Ngot ngao va mat lanh nhu suong som Mondstadt.",
         "img": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=600&q=80"
     },
-    "Espresso Phong Ấn Địa Mạch": {
-        "price": 35000, "elem": "pyro", "desc": "Đánh thức sức mạnh hỏa diệm nguyên tố.",
+    "Espresso Phong An Dia Mach": {
+        "price": 35000, "elem": "pyro", "desc": "Dinh thuc suc manh hoa diem nguyen to.",
         "img": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=600&q=80"
     },
-    "Cold Brew Trái Cây Phong Thần": {
-        "price": 50000, "elem": "dendro", "desc": "Thanh mát hương cỏ cây từ rừng sâu Sumeru.",
+    "Cold Brew Trai Cay Phong Than": {
+        "price": 50000, "elem": "dendro", "desc": "Thanh mat huong co cay tu rung sau Sumeru.",
         "img": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=80"
     },
-    "Trà Đào Hỏa Nguyên Tố": {
-        "price": 48000, "elem": "pyro", "desc": "Bùng nổ vị giác với đào tươi và thạch lửa.",
+    "Tra Dao Hoa Nguyen To": {
+        "price": 48000, "elem": "pyro", "desc": "Bung no vi giac voi dao tuoi va thach lua.",
         "img": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80"
     },
-    "Trà Sữa Trân Châu Lôi Điện": {
-        "price": 52000, "elem": "electro", "desc": "Tia chớp tím béo ngậy từ đảo Inazuma.",
+    "Tra Sua Tran Chau Loi Dien": {
+        "price": 52000, "elem": "electro", "desc": "Tia chop tim beo ngay tu dao Inazuma.",
         "img": "https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&w=600&q=80"
     },
-    "Trà Sữa Oánh Trống Natlan": {
-        "price": 55000, "elem": "geo", "desc": "Vị cacao đậm đà kèm trân châu dung nham nóng bỏng.",
+    "Tra Sua Oanh Trong Natlan": {
+        "price": 55000, "elem": "geo", "desc": "Vi cacao dam da kem tran chau dung nham nong bong.",
         "img": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80"
     },
-    "Nước Ép Thần Tinh Linh Fontaine": {
-        "price": 58000, "elem": "hydro", "desc": "Thức uống kỳ ảo ban phước từ suối nguồn tinh khiết.",
+    "Nuoc Ep Than Tinh Linh Fontaine": {
+        "price": 58000, "elem": "hydro", "desc": "Thuc uong ky ao ban phuoc tu suoi nguon tinh khiet.",
         "img": "https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=600&q=80"
     },
-    "Matcha Latte Phong Phong Tốc": {
-        "price": 50000, "elem": "anemo", "desc": "Xanh mát vị trà xanh kết hợp gió trời Mondstadt.",
+    "Matcha Latte Phong Toc": {
+        "price": 50000, "elem": "anemo", "desc": "Xanh mat vi tra xanh ket hop gio troi Mondstadt.",
         "img": "https://images.unsplash.com/photo-1536256263959-770b48d82b08?auto=format&fit=crop&w=600&q=80"
     },
-    "Hồng Trà Kem Cheese Sương Mù": {
-        "price": 52000, "elem": "cryo", "desc": "Lớp kem mặn bồng bềnh phủ trên nền hồng trà hảo hạng.",
+    "Hong Tra Kem Cheese Suong Mu": {
+        "price": 52000, "elem": "cryo", "desc": "Lop kem man bong benh phu tren nen hong tra hao hang.",
         "img": "https://images.unsplash.com/photo-1556742049-0a67d553c2a5?auto=format&fit=crop&w=600&q=80"
     }
 }
@@ -194,40 +194,40 @@ DRINKS_MENU = {
 # DỮ LIỆU BÁNH NGỌT TRÁNG MIỆNG BẮT MẮT
 # ==========================================
 DESSERTS_MENU = {
-    "Bánh Mousse Trà Xanh Inazuma": {
-        "price": 45000, "desc": "Mềm mịn vị matcha nguyên bản từ đảo Narukami.",
+    "Banh Mousse Tra Xanh Inazuma": {
+        "price": 45000, "desc": "Mem min vi matcha nguyen ban tu dao Narukami.",
         "img": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80"
     },
-    "Bánh Tiramisu Hạt Dẻ Fontaine": {
-        "price": 50000, "desc": "Hương vị lãng mạn kinh điển xứ sở nghệ thuật.",
+    "Banh Tiramisu Hat De Fontaine": {
+        "price": 50000, "desc": "Huong vi lang man kinh dien xu so nghe thuat.",
         "img": "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=600&q=80"
     },
-    "Bánh Su Kem Ngọt Ngào Mondstadt": {
-        "price": 35000, "desc": "Tan chảy ngay từ miếng cắn đầu tiên với lớp kem sữa tươi.",
+    "Banh Su Kem Ngot Ngao Mondstadt": {
+        "price": 35000, "desc": "Tan chay ngay tu mieng can dau tien voi lop kem sua tuoi.",
         "img": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80"
     },
-    "Bánh Tart Trứng Liyue Thơm Phức": {
-        "price": 32000, "desc": "Vỏ ngàn lớp giòn rụm, nhân trứng béo ngậy thơm nức mũi.",
+    "Banh Tart Trung Liyue Thom Phuc": {
+        "price": 32000, "desc": "Vo ngan lop gion rum, nhan trung beo ngay thom nuc mui.",
         "img": "https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80"
     },
-    "Bánh Brownie Socola Vực Thẳm": {
-        "price": 48000, "desc": "Socola đắng nhẹ nguyên chất đậm sâu kích thích vị giác.",
+    "Banh Brownie Socola Vuc Tham": {
+        "price": 48000, "desc": "Socola dang nhe nguyen chat dam sau kich thich vi giac.",
         "img": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
     },
-    "Bánh Macaron Cầu Vồng Sumeru": {
-        "price": 42000, "desc": "Ngọt ngào đầy màu sắc từ học viện tri thức.",
+    "Banh Macaron Cau Vong Sumeru": {
+        "price": 42000, "desc": "Ngot ngao day mau sac tu hoc vien tri thuc.",
         "img": "https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=600&q=80"
     }
 }
 
 TOPPINGS = {
-    "Trân châu đen hoàng gia (+8k)": 8000,
-    "Trân châu trắng sương mù (+8k)": 8000,
-    "Thạch dừa nha đam nguyên tố (+10k)": 10000,
-    "Kem Cheese béo ngậy thượng hạng (+12k)": 12000,
-    "Pudding trứng béo tan chảy (+10k)": 10000,
-    "Thạch Thủy Tinh Pha Lê (+10k)": 10000,
-    "Trân Châu Dung Nham Natlan (+12k)": 12000,
+    "Tran chau den hoang gia (+8k)": 8000,
+    "Tran chau trang suong mu (+8k)": 8000,
+    "Thach dua nha đam nguyen to (+10k)": 10000,
+    "Kem Cheese beo ngay thuong hang (+12k)": 12000,
+    "Pudding trung beo tan chay (+10k)": 10000,
+    "Thach Thuy Tinh Pha Le (+10k)": 10000,
+    "Tran Chau Dung Nham Natlan (+12k)": 12000,
 }
 
 # ==========================================
@@ -270,7 +270,7 @@ with st.sidebar:
         st.rerun()
 
 # ==========================================
-# TÍNH NĂNG 1: KHÁM PHÁ MENU & GỌI MÓN (HIỆN HẲN RA NGOÀI TRỰC QUAN)
+# TÍNH NĂNG 1: KHÁM PHÁ MENU & GỌI MÓN (TRỰC QUAN & ĐỀ XUẤT BÁNH KÈM NGAY KẾ BÊN)
 # ==========================================
 if nav_option == "🛒 Khám Phá Menu & Gọi Món":
     col_menu, col_bill = st.columns([1.4, 1])
@@ -278,67 +278,42 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
     with col_menu:
         st.markdown('<div class="genshin-card"><h3>📜 Sổ Tay Thực Đơn Teyvat (Hiển Thị Trực Quan)</h3>', unsafe_allow_html=True)
         
-        tab_nuoc, tab_banh = st.tabs(["🍹 Thức Uống Nguyên Tố", "🍰 Bánh Ngọt Tráng Miệng"])
+        st.markdown("#### 🍹 Danh sách Thức Uống Nguyên Tố:")
+        drink_keys = list(DRINKS_MENU.keys())
+        
+        # Hiển thị lưới hình ảnh nước uống bắt mắt hoàn toàn không có nút chọn rườm rà
+        for i in range(0, len(drink_keys), 2):
+            c1, c2 = st.columns(2)
+            for c_idx, col_slot in enumerate([c1, c2]):
+                if i + c_idx < len(drink_keys):
+                    d_name = drink_keys[i + c_idx]
+                    d_info = DRINKS_MENU[d_name]
+                    with col_slot:
+                        st.image(d_info["img"], use_column_width=True)
+                        st.markdown(f"**{d_name}**")
+                        st.markdown(f"<span class='element-tag {d_info['elem']}'>{d_info['elem'].upper()}</span> <b style='color: #fde047;'>{d_info['price']:,.0f}đ</b>", unsafe_allow_html=True)
+                        st.caption(d_info['desc'])
 
-        # --- TAB 1: THỨC UỐNG ---
-        with tab_nuoc:
-            st.markdown("#### Chọn món nước yêu thích:")
-            selected_drink = None
-            
-            # Hiển thị dạng lưới thẻ sản phẩm trực quan
-            drink_keys = list(DRINKS_MENU.keys())
-            for i in range(0, len(drink_keys), 2):
-                c1, c2 = st.columns(2)
-                for c_idx, col_slot in enumerate([c1, c2]):
-                    if i + c_idx < len(drink_keys):
-                        d_name = drink_keys[i + c_idx]
-                        d_info = DRINKS_MENU[d_name]
-                        with col_slot:
-                            st.image(d_info["img"], use_column_width=True)
-                            st.markdown(f"**{d_name}**")
-                            st.markdown(f"<span class='element-tag {d_info['elem']}'>{d_info['elem'].upper()}</span> <b style='color: #fde047;'>{d_info['price']:,.0f}đ</b>", unsafe_allow_html=True)
-                            st.caption(d_info['desc'])
-                            if st.button("Chọn món này", key=f"drink_btn_{d_name}"):
-                                st.session_state.chosen_drink = d_name
+        st.markdown("---")
+        st.markdown("### 🧋 Khu Vực Order & Gợi Ý Bánh Ngọt Đi Kèm")
+        
+        # Bố trí phần order nước và gợi ý bánh ngọt ngay kế bên nhau (chia 2 cột)
+        col_order_drink, col_suggest_cake = st.columns(2)
 
-            # Món nước đang được chọn cấu hình
-            current_chosen_drink = st.session_state.get("drink_choice", drink_keys[0])
-            st.markdown("---")
-            st.markdown(f"🧋 **Cấu hình ly nước:**")
-            selected_drink = st.selectbox("Món nước đã chọn (hoặc đổi tại đây):", drink_keys, index=drink_keys.index(current_chosen_drink) if current_chosen_drink in drink_keys else 0)
-            st.session_state.drink_choice = selected_drink
-            
+        with col_order_drink:
+            st.markdown("#### 1. Chọn món nước:")
+            selected_drink = st.selectbox("Món nước:", drink_keys)
             drink_info = DRINKS_MENU[selected_drink]
-            
-            c_sug, c_ice, c_size = st.columns(3)
-            with c_sug:
-                sugar = st.selectbox("Độ ngọt", ["100%", "70%", "50%", "30%", "0%"], key="cfg_sugar")
-            with c_ice:
-                ice = st.selectbox("Lượng đá", ["Bình thường", "Ít đá", "Đá riêng", "Không đá"], key="cfg_ice")
-            with c_size:
-                size = st.selectbox("Size ly", ["M (Tiêu chuẩn)", "L (+7,000đ)", "XL (+15,000đ)"], key="cfg_size")
 
-            selected_toppings = []
-            st.markdown("✨ **Thêm Topping Thần Kỳ:**")
-            top_cols = st.columns(2)
-            idx = 0
-            for top_name, top_price in TOPPINGS.items():
-                with top_cols[idx % 2]:
-                    if st.checkbox(top_name, key=f"top_{top_name}"):
-                        selected_toppings.append({"name": top_name, "price": top_price})
-                idx += 1
+            sugar = st.selectbox("Độ ngọt", ["100%", "70%", "50%", "30%", "0%"])
+            ice = st.selectbox("Lượng đá", ["Bình thường", "Ít đá", "Đá riêng", "Không đá"])
+            size = st.selectbox("Size ly", ["M (Tiêu chuẩn)", "L (+7,000đ)", "XL (+15,000đ)"])
 
-            qty = st.number_input("Số lượng", min_value=1, max_value=20, value=1, key="cfg_qty")
-            note = st.text_input("Ghi chú cho Bartender", placeholder="VD: ít ngọt, mang ra bàn chính...", key="cfg_note")
-
-        # --- TAB 2: BÁNH NGỌT ĂN KÈM ---
-        with tab_banh:
-            st.markdown("#### Chọn bánh ngọt tráng miệng kèm theo:")
+        with col_suggest_cake:
+            st.markdown("#### 2. 🍰 Gợi ý bánh ăn kèm:")
             cake_keys = list(DESSERTS_MENU.keys())
-            
-            # Hiển thị dạng lưới bánh ngọt trực quan bắt mắt
-            selected_cake_name = st.radio(
-                "Danh sách bánh ngọt:",
+            selected_cake_name = st.selectbox(
+                "Chọn bánh ngọt:",
                 ["-- Không dùng bánh ngọt --"] + cake_keys,
                 format_func=lambda x: f"✨ {x} ({DESSERTS_MENU[x]['price']:,.0f}đ)" if x != "-- Không dùng bánh ngọt --" else x
             )
@@ -347,15 +322,29 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             if selected_cake_name != "-- Không dùng bánh ngọt --":
                 c_info = DESSERTS_MENU[selected_cake_name]
                 st.image(c_info["img"], use_column_width=True)
-                st.markdown(f"**{selected_cake_name}** — <b style='color: #4ade80;'>{c_info['price']:,.0f} VNĐ</b>", unsafe_allow_html=True)
-                st.caption(c_info["desc"])
+                st.caption(f"**{selected_cake_name}**\n{c_info['desc']}")
                 cake_data = {
                     "name": selected_cake_name,
                     "price": c_info["price"],
                     "desc": c_info["desc"]
                 }
+            else:
+                st.info("💡 Gợi ý: Thêm một chiếc bánh ngọt sẽ giúp trải nghiệm vị giác trọn vẹn hơn!")
 
         st.markdown("---")
+        selected_toppings = []
+        st.markdown("✨ **Thêm Topping Thần Kỳ:**")
+        top_cols = st.columns(2)
+        idx = 0
+        for top_name, top_price in TOPPINGS.items():
+            with top_cols[idx % 2]:
+                if st.checkbox(top_name, key=f"top_{top_name}"):
+                    selected_toppings.append({"name": top_name, "price": top_price})
+            idx += 1
+
+        qty = st.number_input("Số lượng", min_value=1, max_value=20, value=1)
+        note = st.text_input("Ghi chú cho Bartender", placeholder="VD: ít ngọt, mang ra bàn chính...")
+
         if st.button("➕ THÊM VÀO HÓA ĐƠN", use_container_width=True):
             actual_price = drink_info["price"]
             if "L (+7,000đ)" in size:
