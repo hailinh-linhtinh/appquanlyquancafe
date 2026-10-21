@@ -396,7 +396,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
         if input_name:
             st.session_state.customer_name = input_name
 
-        # ---- PHẦN 1: GỌI MÓN NƯỚC & SỐ LƯỢNG NƯỚC ----
+        # ---- PHẦN NƯỚC VÀ SỐ LƯỢNG NƯỚC RIÊNG ----
         selected_drink = st.selectbox("Chọn món nước:", drink_keys)
         drink_info = DRINKS_MENU[selected_drink]
 
@@ -411,7 +411,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             "Số lượng nước", min_value=1, max_value=20, value=1, key="qty_drink"
         )
 
-        # ---- PHẦN 2: CHỌN TOPPINGS LÊN TRƯỚC BÁNH NGỌT ----
+        # ---- ĐƯA TOPPING LÊN TRƯỚC BÁNH NGỌT ----
         selected_toppings = []
         st.markdown("✨ **Topping:**")
         top_cols = st.columns(2)
@@ -426,7 +426,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
         st.markdown("---")
 
-        # ---- PHẦN 3: GỌI BÁNH NGỌT ĂN KÈM & SỐ LƯỢNG BÁNH ----
+        # ---- PHẦN BÁNH NGỌT & SỐ LƯỢNG BÁNH RIÊNG ----
         selected_cake = st.selectbox(
             "Chọn bánh ngọt ăn kèm:", ["-- Không dùng bánh ngọt --"] + cake_keys
         )
@@ -456,7 +456,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     actual_price += 10000
 
                 topping_total = sum([t["price"] for t in selected_toppings])
-                # Tính tổng tiền nước (đã cộng topping và nhân với số lượng nước riêng)
                 total_drink_price = (actual_price + topping_total) * qty_drink
 
                 item_order = {
@@ -559,7 +558,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 if not st.session_state.customer_name.strip():
                     st.error("❌ Vui lòng nhập tên Lữ Khách trước khi thanh toán!")
                 else:
-                    # Cứ mỗi 80k đơn hàng = 1 lần quay (160 Nguyên Thạch)
+                    # Mức tích lũy mới: cứ 80k đơn hàng = 160 Nguyên Thạch (1 lần quay)
                     earned_primogems = int(final_total // 80000) * 160
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
