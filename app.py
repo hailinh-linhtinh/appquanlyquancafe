@@ -188,23 +188,23 @@ DRINKS_MENU = {
 DESSERTS_MENU = {
     "Mousse Chanh Dây": {
         "price": 30000,
-        "img": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&auto=format&fit=crop&q=80",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDf9d0k7qLRvyID6XhJSbtHH9A-eGa_ctyexpokjjyesu71qLIPMRM8qk&s=10",
     },
     "Tiramisu Việt Quất": {
         "price": 40000,
-        "img": "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&auto=format&fit=crop&q=80",
+        "img": "https://cdn.hstatic.net/products/1000398438/viet_quat_8b428f1b3aa74ca9a769a7cc0b5e647c_1024x1024.jpg",
     },
     "Su Kem": {
         "price": 25000,
-        "img": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80",
+        "img": "https://eggyolk.vn/wp-content/uploads/2024/08/Cach-lam-nhan-banh-su-kem-bang-whipping.jpg",
     },
     "Tart Trứng": {
         "price": 30000,
-        "img": "https://images.unsplash.com/photo-1519869325930-281384150729?w=600&auto=format&fit=crop&q=80",
+        "img": "https://file.hstatic.net/200000721249/file/h_tart_trung_bang_noi_chien_khong_dau_b701f1d2d3d644429912379031d77916.jpg",
     },
     "Donut": {
         "price": 25000,
-        "img": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format&fit=crop&q=80",
+        "img": "https://s3-ap-southeast-1.amazonaws.com/happie-bucket/5/e/c/5ecfa090-93b6-4214-b402-ba24e3154847-origin.jpeg",
     },
 }
 
