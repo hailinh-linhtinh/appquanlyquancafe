@@ -49,11 +49,8 @@ def set_background_video(video_file):
         .dendro {{ background: rgba(34, 197, 94, 0.25); color: #4ade80; border: 1px solid #22c55e; }}
         .anemo {{ background: rgba(45, 212, 191, 0.25); color: #2dd4bf; border: 1px solid #14b8a6; }}
         .geo {{ background: rgba(234, 179, 8, 0.25); color: #facc15; border: 1px solid #eab308; }}
-        
-        /* ÉP SIDEBAR KÉO LÊN SÁT TRÊN, GIẢM KHOẢNG TRỐNG */
         [data-testid="stSidebar"] {{ background: rgba(7, 9, 19, 0.92); border-right: 2px solid rgba(245, 158, 11, 0.25); }}
         [data-testid="stSidebar"] > div:first-child {{ padding-top: 0.5rem !important; }}
-        .st-emotion-cache-1104ytp {{ padding-top: 1rem; }}
         </style>
         <video autoplay muted loop id="bg-video"><source src="data:video/mp4;base64,{encoded_video}" type="video/mp4"></video>
         """,
@@ -477,33 +474,35 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             st.warning("Giỏ hàng trống!")
         else:
             subtotal = 0
+            bill_content = f"=== HOA DON LIMDIM COFFEE • TEYVAT ===\n"
+            bill_content += f"Khach hang: {st.session_state.customer_name}\n"
+            bill_content += f"Thoi gian: {time.strftime('%d/%m/%Y %H:%M:%S')}\n"
+            bill_content += "-" * 40 + "\n"
+
             st.markdown(
-                f"**Lữ khách thanh toán:** {st.session_state.customer_name if st.session_state.customer_name else 'Chưa có tên'}"
+                f"**Lữ khách thanh toán:** {st.session_state.customer_name}"
             )
             for i, cart_item in enumerate(st.session_state.cart):
-                st.markdown(
-                    f"**{i+1}. {cart_item['name']}** x{cart_item['qty']} ({cart_item['size']})"
-                )
+                line_str = f"{i+1}. {cart_item['name']} x{cart_item['qty']} ({cart_item['size']}) - {cart_item['total_price']:,.0f}đ"
+                st.markdown(f"**{line_str}**")
+                bill_content += line_str + "\n"
+
                 if cart_item["paired_cake"]:
-                    st.caption(
-                        f"🍰 Kèm: {cart_item['paired_cake']['name']} ({cart_item['paired_cake']['price']:,.0f}đ)"
-                    )
+                    cake_str = f"   + Kem/Bánh kèm: {cart_item['paired_cake']['name']} - {cart_item['paired_cake']['price']:,.0f}đ"
+                    st.caption(cake_str)
+                    bill_content += cake_str + "\n"
                     subtotal += cart_item["paired_cake"]["price"]
+
                 subtotal += cart_item["total_price"]
                 st.markdown(
                     "<hr style='margin: 4px 0; opacity: 0.1;'>",
                     unsafe_allow_html=True,
                 )
 
-            if st.session_state.discount_percent > 0:
-                discount_amount = subtotal * (
-                    st.session_state.discount_percent / 100
-                )
-                st.success(f"Voucher giảm: -{st.session_state.discount_percent}%")
-            else:
-                discount_amount = 0
-
-            final_total = subtotal - discount_amount
+            final_total = subtotal
+            bill_content += "-" * 40 + "\n"
+            bill_content += f"TONG THANH TOAN: {final_total:,.0f} VND\n"
+            bill_content += "Cam on lữ khách đã ghe tham quan!"
 
             st.markdown(
                 f"<h3 style='color: #4ade80; text-align: right;'>Tổng Bill: {final_total:,.0f} VNĐ</h3>",
@@ -525,6 +524,15 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     """,
                     unsafe_allow_html=True,
                 )
+
+            # NÚT TẢI XUỐNG HÓA ĐƠN TRỰC TIẾP RA FILE .TXT (ĐẢM BẢO HOẠT ĐỘNG 100%)
+            st.download_button(
+                label="📥 TẢI XUỐNG HÓA ĐƠN (FILE TXT)",
+                data=bill_content,
+                file_name=f"HoaDon_{st.session_state.customer_name}.txt",
+                mime="text/plain",
+                use_container_width=True,
+            )
 
             if st.button("🚀 XÁC NHẬN THANH TOÁN & TÍCH NGUYÊN THẠCH", use_container_width=True):
                 if not st.session_state.customer_name.strip():
