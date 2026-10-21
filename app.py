@@ -49,7 +49,7 @@ def set_background_video(video_file):
         .dendro {{ background: rgba(34, 197, 94, 0.25); color: #4ade80; border: 1px solid #22c55e; }}
         .anemo {{ background: rgba(45, 212, 191, 0.25); color: #2dd4bf; border: 1px solid #14b8a6; }}
         .geo {{ background: rgba(234, 179, 8, 0.25); color: #facc15; border: 1px solid #eab308; }}
-        [data-testid="stSidebar"] {{ background: rgba(7, 9, 19, 0.92); border-right: 2px solid rgba(245, 158, 11, 0.25); }}
+        [data-testid="stSidebar"] {{ background: rgba(7, 9, 19, 0.92); border-right: 2px solid rgba(245, 158, 11, 0.25); padding-top: 1rem; }}
         </style>
         <video autoplay muted loop id="bg-video"><source src="data:video/mp4;base64,{encoded_video}" type="video/mp4"></video>
         """,
@@ -273,7 +273,7 @@ st.markdown(
 # SIDEBAR
 # ==========================================
 with st.sidebar:
-    st.markdown("### 🌟 NƠI DỪNG CHÂN LỮ KHÁCH")
+    st.markdown("### 🌟 LỮ KHÁCH")
     current_user_gems = st.session_state.primogems_db.get(
         st.session_state.customer_name, 0
     )
@@ -284,32 +284,35 @@ with st.sidebar:
         else "Chưa nhập tên"
     )
 
-    # THIẾT KẾ KHUNG THÔNG TIN GỌN GÀNG, CÂN ĐỐI
+    # KHUNG THÔNG TIN GỌN GÀNG, SÁT LỀ KHÔNG KHOẢNG TRỐNG
     st.markdown(
         f"""
-        <div style="background: rgba(22, 32, 50, 0.7); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 10px;">
-            <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">👤 Lữ khách: <b style="color: #fde047;">{display_name}</b></p>
-            <p style="margin: 6px 0 0 0; font-size: 0.95rem; color: #f1f5f9;">💎 Nguyên Thạch: <b style="color: #60a5fa;">{current_user_gems} / 160 ✨</b></p>
+        <div style="background: rgba(22, 32, 50, 0.7); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 8px 10px; margin-bottom: 6px;">
+            <div style="font-size: 0.85rem; color: #cbd5e1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">👤 <b>{display_name}</b></div>
+            <div style="font-size: 0.85rem; color: #60a5fa; margin-top: 3px;">💎 <b>{current_user_gems} / 160</b> Nguyên Thạch</div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     if current_user_gems >= 160:
-        st.success("🎉 Đủ 160 Nguyên Thạch! Đổi lượt Gacha ngay!")
+        st.success("🎉 Đủ 160 Nguyên Thạch! Đổi Gacha ngay!")
     else:
         needed = 160 - current_user_gems
-        st.caption(f"💡 Cần thêm `{needed} 💎` để đổi lượt Gacha.")
+        st.caption(f"💡 Cần thêm `{needed} 💎` đổi lượt Gacha.")
 
-    # THÔNG TIN CỬA HÀNG
+    # THÔNG TIN QUÁN GỌN GÀNG
     st.markdown("---")
     st.markdown("### ☕ THÔNG TIN QUÁN")
     st.markdown(
         """
-        📍 **Địa chỉ:** 123 Teyvat, Q.1, TP.HCM  
-        ⏰ **Mở cửa:** 08:00 - 22:30  
-        📞 **Hotline:** 039.123.4567
-        """
+        <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.4;">
+        📍 <b>ĐC:</b> 123 Teyvat, Q.1, TP.HCM<br>
+        ⏰ <b>Mở cửa:</b> 08:00 - 22:30<br>
+        📞 <b>Hotline:</b> 039.123.4567
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
     st.markdown("---")
 
