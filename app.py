@@ -116,72 +116,72 @@ DRINKS_MENU = {
     "Bạc Xỉu": {
         "price": 40000,
         "elem": "cryo",
-        "img": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&auto=format&fit=crop&q=80",
+        "img": "https://kingcoffee.com.vn/wp-content/uploads/2026/01/Ty-le-pha-ca-phe-bac-xiu-1024x683.jpg",
     },
     "Cà Phê Sữa": {
         "price": 35000,
         "elem": "pyro",
-        "img": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&auto=format&fit=crop&q=80",
+        "img": "https://giacaphe.com/wp-content/uploads/2023/03/ca-phe-sua-da-2.jpg",
     },
     "Cà Phê Đen": {
         "price": 30000,
         "elem": "pyro",
-        "img": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&auto=format&fit=crop&q=80",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh1yM41EDNB7aYHyMEXt3to5grV2GwGRtHcuQHEmTXp1fX6jVoV46A_2Bi&s=10",
     },
     "Trà Đào": {
         "price": 35000,
         "elem": "cryo",
-        "img": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80",
+        "img": "https://beptruong.edu.vn/wp-content/uploads/2020/10/tra-dao-cam-sa.jpg",
     },
     "Matcha Latte": {
         "price": 40000,
         "elem": "dendro",
-        "img": "https://images.unsplash.com/photo-1536256263959-770b48d82b08?w=600&auto=format&fit=crop&q=80",
+        "img": "https://mocktail.net/wp-content/uploads/2021/05/Matcha-Iced-Latte_ig.jpg",
     },
     "Trà Sữa Olong": {
         "price": 35000,
         "elem": "pyro",
-        "img": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=600&auto=format&fit=crop&q=80",
+        "img": "https://amivietnam.com/wp-content/uploads/2024/03/54-2-508x400.png",
     },
     "Trà Sữa Gạo Rang": {
         "price": 35000,
         "elem": "electro",
-        "img": "https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=600&auto=format&fit=crop&q=80",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToiB5jIgP4zf96jrlPfyvMivXWEYk-9J1sxVKomEu-iIy74NHDBt720Fpc&s=10",
     },
     "Trà Sen Vàng": {
         "price": 35000,
         "elem": "hydro",
-        "img": "https://images.unsplash.com/photo-1527661591475-527312dd65f5?w=600&auto=format&fit=crop&q=80",
+        "img": "https://bepchethai.vn/wp-content/uploads/2023/02/tra-sen-vang-machiato-3-500x500.jpg",
     },
     "Hồng Trà Kem Cheese": {
         "price": 35000,
         "elem": "cryo",
-        "img": "https://images.unsplash.com/photo-1556742049-0a67d553c2a5?w=600&auto=format&fit=crop&q=80",
+        "img": "https://thucphamplaza.com/wp-content/uploads/products_img/hong-tra-kem.jpg",
     },
     "Yaourt Việt Quất": {
         "price": 40000,
         "elem": "pyro",
-        "img": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=600&auto=format&fit=crop&q=80",
+        "img": "https://file.hstatic.net/200000055918/file/yaourt-blueberry_0dae760f3a8d4d008d8ca71c0ad577a6_grande.jpg",
     },
     "Trà Sữa Thái Xanh": {
         "price": 35000,
         "elem": "dendro",
-        "img": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&auto=format&fit=crop&q=80",
+        "img": "https://lypham.vn/wp-content/uploads/2024/09/luu-y-khi-nau-tra-sua-thai-xanh.jpg",
     },
     "Trà Chanh Lô Hội": {
         "price": 30000,
         "elem": "anemo",
-        "img": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&auto=format&fit=crop&q=80",
+        "img": "https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-1025.jpg",
     },
     "Sữa Tươi Trân Châu": {
         "price": 35000,
         "elem": "geo",
-        "img": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=600&auto=format&fit=crop&q=80",
+        "img": "https://cdn-img-v2.mybota.vn/uploadv2/web/10/10903/news/2019/09/07/03/30/1567827047_85b204df1917fe49a706.jpg",
     },
     "Phindi Hạnh Nhân": {
         "price": 40000,
         "elem": "anemo",
-        "img": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&auto=format&fit=crop&q=80",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRFfVlydJt0WTxnn3SAnQfmWK8mk-OrKW0zp5M6-Lyd_SOP8wJK79w5FM&s=10",
     },
 }
 
