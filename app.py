@@ -219,7 +219,7 @@ BOARDGAMES_DATA = {
     },
     "Cờ Vua": {
         "desc": "Đấu trí đỉnh cao trên bàn cờ vua chiến thuật.",
-        "img": "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/9_f9a87e28cb.jpg",
+        "img": "https://pos.nvncdn.com/efbd30-19981/ps/20240206_l6igYHEGT9.jpeg?v=1707214316",
     },
     "Cờ Tướng": {
         "desc": "Trận chiến tướng sĩ tượng xe pháo mã truyền thống.",
