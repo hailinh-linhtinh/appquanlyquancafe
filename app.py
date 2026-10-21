@@ -130,15 +130,20 @@ DRINKS_MENU = {
         "elem": "pyro",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh1yM41EDNB7aYHyMEXt3to5grV2GwGRtHcuQHEmTXp1fX6jVoV46A_2Bi&s=10",
     },
-    "Trà Đào": {
-        "price": 35000,
-        "elem": "cryo",
-        "img": "https://beptruong.edu.vn/wp-content/uploads/2020/10/tra-dao-cam-sa.jpg",
+     "Phindi Hạnh Nhân": {
+        "price": 40000,
+        "elem": "anemo",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRFfVlydJt0WTxnn3SAnQfmWK8mk-OrKW0zp5M6-Lyd_SOP8wJK79w5FM&s=10",
     },
     "Matcha Latte": {
         "price": 40000,
         "elem": "dendro",
         "img": "https://mocktail.net/wp-content/uploads/2021/05/Matcha-Iced-Latte_ig.jpg",
+    },
+     "Trà Sữa Thái Xanh": {
+        "price": 35000,
+        "elem": "dendro",
+        "img": "https://barona.vn/storage/meo-vat/182/cach-lam-tra-sua-thai-xanh.jpg",
     },
     "Trà Sữa Olong": {
         "price": 35000,
@@ -149,6 +154,11 @@ DRINKS_MENU = {
         "price": 35000,
         "elem": "electro",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToiB5jIgP4zf96jrlPfyvMivXWEYk-9J1sxVKomEu-iIy74NHDBt720Fpc&s=10",
+   },
+    "Sữa Tươi Trân Châu": {
+        "price": 35000,
+        "elem": "geo",
+        "img": "https://cdn-img-v2.mybota.vn/uploadv2/web/10/10903/news/2019/09/07/03/30/1567827047_85b204df1917fe49a706.jpg",
     },
     "Trà Sen Vàng": {
         "price": 35000,
@@ -165,25 +175,15 @@ DRINKS_MENU = {
         "elem": "pyro",
         "img": "https://file.hstatic.net/200000055918/file/yaourt-blueberry_0dae760f3a8d4d008d8ca71c0ad577a6_grande.jpg",
     },
-    "Trà Sữa Thái Xanh": {
-        "price": 35000,
-        "elem": "dendro",
-        "img": "https://barona.vn/storage/meo-vat/182/cach-lam-tra-sua-thai-xanh.jpg",
-    },
     "Trà Chanh Lô Hội": {
         "price": 30000,
         "elem": "anemo",
         "img": "https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-1025.jpg",
     },
-    "Sữa Tươi Trân Châu": {
+    "Trà Đào": {
         "price": 35000,
-        "elem": "geo",
-        "img": "https://cdn-img-v2.mybota.vn/uploadv2/web/10/10903/news/2019/09/07/03/30/1567827047_85b204df1917fe49a706.jpg",
-    },
-    "Phindi Hạnh Nhân": {
-        "price": 40000,
-        "elem": "anemo",
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRFfVlydJt0WTxnn3SAnQfmWK8mk-OrKW0zp5M6-Lyd_SOP8wJK79w5FM&s=10",
+        "elem": "cryo",
+        "img": "https://beptruong.edu.vn/wp-content/uploads/2020/10/tra-dao-cam-sa.jpg",
     },
 }
 
