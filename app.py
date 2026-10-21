@@ -166,7 +166,7 @@ DRINKS_MENU = {
     "Trà Sữa Thái Xanh": {
         "price": 35000,
         "elem": "dendro",
-        "img": "https://lypham.vn/wp-content/uploads/2024/09/luu-y-khi-nau-tra-sua-thai-xanh.jpg",
+        "img": "https://barona.vn/storage/meo-vat/182/cach-lam-tra-sua-thai-xanh.jpg",
     },
     "Trà Chanh Lô Hội": {
         "price": 30000,
