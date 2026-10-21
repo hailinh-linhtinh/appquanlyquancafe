@@ -198,7 +198,7 @@ DESSERTS_MENU = {
     },
     "Su Kem": {
         "price": 25000,
-        "img": "https://eggyolk.vn/wp-content/uploads/2024/08/Cach-lam-nhan-ban-su-kem-bang-whipping.jpg",
+        "img": "https://eggyolk.vn/wp-content/uploads/2024/08/Cach-lam-nhan-banh-su-kem-bang-whipping.jpg",
     },
     "Tart Trứng": {
         "price": 30000,
