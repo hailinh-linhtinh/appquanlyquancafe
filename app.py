@@ -3,6 +3,7 @@ import random
 import time
 import pandas as pd
 import streamlit as st
+from fpdf import FPDF
 
 # Cấu hình trang Streamlit
 st.set_page_config(
@@ -60,6 +61,8 @@ def set_background_video(video_file):
 
 
 set_background_video("teyvat.mp4")
+
+
 # ==========================================
 # HÀM TẠO FILE PDF HÓA ĐƠN THẬT
 # ==========================================
@@ -153,7 +156,6 @@ if "customer_name" not in st.session_state:
 if "primogems_db" not in st.session_state:
     st.session_state.primogems_db = {}
 
-# Sơ đồ 12 bàn chuẩn theo vùng đất Teyvat
 if "table_status" not in st.session_state:
     st.session_state.table_status = {
         "Bàn 01: Mondstadt": True,
@@ -178,13 +180,13 @@ if "boardgames" not in st.session_state:
         "Cờ Vua": True,
         "Cờ Tướng": True,
         "Khối Rubik": False,
-        "Truth or Dare": True,
+        "True or Dare": True,
         "Bài Uno": True,
         "Mèo Nổ": False,
     }
 
 # ==========================================
-# DỮ LIỆU MENU ĐỦ 15 MÓN NƯỚC & 5 MÓN BÁNH
+# DỮ LIỆU MENU
 # ==========================================
 DRINKS_MENU = {
     "Cà Phê Muối": {
@@ -370,10 +372,10 @@ with st.sidebar:
     else:
         needed = 160 - current_user_gems
         st.caption(
-            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (80k bill = 160 💎)."
+            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (25k bill = 16 💎)."
         )
-        
-# THÔNG TIN CỬA HÀNG ĐẶT PHÍA TRÊN PHẦN CHỌN KHÔNG GIAN
+
+    # THÔNG TIN CỬA HÀNG ĐẶT PHÍA TRÊN PHẦN CHỌN KHÔNG GIAN
     st.markdown("---")
     st.markdown("### ☕ THÔNG TIN QUÁN")
     st.markdown(
@@ -384,7 +386,7 @@ with st.sidebar:
         """
     )
     st.markdown("---")
-    
+
     nav_option = st.radio(
         "Chọn không gian:",
         [
@@ -455,7 +457,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
     with col_order_right:
         st.markdown(
-            '<div class="genshin-card"><h3>🧋 Gọi Món</h3>',
+            '<div class="genshin-card"><h3>🧋 Tùy Chỉnh & Gọi Món</h3>',
             unsafe_allow_html=True,
         )
         input_name = st.text_input(
@@ -592,7 +594,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     """,
                     unsafe_allow_html=True,
                 )
-                
+
             pdf_data = generate_pdf_invoice(
                 st.session_state.customer_name
                 if st.session_state.customer_name
@@ -608,11 +610,11 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 use_container_width=True,
             )
 
-            if st.button("🚀 XUẤT HÓA ĐƠN & TÍCH NGUYÊN THẠCH", use_container_width=True):
+            if st.button("🚀 XÁC NHẬN THANH TOÁN & TÍCH NGUYÊN THẠCH", use_container_width=True):
                 if not st.session_state.customer_name.strip():
-                    st.error("❌ Vui lòng nhập tên Lữ Khách trước khi xuất hóa đơn để tích lũy Nguyên Thạch!")
+                    st.error("❌ Vui lòng nhập tên Lữ Khách trước khi thanh toán!")
                 else:
-                    earned_primogems = int(final_total // 8000) * 16
+                    earned_primogems = int(final_total // 25000) * 16
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
                     )
@@ -622,7 +624,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
                     st.balloons()
                     st.success(
-                        f"🎉 Xuất hóa đơn thành công cho **{st.session_state.customer_name}**! +{earned_primogems} 💎 Nguyên Thạch đã cộng vào ví cá nhân!"
+                        f"🎉 Thanh toán thành công cho **{st.session_state.customer_name}**! +{earned_primogems} 💎 Nguyên Thạch đã cộng vào ví cá nhân!"
                     )
                     st.session_state.cart = []
                     st.session_state.discount_code = None
@@ -634,7 +636,11 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 # ==========================================
 elif nav_option == "✨ Cổng Gacha Wish":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    active_name = st.session_state.customer_name if st.session_state.customer_name else "Lữ Khách"
+    active_name = (
+        st.session_state.customer_name
+        if st.session_state.customer_name
+        else "Lữ Khách"
+    )
     st.markdown(f"## ✨ Cổng Cầu Nguyện của: {active_name}")
 
     current_user_gems = st.session_state.primogems_db.get(
@@ -648,12 +654,14 @@ elif nav_option == "✨ Cổng Gacha Wish":
     with col_w1:
         st.markdown(
             """
-            * **⭐⭐⭐ Thường:** Giảm **0%** (Tỷ lệ 5%5)
-            * **⭐⭐⭐⭐ Vip:** Giảm **10%** (Tỷ lệ 40%)
+            * **⭐⭐⭐ Thường:** Giảm **10%** (Tỷ lệ 70%)
+            * **⭐⭐⭐⭐ Vip:** Giảm **20%** (Tỷ lệ 25%)
             * **⭐⭐⭐⭐⭐ Pro:** Giảm **50%** (Tỷ lệ 5%)
             """
         )
-        st.info(f"Số Nguyên Thạch của **{active_name}**: **{current_user_gems} 💎**")
+        st.info(
+            f"Số Nguyên Thạch của **{active_name}**: **{current_user_gems} 💎**"
+        )
 
     with col_w2:
         st.markdown(
@@ -662,9 +670,13 @@ elif nav_option == "✨ Cổng Gacha Wish":
         )
         if st.button("🌠 CẦU NGUYỆN 1 LẦN (160 💎)"):
             if not st.session_state.customer_name.strip():
-                st.error("❌ Vui lòng nhập tên Lữ Khách ở phần Gọi Món trước khi quay Gacha!")
+                st.error(
+                    "❌ Vui lòng nhập tên Lữ Khách ở phần Gọi Món trước khi quay Gacha!"
+                )
             elif current_user_gems < 160:
-                st.error("❌ Bạn không đủ 160 Nguyên Thạch! Hãy xuất thêm hóa đơn để tích lũy.")
+                st.error(
+                    "❌ Bạn không đủ 160 Nguyên Thạch! Hãy xuất thêm hóa đơn để tích lũy."
+                )
             else:
                 st.session_state.primogems_db[
                     st.session_state.customer_name
@@ -676,20 +688,20 @@ elif nav_option == "✨ Cổng Gacha Wish":
                 if roll <= 10:
                     discount, tier, code = (
                         50,
-                        "⭐⭐⭐⭐⭐ (Pro 5 SAO - Giảm 5%)",
+                        "⭐⭐⭐⭐⭐ (Pro 5 SAO - Giảm 50%)",
                         "TEYVAT50",
                     )
                     st.balloons()
                 elif roll <= 40:
                     discount, tier, code = (
                         20,
-                        "⭐⭐⭐⭐ (Vip 4 SAO - Giảm 40%)",
+                        "⭐⭐⭐⭐ (Vip 4 SAO - Giảm 20%)",
                         "TEYVAT20",
                     )
                 else:
                     discount, tier, code = (
                         10,
-                        "⭐⭐⭐ (Thường 3 SAO - Giảm 55%)",
+                        "⭐⭐⭐ (Thường 3 SAO - Giảm 10%)",
                         "TEYVAT10",
                     )
 
@@ -702,7 +714,7 @@ elif nav_option == "✨ Cổng Gacha Wish":
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# 3. KHO TRÒ CHƠI BOARDGAME & CỜ (ĐÃ FIX TRIỆT ĐỂ LỖI KHUNG ĐEN)
+# 3. KHO TRÒ CHƠI BOARDGAME & CỜ
 # ==========================================
 elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
@@ -755,7 +767,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
 # ==========================================
 elif nav_option == "🪑 Sơ Đồ Bàn Trống":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🪑 Sơ Đồ Bàn Trống")
+    st.markdown("## 🪑 Sơ Đồ Bàn Trống (Teyvat Regions)")
     st.write(
         "Trạng thái thực tế của 12 bàn theo các vùng đất trong game."
     )
