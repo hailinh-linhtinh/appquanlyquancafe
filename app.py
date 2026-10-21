@@ -99,7 +99,7 @@ if "boardgames" not in st.session_state:
         "Cờ Vua": True,
         "Cờ Tướng": True,
         "Khối Rubik": False,
-        "True or Dare": True,
+        "Truth or Dare": True,
         "Bài Uno": True,
         "Mèo Nổ": False,
     }
@@ -211,35 +211,35 @@ DESSERTS_MENU = {
 BOARDGAMES_DATA = {
     "Bài Ma Sói": {
         "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn.",
-        "img": "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=600&auto=format&fit=crop&q=80",
+        "img": "https://cdp-api.printgo.vn/uploads/products/IMG_5799.jpg",
     },
     "Cờ Cá Ngựa": {
         "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
-        "img": "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=600&auto=format&fit=crop&q=80",
+        "img": "https://thanhnien.mediacdn.vn/Uploaded/phunggiao/2017_10_02/co-ca-ngua-01_ZFYX.jpg?width=600",
     },
     "Cờ Vua": {
         "desc": "Đấu trí đỉnh cao trên bàn cờ vua chiến thuật.",
-        "img": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=600&auto=format&fit=crop&q=80",
+        "img": "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/9_f9a87e28cb.jpg",
     },
     "Cờ Tướng": {
         "desc": "Trận chiến tướng sĩ tượng xe pháo mã truyền thống.",
-        "img": "https://images.unsplash.com/photo-1586165368502-1bad197a6461?w=600&auto=format&fit=crop&q=80",
+        "img": "https://www.covuacaocap.com/wp-content/uploads/Cach-choi-co-tuong-06.jpg",
     },
     "Khối Rubik": {
         "desc": "Thử thách tư duy logic và tốc độ xoay khối.",
-        "img": "https://images.unsplash.com/photo-1591991564624-370c242e8bbd?w=600&auto=format&fit=crop&q=80",
+        "img": "https://down-vn.img.susercontent.com/file/cn-11134207-820l4-mu377cwjl53720",
     },
-    "True or Dare": {
+    "Truth or Dare": {
         "desc": "Bộ bài thử thách Thật hay Thách vui nhộn.",
-        "img": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&auto=format&fit=crop&q=80",
+        "img": "https://vn-live-01.slatic.net/p/96cb49838d2c38b9ce928b88eb7247a4.jpg",
     },
     "Bài Uno": {
         "desc": "Bài Uno lật ngược tình thế bất ngờ cùng chiến hữu.",
-        "img": "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=600&auto=format&fit=crop&q=80",
+        "img": "https://cdn-media.sforum.vn/storage/app/media/wp-content/uploads/2023/02/uno-01.jpg",
     },
     "Mèo Nổ": {
         "desc": "Game thẻ bài mèo nổ hài hước đầy may rủi.",
-        "img": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80",
+        "img": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/12/cach-choi-meo-no-2.jpg",
     },
 }
 
