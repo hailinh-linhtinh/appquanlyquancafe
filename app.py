@@ -60,6 +60,84 @@ def set_background_video(video_file):
 
 
 set_background_video("teyvat.mp4")
+# ==========================================
+# HÀM TẠO FILE PDF HÓA ĐƠN THẬT
+# ==========================================
+class PDFInvoice(FPDF):
+
+    def header(self):
+        self.set_font("Arial", "B", 16)
+        self.cell(0, 10, "LIMDIM COFFEE • TEYVAT STATION", 0, 1, "C")
+        self.set_font("Arial", "I", 10)
+        self.cell(
+            0,
+            6,
+            "Hoa don thanh toan chinh thuc tu Dai luc nguyen to",
+            0,
+            1,
+            "C",
+        )
+        self.ln(5)
+
+    def footer(self):
+        self.set_y(-15)
+        self.set_font("Arial", "I", 8)
+        self.cell(
+            0,
+            10,
+            "Cam on Lu khach da ghe tham quan tra & ca phe Limdim!",
+            0,
+            0,
+            "C",
+        )
+
+
+def generate_pdf_invoice(customer, cart_items, total_amt):
+    pdf = PDFInvoice()
+    pdf.add_page()
+    pdf.set_font("Arial", "", 11)
+
+    pdf.cell(0, 8, f"Khach hang (Lu khach): {customer}", 0, 1, "L")
+    pdf.cell(
+        0,
+        8,
+        f"Thoi gian: {time.strftime('%d/%m/%Y %H:%M:%S', time.localtime())}",
+        0,
+        1,
+        "L",
+    )
+    pdf.ln(5)
+
+    pdf.set_font("Arial", "B", 10)
+    pdf.cell(100, 8, "Ten Mon", 1, 0, "L")
+    pdf.cell(20, 8, "SL", 1, 0, "C")
+    pdf.cell(40, 8, "Thanh Tien", 1, 1, "R")
+
+    pdf.set_font("Arial", "", 10)
+    for item in cart_items:
+        pdf.cell(100, 8, str(item["name"] + " (" + item["size"] + ")"), 1, 0, "L")
+        pdf.cell(20, 8, str(item["qty"]), 1, 0, "C")
+        pdf.cell(40, 8, f"{item['total_price']:,.0f}d", 1, 1, "R")
+        if item["paired_cake"]:
+            pdf.cell(
+                100,
+                7,
+                f"  + Kèm: {item['paired_cake']['name']}",
+                1,
+                0,
+                "L",
+            )
+            pdf.cell(20, 7, "1", 1, 0, "C")
+            pdf.cell(
+                40, 7, f"{item['paired_cake']['price']:,.0f}d", 1, 1, "R"
+            )
+
+    pdf.ln(5)
+    pdf.set_font("Arial", "B", 12)
+    pdf.cell(120, 10, "TONG THANH TOAN:", 0, 0, "R")
+    pdf.cell(40, 10, f"{total_amt:,.0f} VND", 0, 1, "R")
+    return pdf.output(dest="S").encode("latin1")
+
 
 # ==========================================
 # KHỞI TẠO SESSION STATE
@@ -294,7 +372,19 @@ with st.sidebar:
         st.caption(
             f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (80k bill = 160 💎)."
         )
-
+        
+# THÔNG TIN CỬA HÀNG ĐẶT PHÍA TRÊN PHẦN CHỌN KHÔNG GIAN
+    st.markdown("---")
+    st.markdown("### ☕ THÔNG TIN QUÁN")
+    st.markdown(
+        """
+        📍 **Địa chỉ:** Số 123, Đường Teyvat, Quận 1, TP.HCM  
+        ⏰ **Giờ mở cửa:** 08:00 - 22:30 (Hàng ngày)  
+        📞 **Hotline:** 039.123.4567
+        """
+    )
+    st.markdown("---")
+    
     nav_option = st.radio(
         "Chọn không gian:",
         [
