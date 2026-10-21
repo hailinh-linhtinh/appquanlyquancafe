@@ -111,7 +111,7 @@ DRINKS_MENU = {
     "Cà Phê Muối": {
         "price": 40000,
         "elem": "hydro",
-        "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80",
+        "img": "https://cubes-asia.com/storage/blogs/2024-12/cach-lam-ca-phe-muoi-nguyen-lieu-cong-thuc-lam.jpg",
     },
     "Bạc Xỉu": {
         "price": 40000,
