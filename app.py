@@ -101,7 +101,7 @@ if "boardgames" not in st.session_state:
         "Cờ Vua": True,
         "Cờ Tướng": True,
         "Khối Rubik": False,
-        "True or Dare": True,
+        "Truth or Dare": True,
         "Bài Uno": True,
         "Mèo Nổ": False,
     }
@@ -235,7 +235,7 @@ BOARDGAMES_DATA = {
         "desc": "Thử thách tư duy logic và tốc độ xoay khối.",
         "img": "https://down-vn.img.susercontent.com/file/cn-11134207-820l4-mu377cwjl53720",
     },
-    "True or Dare": {
+    "Truth or Dare": {
         "desc": "Bộ bài thử thách Thật hay Thách vui nhộn.",
         "img": "https://vn-live-01.slatic.net/p/96cb49838d2c38b9ce928b88eb7247a4.jpg",
     },
@@ -691,7 +691,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
 # ==========================================
 elif nav_option == "🪑 Sơ Đồ Bàn Trống":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🪑 Sơ Đồ Bàn Trống (Teyvat Regions)")
+    st.markdown("## 🪑 Sơ Đồ Bàn Trống")
     st.write(
         "Trạng thái thực tế của 12 bàn theo các vùng đất trong game."
     )
