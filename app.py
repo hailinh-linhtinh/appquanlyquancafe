@@ -502,7 +502,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             final_total = subtotal
             bill_content += "-" * 40 + "\n"
             bill_content += f"TONG THANH TOAN: {final_total:,.0f} VND\n"
-            bill_content += "Cam on lữ khách đã ghe tham quan!"
+            bill_content += "Cam on la khach da ghe tham quan!"
 
             st.markdown(
                 f"<h3 style='color: #4ade80; text-align: right;'>Tổng Bill: {final_total:,.0f} VNĐ</h3>",
