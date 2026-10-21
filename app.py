@@ -306,9 +306,9 @@ with st.sidebar:
     st.markdown(
         """
         <div style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.3;">
-        📍 <b>ĐC:</b> 123 Teyvat, Q.1, TP.HCM<br>
+        📍 <b>ĐC:</b> 0707 Teyvat, Phú Quốc, Genshin<br>
         ⏰ <b>Mở:</b> 08:00 - 22:30<br>
-        📞 <b>Hotline:</b> 039.123.4567
+        📞 <b>Hotline:</b> 0714.082.012
         </div>
         """,
         unsafe_allow_html=True,
@@ -385,7 +385,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
     with col_order_right:
         st.markdown(
-            '<div class="genshin-card"><h3>🧋 Tùy Chỉnh & Gọi Món</h3>',
+            '<div class="genshin-card"><h3>🧋 Gọi Món</h3>',
             unsafe_allow_html=True,
         )
         input_name = st.text_input(
@@ -578,8 +578,8 @@ elif nav_option == "✨ Cổng Gacha Wish":
     with col_w1:
         st.markdown(
             """
-            * **⭐⭐⭐ Thường:** Giảm **10%** (Tỷ lệ 70%)
-            * **⭐⭐⭐⭐ Vip:** Giảm **20%** (Tỷ lệ 25%)
+            * **⭐⭐⭐ Thường:** Giảm **10%** (Tỷ lệ 75%)
+            * **⭐⭐⭐⭐ Vip:** Giảm **20%** (Tỷ lệ 20%)
             * **⭐⭐⭐⭐⭐ Pro:** Giảm **50%** (Tỷ lệ 5%)
             """
         )
