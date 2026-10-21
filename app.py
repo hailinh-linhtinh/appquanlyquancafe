@@ -3,7 +3,6 @@ import random
 import time
 import pandas as pd
 import streamlit as st
-from fpdf import FPDF
 
 # Cấu hình trang Streamlit
 st.set_page_config(
@@ -62,86 +61,6 @@ def set_background_video(video_file):
 
 set_background_video("teyvat.mp4")
 
-
-# ==========================================
-# HÀM TẠO FILE PDF HÓA ĐƠN THẬT
-# ==========================================
-class PDFInvoice(FPDF):
-
-    def header(self):
-        self.set_font("Arial", "B", 16)
-        self.cell(0, 10, "LIMDIM COFFEE • TEYVAT STATION", 0, 1, "C")
-        self.set_font("Arial", "I", 10)
-        self.cell(
-            0,
-            6,
-            "Hoa don thanh toan chinh thuc tu Dai luc nguyen to",
-            0,
-            1,
-            "C",
-        )
-        self.ln(5)
-
-    def footer(self):
-        self.set_y(-15)
-        self.set_font("Arial", "I", 8)
-        self.cell(
-            0,
-            10,
-            "Cam on Lu khach da ghe tham quan tra & ca phe Limdim!",
-            0,
-            0,
-            "C",
-        )
-
-
-def generate_pdf_invoice(customer, cart_items, total_amt):
-    pdf = PDFInvoice()
-    pdf.add_page()
-    pdf.set_font("Arial", "", 11)
-
-    pdf.cell(0, 8, f"Khach hang (Lu khach): {customer}", 0, 1, "L")
-    pdf.cell(
-        0,
-        8,
-        f"Thoi gian: {time.strftime('%d/%m/%Y %H:%M:%S', time.localtime())}",
-        0,
-        1,
-        "L",
-    )
-    pdf.ln(5)
-
-    pdf.set_font("Arial", "B", 10)
-    pdf.cell(100, 8, "Ten Mon", 1, 0, "L")
-    pdf.cell(20, 8, "SL", 1, 0, "C")
-    pdf.cell(40, 8, "Thanh Tien", 1, 1, "R")
-
-    pdf.set_font("Arial", "", 10)
-    for item in cart_items:
-        pdf.cell(100, 8, str(item["name"] + " (" + item["size"] + ")"), 1, 0, "L")
-        pdf.cell(20, 8, str(item["qty"]), 1, 0, "C")
-        pdf.cell(40, 8, f"{item['total_price']:,.0f}d", 1, 1, "R")
-        if item["paired_cake"]:
-            pdf.cell(
-                100,
-                7,
-                f"  + Kèm: {item['paired_cake']['name']}",
-                1,
-                0,
-                "L",
-            )
-            pdf.cell(20, 7, "1", 1, 0, "C")
-            pdf.cell(
-                40, 7, f"{item['paired_cake']['price']:,.0f}d", 1, 1, "R"
-            )
-
-    pdf.ln(5)
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(120, 10, "TONG THANH TOAN:", 0, 0, "R")
-    pdf.cell(40, 10, f"{total_amt:,.0f} VND", 0, 1, "R")
-    return pdf.output(dest="S").encode("latin1")
-
-
 # ==========================================
 # KHỞI TẠO SESSION STATE
 # ==========================================
@@ -156,6 +75,7 @@ if "customer_name" not in st.session_state:
 if "primogems_db" not in st.session_state:
     st.session_state.primogems_db = {}
 
+# Sơ đồ 12 bàn chuẩn theo vùng đất Teyvat
 if "table_status" not in st.session_state:
     st.session_state.table_status = {
         "Bàn 01: Mondstadt": True,
@@ -277,7 +197,7 @@ DESSERTS_MENU = {
     },
     "Su Kem": {
         "price": 25000,
-        "img": "https://eggyolk.vn/wp-content/uploads/2024/08/Cach-lam-nhan-banh-su-kem-bang-whipping.jpg",
+        "img": "https://eggyolk.vn/wp-content/uploads/2024/08/Cach-lam-nhan-ban-su-kem-bang-whipping.jpg",
     },
     "Tart Trứng": {
         "price": 30000,
@@ -314,7 +234,7 @@ BOARDGAMES_DATA = {
         "desc": "Thử thách tư duy logic và tốc độ xoay khối.",
         "img": "https://down-vn.img.susercontent.com/file/cn-11134207-820l4-mu377cwjl53720",
     },
-    "Truth or Dare": {
+    "True or Dare": {
         "desc": "Bộ bài thử thách Thật hay Thách vui nhộn.",
         "img": "https://vn-live-01.slatic.net/p/96cb49838d2c38b9ce928b88eb7247a4.jpg",
     },
@@ -375,7 +295,6 @@ with st.sidebar:
             f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (25k bill = 16 💎)."
         )
 
-    # THÔNG TIN CỬA HÀNG ĐẶT PHÍA TRÊN PHẦN CHỌN KHÔNG GIAN
     st.markdown("---")
     st.markdown("### ☕ THÔNG TIN QUÁN")
     st.markdown(
@@ -595,18 +514,13 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     unsafe_allow_html=True,
                 )
 
-            pdf_data = generate_pdf_invoice(
-                st.session_state.customer_name
-                if st.session_state.customer_name
-                else "Khách Lẻ",
-                st.session_state.cart,
-                final_total,
-            )
+            # Nút xuất hóa đơn dạng text/HTML trực quan
+            bill_text = f"=== HOA DON LIMDIM COFFEE ===\nKhach: {st.session_state.customer_name}\nTong tien: {final_total:,.0f} VND\nTrang thai: Da thanh toan"
             st.download_button(
-                label="📥 TẢI XUỐNG HÓA ĐƠN PDF",
-                data=pdf_data,
-                file_name=f"HoaDon_{st.session_state.customer_name if st.session_state.customer_name else 'Limdim'}.pdf",
-                mime="application/pdf",
+                label="📥 TẢI XUỐNG HÓA ĐƠN TXT",
+                data=bill_text,
+                file_name=f"HoaDon_{st.session_state.customer_name if st.session_state.customer_name else 'Limdim'}.txt",
+                mime="text/plain",
                 use_container_width=True,
             )
 
