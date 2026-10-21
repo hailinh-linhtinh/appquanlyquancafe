@@ -101,7 +101,7 @@ if "boardgames" not in st.session_state:
         "Cờ Vua": True,
         "Cờ Tướng": True,
         "Khối Rubik": False,
-        "Truth or Dare": True,
+        "True or Dare": True,
         "Bài Uno": True,
         "Mèo Nổ": False,
     }
@@ -130,20 +130,15 @@ DRINKS_MENU = {
         "elem": "pyro",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh1yM41EDNB7aYHyMEXt3to5grV2GwGRtHcuQHEmTXp1fX6jVoV46A_2Bi&s=10",
     },
-     "Phindi Hạnh Nhân": {
-        "price": 40000,
-        "elem": "anemo",
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRFfVlydJt0WTxnn3SAnQfmWK8mk-OrKW0zp5M6-Lyd_SOP8wJK79w5FM&s=10",
+    "Trà Đào": {
+        "price": 35000,
+        "elem": "cryo",
+        "img": "https://beptruong.edu.vn/wp-content/uploads/2020/10/tra-dao-cam-sa.jpg",
     },
     "Matcha Latte": {
         "price": 40000,
         "elem": "dendro",
         "img": "https://mocktail.net/wp-content/uploads/2021/05/Matcha-Iced-Latte_ig.jpg",
-    },
-     "Trà Sữa Thái Xanh": {
-        "price": 35000,
-        "elem": "dendro",
-        "img": "https://barona.vn/storage/meo-vat/182/cach-lam-tra-sua-thai-xanh.jpg",
     },
     "Trà Sữa Olong": {
         "price": 35000,
@@ -154,11 +149,6 @@ DRINKS_MENU = {
         "price": 35000,
         "elem": "electro",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToiB5jIgP4zf96jrlPfyvMivXWEYk-9J1sxVKomEu-iIy74NHDBt720Fpc&s=10",
-   },
-    "Sữa Tươi Trân Châu": {
-        "price": 35000,
-        "elem": "geo",
-        "img": "https://cdn-img-v2.mybota.vn/uploadv2/web/10/10903/news/2019/09/07/03/30/1567827047_85b204df1917fe49a706.jpg",
     },
     "Trà Sen Vàng": {
         "price": 35000,
@@ -170,20 +160,30 @@ DRINKS_MENU = {
         "elem": "cryo",
         "img": "https://thucphamplaza.com/wp-content/uploads/products_img/hong-tra-kem.jpg",
     },
-     "Trà Đào": {
+    "Yaourt Việt Quất": {
+        "price": 40000,
+        "elem": "pyro",
+        "img": "https://file.hstatic.net/200000055918/file/yaourt-blueberry_0dae760f3a8d4d008d8ca71c0ad577a6_grande.jpg",
+    },
+    "Trà Sữa Thái Xanh": {
         "price": 35000,
-        "elem": "cryo",
-        "img": "https://beptruong.edu.vn/wp-content/uploads/2020/10/tra-dao-cam-sa.jpg",
+        "elem": "dendro",
+        "img": "https://barona.vn/storage/meo-vat/182/cach-lam-tra-sua-thai-xanh.jpg",
     },
     "Trà Chanh Lô Hội": {
         "price": 30000,
         "elem": "anemo",
         "img": "https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-1025.jpg",
     },
-    "Yaourt Việt Quất": {
+    "Sữa Tươi Trân Châu": {
+        "price": 35000,
+        "elem": "geo",
+        "img": "https://cdn-img-v2.mybota.vn/uploadv2/web/10/10903/news/2019/09/07/03/30/1567827047_85b204df1917fe49a706.jpg",
+    },
+    "Phindi Hạnh Nhân": {
         "price": 40000,
-        "elem": "pyro",
-        "img": "https://file.hstatic.net/200000055918/file/yaourt-blueberry_0dae760f3a8d4d008d8ca71c0ad577a6_grande.jpg",
+        "elem": "anemo",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRFfVlydJt0WTxnn3SAnQfmWK8mk-OrKW0zp5M6-Lyd_SOP8wJK79w5FM&s=10",
     },
 }
 
@@ -198,7 +198,7 @@ DESSERTS_MENU = {
     },
     "Su Kem": {
         "price": 25000,
-        "img": "https://eggyolk.vn/wp-content/uploads/2024/08/Cach-lam-nhan-banh-su-kem-bang-whipping.jpg",
+        "img": "https://eggyolk.vn/wp-content/uploads/2024/08/Cach-lam-nhan-ban-su-kem-bang-whipping.jpg",
     },
     "Tart Trứng": {
         "price": 30000,
@@ -235,7 +235,7 @@ BOARDGAMES_DATA = {
         "desc": "Thử thách tư duy logic và tốc độ xoay khối.",
         "img": "https://down-vn.img.susercontent.com/file/cn-11134207-820l4-mu377cwjl53720",
     },
-    "Truth or Dare": {
+    "True or Dare": {
         "desc": "Bộ bài thử thách Thật hay Thách vui nhộn.",
         "img": "https://vn-live-01.slatic.net/p/96cb49838d2c38b9ce928b88eb7247a4.jpg",
     },
@@ -385,7 +385,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
     with col_order_right:
         st.markdown(
-            '<div class="genshin-card"><h3>🧋 Gọi Món</h3>',
+            '<div class="genshin-card"><h3>🧋 Tùy Chỉnh & Gọi Món</h3>',
             unsafe_allow_html=True,
         )
         input_name = st.text_input(
@@ -396,6 +396,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
         if input_name:
             st.session_state.customer_name = input_name
 
+        # ---- PHẦN 1: GỌI MÓN NƯỚC & SỐ LƯỢNG NƯỚC ----
         selected_drink = st.selectbox("Chọn món nước:", drink_keys)
         drink_info = DRINKS_MENU[selected_drink]
 
@@ -406,19 +407,11 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
         size = st.selectbox(
             "Size ly", ["M (Tiêu chuẩn)", "L (+5,000đ)", "XL (+10,000đ)"]
         )
-
-        selected_cake = st.selectbox(
-            "Chọn bánh ngọt ăn kèm:", ["-- Không dùng bánh ngọt --"] + cake_keys
+        qty_drink = st.number_input(
+            "Số lượng nước", min_value=1, max_value=20, value=1, key="qty_drink"
         )
 
-        cake_data = None
-        if selected_cake != "-- Không dùng bánh ngọt --":
-            c_info = DESSERTS_MENU[selected_cake]
-            cake_data = {
-                "name": selected_cake,
-                "price": c_info["price"],
-            }
-
+        # ---- PHẦN 2: CHỌN TOPPINGS LÊN TRƯỚC BÁNH NGỌT ----
         selected_toppings = []
         st.markdown("✨ **Topping:**")
         top_cols = st.columns(2)
@@ -431,7 +424,25 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     )
             idx += 1
 
-        qty = st.number_input("Số lượng", min_value=1, max_value=20, value=1)
+        st.markdown("---")
+
+        # ---- PHẦN 3: GỌI BÁNH NGỌT ĂN KÈM & SỐ LƯỢNG BÁNH ----
+        selected_cake = st.selectbox(
+            "Chọn bánh ngọt ăn kèm:", ["-- Không dùng bánh ngọt --"] + cake_keys
+        )
+
+        cake_data = None
+        if selected_cake != "-- Không dùng bánh ngọt --":
+            c_info = DESSERTS_MENU[selected_cake]
+            qty_cake = st.number_input(
+                "Số lượng bánh", min_value=1, max_value=20, value=1, key="qty_cake"
+            )
+            cake_data = {
+                "name": selected_cake,
+                "price": c_info["price"],
+                "qty": qty_cake,
+            }
+
         note = st.text_input("Ghi chú", placeholder="VD: ít đá...")
 
         if st.button("➕ THÊM VÀO GIỎ HÀNG", use_container_width=True):
@@ -445,7 +456,8 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     actual_price += 10000
 
                 topping_total = sum([t["price"] for t in selected_toppings])
-                total_item_price = (actual_price + topping_total) * qty
+                # Tính tổng tiền nước (đã cộng topping và nhân với số lượng nước riêng)
+                total_drink_price = (actual_price + topping_total) * qty_drink
 
                 item_order = {
                     "customer": st.session_state.customer_name,
@@ -455,9 +467,9 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     "sugar": sugar,
                     "ice": ice,
                     "toppings": selected_toppings,
-                    "qty": qty,
+                    "qty": qty_drink,
                     "note": note,
-                    "total_price": total_item_price,
+                    "total_price": total_drink_price,
                     "paired_cake": cake_data,
                 }
                 st.session_state.cart.append(item_order)
@@ -486,23 +498,33 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 line_str = f"{i+1}. {cart_item['name']} x{cart_item['qty']} ({cart_item['size']}) - {cart_item['total_price']:,.0f}đ"
                 st.markdown(f"**{line_str}**")
                 bill_content += line_str + "\n"
+                subtotal += cart_item["total_price"]
 
                 if cart_item["paired_cake"]:
-                    cake_str = f"   + Kem/Bánh kèm: {cart_item['paired_cake']['name']} - {cart_item['paired_cake']['price']:,.0f}đ"
+                    cake = cart_item["paired_cake"]
+                    cake_total = cake["price"] * cake["qty"]
+                    cake_str = f"   + Bánh kèm: {cake['name']} x{cake['qty']} - {cake_total:,.0f}đ"
                     st.caption(cake_str)
                     bill_content += cake_str + "\n"
-                    subtotal += cart_item["paired_cake"]["price"]
+                    subtotal += cake_total
 
-                subtotal += cart_item["total_price"]
                 st.markdown(
                     "<hr style='margin: 4px 0; opacity: 0.1;'>",
                     unsafe_allow_html=True,
                 )
 
-            final_total = subtotal
+            if st.session_state.discount_percent > 0:
+                discount_amount = subtotal * (
+                    st.session_state.discount_percent / 100
+                )
+                st.success(f"Voucher giảm: -{st.session_state.discount_percent}%")
+            else:
+                discount_amount = 0
+
+            final_total = subtotal - discount_amount
             bill_content += "-" * 40 + "\n"
             bill_content += f"TONG THANH TOAN: {final_total:,.0f} VND\n"
-            bill_content += "Cam on la khach da ghe tham quan!"
+            bill_content += "Cam on lữ khách đã ghe tham quan!"
 
             st.markdown(
                 f"<h3 style='color: #4ade80; text-align: right;'>Tổng Bill: {final_total:,.0f} VNĐ</h3>",
@@ -525,7 +547,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     unsafe_allow_html=True,
                 )
 
-            # NÚT TẢI XUỐNG HÓA ĐƠN TRỰC TIẾP RA FILE .TXT (ĐẢM BẢO HOẠT ĐỘNG 100%)
             st.download_button(
                 label="📥 TẢI XUỐNG HÓA ĐƠN (FILE TXT)",
                 data=bill_content,
@@ -538,7 +559,8 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 if not st.session_state.customer_name.strip():
                     st.error("❌ Vui lòng nhập tên Lữ Khách trước khi thanh toán!")
                 else:
-                    earned_primogems = int(final_total // 25000) * 16
+                    # Cứ mỗi 80k đơn hàng = 1 lần quay (160 Nguyên Thạch)
+                    earned_primogems = int(final_total // 80000) * 160
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
                     )
@@ -578,8 +600,8 @@ elif nav_option == "✨ Cổng Gacha Wish":
     with col_w1:
         st.markdown(
             """
-            * **⭐⭐⭐ Thường:** Giảm **10%** (Tỷ lệ 75%)
-            * **⭐⭐⭐⭐ Vip:** Giảm **20%** (Tỷ lệ 20%)
+            * **⭐⭐⭐ Thường:** Giảm **10%** (Tỷ lệ 70%)
+            * **⭐⭐⭐⭐ Vip:** Giảm **20%** (Tỷ lệ 25%)
             * **⭐⭐⭐⭐⭐ Pro:** Giảm **50%** (Tỷ lệ 5%)
             """
         )
@@ -691,7 +713,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
 # ==========================================
 elif nav_option == "🪑 Sơ Đồ Bàn Trống":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🪑 Sơ Đồ Bàn Trống")
+    st.markdown("## 🪑 Sơ Đồ Bàn Trống (Teyvat Regions)")
     st.write(
         "Trạng thái thực tế của 12 bàn theo các vùng đất trong game."
     )
