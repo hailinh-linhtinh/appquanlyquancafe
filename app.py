@@ -49,7 +49,11 @@ def set_background_video(video_file):
         .dendro {{ background: rgba(34, 197, 94, 0.25); color: #4ade80; border: 1px solid #22c55e; }}
         .anemo {{ background: rgba(45, 212, 191, 0.25); color: #2dd4bf; border: 1px solid #14b8a6; }}
         .geo {{ background: rgba(234, 179, 8, 0.25); color: #facc15; border: 1px solid #eab308; }}
-        [data-testid="stSidebar"] {{ background: rgba(7, 9, 19, 0.92); border-right: 2px solid rgba(245, 158, 11, 0.25); padding-top: 1rem; }}
+        
+        /* ÉP SIDEBAR KÉO LÊN SÁT TRÊN, GIẢM KHOẢNG TRỐNG */
+        [data-testid="stSidebar"] {{ background: rgba(7, 9, 19, 0.92); border-right: 2px solid rgba(245, 158, 11, 0.25); }}
+        [data-testid="stSidebar"] > div:first-child {{ padding-top: 0.5rem !important; }}
+        .st-emotion-cache-1104ytp {{ padding-top: 1rem; }}
         </style>
         <video autoplay muted loop id="bg-video"><source src="data:video/mp4;base64,{encoded_video}" type="video/mp4"></video>
         """,
@@ -284,12 +288,11 @@ with st.sidebar:
         else "Chưa nhập tên"
     )
 
-    # KHUNG THÔNG TIN GỌN GÀNG, SÁT LỀ KHÔNG KHOẢNG TRỐNG
     st.markdown(
         f"""
-        <div style="background: rgba(22, 32, 50, 0.7); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 8px 10px; margin-bottom: 6px;">
-            <div style="font-size: 0.85rem; color: #cbd5e1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">👤 <b>{display_name}</b></div>
-            <div style="font-size: 0.85rem; color: #60a5fa; margin-top: 3px;">💎 <b>{current_user_gems} / 160</b> Nguyên Thạch</div>
+        <div style="background: rgba(22, 32, 50, 0.7); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 8px; padding: 6px 8px; margin-bottom: 4px;">
+            <div style="font-size: 0.8rem; color: #cbd5e1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">👤 <b>{display_name}</b></div>
+            <div style="font-size: 0.8rem; color: #60a5fa; margin-top: 2px;">💎 <b>{current_user_gems} / 160</b> Nguyên Thạch</div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -299,16 +302,15 @@ with st.sidebar:
         st.success("🎉 Đủ 160 Nguyên Thạch! Đổi Gacha ngay!")
     else:
         needed = 160 - current_user_gems
-        st.caption(f"💡 Cần thêm `{needed} 💎` đổi lượt Gacha.")
+        st.caption(f"💡 Cần thêm `{needed} 💎` đổi Gacha.")
 
-    # THÔNG TIN QUÁN GỌN GÀNG
     st.markdown("---")
     st.markdown("### ☕ THÔNG TIN QUÁN")
     st.markdown(
         """
-        <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.4;">
+        <div style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.3;">
         📍 <b>ĐC:</b> 123 Teyvat, Q.1, TP.HCM<br>
-        ⏰ <b>Mở cửa:</b> 08:00 - 22:30<br>
+        ⏰ <b>Mở:</b> 08:00 - 22:30<br>
         📞 <b>Hotline:</b> 039.123.4567
         </div>
         """,
