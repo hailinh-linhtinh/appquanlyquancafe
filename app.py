@@ -283,24 +283,31 @@ with st.sidebar:
         if st.session_state.customer_name
         else "Chưa nhập tên"
     )
-    st.info(
-        f"👤 Lữ khách: **{display_name}**\n\n💎 Nguyên Thạch: **{current_user_gems} / 160 ✨**"
+
+    # THIẾT KẾ KHUNG THÔNG TIN GỌN GÀNG, CÂN ĐỐI
+    st.markdown(
+        f"""
+        <div style="background: rgba(22, 32, 50, 0.7); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 10px;">
+            <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">👤 Lữ khách: <b style="color: #fde047;">{display_name}</b></p>
+            <p style="margin: 6px 0 0 0; font-size: 0.95rem; color: #f1f5f9;">💎 Nguyên Thạch: <b style="color: #60a5fa;">{current_user_gems} / 160 ✨</b></p>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
     if current_user_gems >= 160:
         st.success("🎉 Đủ 160 Nguyên Thạch! Đổi lượt Gacha ngay!")
     else:
         needed = 160 - current_user_gems
-        st.caption(
-            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (25k bill = 16 💎)."
-        )
+        st.caption(f"💡 Cần thêm `{needed} 💎` để đổi lượt Gacha.")
 
+    # THÔNG TIN CỬA HÀNG
     st.markdown("---")
     st.markdown("### ☕ THÔNG TIN QUÁN")
     st.markdown(
         """
-        📍 **Địa chỉ:** Số 123, Đường Teyvat, Quận 1, TP.HCM  
-        ⏰ **Giờ mở cửa:** 08:00 - 22:30 (Hàng ngày)  
+        📍 **Địa chỉ:** 123 Teyvat, Q.1, TP.HCM  
+        ⏰ **Mở cửa:** 08:00 - 22:30  
         📞 **Hotline:** 039.123.4567
         """
     )
@@ -513,16 +520,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     """,
                     unsafe_allow_html=True,
                 )
-
-            # Nút xuất hóa đơn dạng text/HTML trực quan
-            bill_text = f"=== HOA DON LIMDIM COFFEE ===\nKhach: {st.session_state.customer_name}\nTong tien: {final_total:,.0f} VND\nTrang thai: Da thanh toan"
-            st.download_button(
-                label="📥 TẢI XUỐNG HÓA ĐƠN TXT",
-                data=bill_text,
-                file_name=f"HoaDon_{st.session_state.customer_name if st.session_state.customer_name else 'Limdim'}.txt",
-                mime="text/plain",
-                use_container_width=True,
-            )
 
             if st.button("🚀 XÁC NHẬN THANH TOÁN & TÍCH NGUYÊN THẠCH", use_container_width=True):
                 if not st.session_state.customer_name.strip():
