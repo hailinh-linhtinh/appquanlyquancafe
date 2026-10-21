@@ -96,6 +96,7 @@ if "boardgames" not in st.session_state:
     st.session_state.boardgames = {
         "Bài Ma Sói": True,
         "Cờ Cá Ngựa": True,
+        "Cờ Tỷ Phú": False,
         "Cờ Vua": True,
         "Cờ Tướng": True,
         "Khối Rubik": False,
@@ -216,6 +217,10 @@ BOARDGAMES_DATA = {
     "Cờ Cá Ngựa": {
         "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
         "img": "https://thanhnien.mediacdn.vn/Uploaded/phunggiao/2017_10_02/co-ca-ngua-01_ZFYX.jpg?width=600",
+    },
+    "Cờ Tỷ Phú": {
+        "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
+        "img": "https://cdn2.fptshop.com.vn/unsafe/Uploads/images/tin-tuc/172607/Originals/cach-choi-co-ty-phu-8.jpg",
     },
     "Cờ Vua": {
         "desc": "Đấu trí đỉnh cao trên bàn cờ vua chiến thuật.",
