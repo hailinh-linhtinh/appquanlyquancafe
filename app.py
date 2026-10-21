@@ -170,20 +170,20 @@ DRINKS_MENU = {
         "elem": "cryo",
         "img": "https://thucphamplaza.com/wp-content/uploads/products_img/hong-tra-kem.jpg",
     },
-    "Yaourt Việt Quất": {
-        "price": 40000,
-        "elem": "pyro",
-        "img": "https://file.hstatic.net/200000055918/file/yaourt-blueberry_0dae760f3a8d4d008d8ca71c0ad577a6_grande.jpg",
+     "Trà Đào": {
+        "price": 35000,
+        "elem": "cryo",
+        "img": "https://beptruong.edu.vn/wp-content/uploads/2020/10/tra-dao-cam-sa.jpg",
     },
     "Trà Chanh Lô Hội": {
         "price": 30000,
         "elem": "anemo",
         "img": "https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-1025.jpg",
     },
-    "Trà Đào": {
-        "price": 35000,
-        "elem": "cryo",
-        "img": "https://beptruong.edu.vn/wp-content/uploads/2020/10/tra-dao-cam-sa.jpg",
+    "Yaourt Việt Quất": {
+        "price": 40000,
+        "elem": "pyro",
+        "img": "https://file.hstatic.net/200000055918/file/yaourt-blueberry_0dae760f3a8d4d008d8ca71c0ad577a6_grande.jpg",
     },
 }
 
@@ -198,7 +198,7 @@ DESSERTS_MENU = {
     },
     "Su Kem": {
         "price": 25000,
-        "img": "https://eggyolk.vn/wp-content/uploads/2024/08/Cach-lam-nhan-ban-su-kem-bang-whipping.jpg",
+        "img": "https://eggyolk.vn/wp-content/uploads/2024/08/Cach-lam-nhan-banh-su-kem-bang-whipping.jpg",
     },
     "Tart Trứng": {
         "price": 30000,
