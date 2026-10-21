@@ -592,6 +592,21 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     """,
                     unsafe_allow_html=True,
                 )
+                
+            pdf_data = generate_pdf_invoice(
+                st.session_state.customer_name
+                if st.session_state.customer_name
+                else "Khách Lẻ",
+                st.session_state.cart,
+                final_total,
+            )
+            st.download_button(
+                label="📥 TẢI XUỐNG HÓA ĐƠN PDF",
+                data=pdf_data,
+                file_name=f"HoaDon_{st.session_state.customer_name if st.session_state.customer_name else 'Limdim'}.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+            )
 
             if st.button("🚀 XUẤT HÓA ĐƠN & TÍCH NGUYÊN THẠCH", use_container_width=True):
                 if not st.session_state.customer_name.strip():
