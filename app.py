@@ -111,22 +111,22 @@ if "boardgames" not in st.session_state:
 # ==========================================
 DRINKS_MENU = {
     "Cà Phê Muối": {
-        "price": 40000,
+        "price": 38000,
         "elem": "hydro",
         "img": "https://cubes-asia.com/storage/blogs/2024-12/cach-lam-ca-phe-muoi-nguyen-lieu-cong-thuc-lam.jpg",
     },
     "Bạc Xỉu": {
-        "price": 40000,
+        "price": 35000,
         "elem": "cryo",
         "img": "https://kingcoffee.com.vn/wp-content/uploads/2026/01/Ty-le-pha-ca-phe-bac-xiu-1024x683.jpg",
     },
     "Cà Phê Sữa": {
-        "price": 35000,
+        "price": 30000,
         "elem": "pyro",
         "img": "https://giacaphe.com/wp-content/uploads/2023/03/ca-phe-sua-da-2.jpg",
     },
     "Cà Phê Đen": {
-        "price": 30000,
+        "price": 28000,
         "elem": "pyro",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh1yM41EDNB7aYHyMEXt3to5grV2GwGRtHcuQHEmTXp1fX6jVoV46A_2Bi&s=10",
     },
@@ -141,17 +141,17 @@ DRINKS_MENU = {
         "img": "https://mocktail.net/wp-content/uploads/2021/05/Matcha-Iced-Latte_ig.jpg",
     },
     "Trà Sữa Olong": {
-        "price": 35000,
+        "price": 30000,
         "elem": "pyro",
         "img": "https://amivietnam.com/wp-content/uploads/2024/03/54-2-508x400.png",
     },
     "Trà Sữa Gạo Rang": {
-        "price": 35000,
+        "price": 30000,
         "elem": "electro",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToiB5jIgP4zf96jrlPfyvMivXWEYk-9J1sxVKomEu-iIy74NHDBt720Fpc&s=10",
     },
     "Trà Sữa Thái Xanh": {
-        "price": 35000,
+        "price": 30000,
         "elem": "dendro",
         "img": "https://barona.vn/storage/meo-vat/182/cach-lam-tra-sua-thai-xanh.jpg",
     },
@@ -171,17 +171,17 @@ DRINKS_MENU = {
         "img": "https://thucphamplaza.com/wp-content/uploads/products_img/hong-tra-kem.jpg",
     },
     "Trà Chanh Lô Hội": {
-        "price": 30000,
+        "price": 28000,
         "elem": "anemo",
         "img": "https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-1025.jpg",
     },
     "Trà Đào": {
-        "price": 35000,
+        "price": 30000,
         "elem": "cryo",
         "img": "https://beptruong.edu.vn/wp-content/uploads/2020/10/tra-dao-cam-sa.jpg",
     },
     "Yaourt Việt Quất": {
-        "price": 40000,
+        "price": 38000,
         "elem": "pyro",
         "img": "https://file.hstatic.net/200000055918/file/yaourt-blueberry_0dae760f3a8d4d008d8ca71c0ad577a6_grande.jpg",
     },
@@ -189,11 +189,11 @@ DRINKS_MENU = {
 
 DESSERTS_MENU = {
     "Tiramisu Việt Quất": {
-        "price": 40000,
+        "price": 35000,
         "img": "https://cdn.hstatic.net/products/1000398438/viet_quat_8b428f1b3aa74ca9a769a7cc0b5e647c_1024x1024.jpg",
     },
     "Mousse Chanh Dây": {
-        "price": 30000,
+        "price": 35000,
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDf9d0k7qLRvyID6XhJSbtHH9A-eGa_ctyexpokjjyesu71qLIPMRM8qk&s=10",
     },
     "Su Kem": {
