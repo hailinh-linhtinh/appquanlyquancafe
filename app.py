@@ -395,13 +395,14 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             value=st.session_state.customer_name,
             placeholder="Ví dụ: Aether, Lumine...",
         )
-        if input_name:
+        if input_name != st.session_state.customer_name:
+            st.session_state.customer_name = input_name
             cleaned_name = input_name.strip()
             if cleaned_name and cleaned_name not in st.session_state.welcomed_customers:
                 st.session_state.welcomed_customers.add(cleaned_name)
                 curr_gems = st.session_state.primogems_db.get(cleaned_name, 0)
                 st.session_state.primogems_db[cleaned_name] = curr_gems + 160
-            st.session_state.customer_name = input_name
+            st.rerun()
 
         # ---- PHẦN NƯỚC VÀ SỐ LƯỢNG NƯỚC RIÊNG ----
         selected_drink = st.selectbox("Chọn món nước:", drink_keys)
@@ -565,7 +566,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 if not st.session_state.customer_name.strip():
                     st.error("❌ Vui lòng nhập tên Lữ Khách trước khi thanh toán!")
                 else:
-                    earned_primogems = int(final_total // 80000) * 160
+                    earned_primogems = int((final_total / 80000) * 160)
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
                     )
@@ -741,7 +742,7 @@ elif nav_option == "🪑 Sơ Đồ Bàn Trống":
                 )
                 if st.button(f"Đặt bàn", key=f"book_{table_name}"):
                     st.session_state.table_status[table_name] = False
-                    st.success(f"Đã giữ chỗ {table_name}!")
+                    st.success(f"Giữ chỗ thành công {table_name}!")
                     st.rerun()
             else:
                 st.markdown(
