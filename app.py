@@ -75,6 +75,8 @@ if "customer_name" not in st.session_state:
     st.session_state.customer_name = ""
 if "primogems_db" not in st.session_state:
     st.session_state.primogems_db = {}
+if "welcomed_customers" not in st.session_state:
+    st.session_state.welcomed_customers = set()
 
 # Sơ đồ 12 bàn chuẩn theo vùng đất Teyvat
 if "table_status" not in st.session_state:
@@ -275,11 +277,6 @@ st.markdown(
 # ==========================================
 with st.sidebar:
     st.markdown("### 🌟 LỮ KHÁCH")
-    
-    # Tự động tặng 160 Nguyên Thạch cho lữ khách mới khi tên đã được thiết lập
-    if st.session_state.customer_name and st.session_state.customer_name not in st.session_state.primogems_db:
-        st.session_state.primogems_db[st.session_state.customer_name] = 160
-
     current_user_gems = st.session_state.primogems_db.get(
         st.session_state.customer_name, 0
     )
@@ -399,9 +396,12 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             placeholder="Ví dụ: Aether, Lumine...",
         )
         if input_name:
+            cleaned_name = input_name.strip()
+            if cleaned_name and cleaned_name not in st.session_state.welcomed_customers:
+                st.session_state.welcomed_customers.add(cleaned_name)
+                curr_gems = st.session_state.primogems_db.get(cleaned_name, 0)
+                st.session_state.primogems_db[cleaned_name] = curr_gems + 160
             st.session_state.customer_name = input_name
-            if input_name not in st.session_state.primogems_db:
-                st.session_state.primogems_db[input_name] = 160
 
         # ---- PHẦN NƯỚC VÀ SỐ LƯỢNG NƯỚC RIÊNG ----
         selected_drink = st.selectbox("Chọn món nước:", drink_keys)
@@ -509,7 +509,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 if cart_item["paired_cake"]:
                     cake = cart_item["paired_cake"]
                     cake_total = cake["price"] * cake["qty"]
-                    cake_str = f"   + Bánh kèm: {cake['name']} x{cake['qty']} - {cake_total:,.0f}đ"
+                    cake_str = f"    + Bánh kèm: {cake['name']} x{cake['qty']} - {cake_total:,.0f}đ"
                     st.caption(cake_str)
                     bill_content += cake_str + "\n"
                     subtotal += cake_total
