@@ -189,13 +189,13 @@ DRINKS_MENU = {
 }
 
 DESSERTS_MENU = {
-    "Mousse Chanh Dây": {
-        "price": 35000,
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDf9d0k7qLRvyID6XhJSbtHH9A-eGa_ctyexpokjjyesu71qLIPMRM8qk&s=10",
-    },
     "Tiramisu Việt Quất": {
         "price": 35000,
         "img": "https://cdn.hstatic.net/products/1000398438/viet_quat_8b428f1b3aa74ca9a769a7cc0b5e647c_1024x1024.jpg",
+    },
+    "Mousse Chanh Dây": {
+        "price": 35000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDf9d0k7qLRvyID6XhJSbtHH9A-eGa_ctyexpokjjyesu71qLIPMRM8qk&s=10",
     },
     "Su Kem": {
         "price": 25000,
@@ -212,13 +212,13 @@ DESSERTS_MENU = {
 }
 
 BOARDGAMES_DATA = {
-    "Bài Ma Sói": {
-        "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn.",
-        "img": "https://cdp-api.printgo.vn/uploads/products/IMG_5799.jpg",
-    },
     "Cờ Cá Ngựa": {
         "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
         "img": "https://thanhnien.mediacdn.vn/Uploaded/phunggiao/2017_10_02/co-ca-ngua-01_ZFYX.jpg?width=600",
+    },
+    "Bài Ma Sói": {
+        "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn.",
+        "img": "https://cdp-api.printgo.vn/uploads/products/IMG_5799.jpg",
     },
     "Cờ Tỷ Phú": {
         "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
@@ -228,21 +228,21 @@ BOARDGAMES_DATA = {
         "desc": "Đấu trí đỉnh cao trên bàn cờ vua chiến thuật.",
         "img": "https://pos.nvncdn.com/efbd30-19981/ps/20240206_l6igYHEGT9.jpeg?v=1707214316",
     },
-    "Cờ Tướng": {
-        "desc": "Trận chiến tướng sĩ tượng xe pháo mã truyền thống.",
-        "img": "https://www.covuacaocap.com/wp-content/uploads/Cach-choi-co-tuong-06.jpg",
-    },
     "Khối Rubik": {
         "desc": "Thử thách tư duy logic và tốc độ xoay khối.",
         "img": "https://down-vn.img.susercontent.com/file/cn-11134207-820l4-mu377cwjl53720",
     },
-    "Truth or Dare": {
-        "desc": "Bộ bài thử thách Thật hay Thách vui nhộn.",
-        "img": "https://vn-live-01.slatic.net/p/96cb49838d2c38b9ce928b88eb7247a4.jpg",
+    "Cờ Tướng": {
+        "desc": "Trận chiến tướng sĩ tượng xe pháo mã truyền thống.",
+        "img": "https://www.covuacaocap.com/wp-content/uploads/Cach-choi-co-tuong-06.jpg",
     },
     "Bài Uno": {
         "desc": "Bài Uno lật ngược tình thế bất ngờ cùng chiến hữu.",
         "img": "https://cdn-media.sforum.vn/storage/app/media/wp-content/uploads/2023/02/uno-01.jpg",
+    },
+    "Truth or Dare": {
+        "desc": "Bộ bài thử thách Thật hay Thách vui nhộn.",
+        "img": "https://vn-live-01.slatic.net/p/96cb49838d2c38b9ce928b88eb7247a4.jpg",
     },
     "Mèo Nổ": {
         "desc": "Game thẻ bài mèo nổ hài hước đầy may rủi.",
@@ -441,7 +441,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 "qty": qty_cake,
             }
 
-        note = st.text_input("Ghi chú", placeholder="VD: ít đá...")
+        note = st.text_input("Ghi chú", placeholder="VD: xin thêm muỗng...")
 
         if st.button("➕ THÊM VÀO GIỎ HÀNG", use_container_width=True):
             if not st.session_state.customer_name.strip():
@@ -450,8 +450,8 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 actual_price = drink_info["price"]
                 if "L (+5,000đ)" in size:
                     actual_price += 5000
-                elif "XL (+10,000đ)" in size:
-                    actual_price += 10000
+                elif "XL (+7,000đ)" in size:
+                    actual_price += 7000
 
                 topping_total = sum([t["price"] for t in selected_toppings])
                 total_drink_price = (actual_price + topping_total) * qty_drink
