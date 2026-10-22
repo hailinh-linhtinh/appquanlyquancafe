@@ -306,7 +306,7 @@ with st.sidebar:
     st.markdown(
         """
         <div style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.3;">
-        📍 <b>ĐC:</b> 0707 Teyvat, Phú Quốc, Genshin<br>
+        📍 <b>ĐC:</b> 0707 Teyvat, Genshin, Phú Quốc<br>
         ⏰ <b>Mở:</b> 08:00 - 22:30<br>
         📞 <b>Hotline:</b> 0714.082.012
         </div>
@@ -712,7 +712,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
 # ==========================================
 elif nav_option == "🪑 Sơ Đồ Bàn Trống":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🪑 Sơ Đồ Bàn Trống (Teyvat Regions)")
+    st.markdown("## 🪑 Sơ Đồ Bàn Trống")
     st.write(
         "Trạng thái thực tế của 12 bàn theo các vùng đất trong game."
     )
