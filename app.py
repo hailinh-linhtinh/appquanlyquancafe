@@ -482,7 +482,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
         if not st.session_state.cart:
             st.warning("Giỏ hàng trống!")
         else:
-            # FIX: Lấy chuẩn thời gian thực theo múi giờ Việt Nam (UTC+7)
+            # Lấy chuẩn thời gian thực theo múi giờ Việt Nam (UTC+7)
             vietnam_time = datetime.now(timezone(timedelta(hours=7)))
             time_str = vietnam_time.strftime("%d/%m/%Y %H:%M:%S")
 
@@ -499,6 +499,22 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 line_str = f"{i+1}. {cart_item['name']} x{cart_item['qty']} ({cart_item['size']}) - {cart_item['total_price']:,.0f}đ"
                 st.markdown(f"**{line_str}**")
                 bill_content += line_str + "\n"
+
+                # FIX: Hiển thị độ ngọt, đá, topping và ghi chú trực tiếp trên bill & file text
+                detail_parts = [
+                    f"Độ ngọt: {cart_item['sugar']}",
+                    f"Đá: {cart_item['ice']}",
+                ]
+                if cart_item["toppings"]:
+                    top_names = ", ".join([t["name"] for t in cart_item["toppings"]])
+                    detail_parts.append(f"Topping: {top_names}")
+                if cart_item["note"]:
+                    detail_parts.append(f"Ghi chú: {cart_item['note']}")
+
+                detail_str = " | ".join(detail_parts)
+                st.caption(f"   ▫️ {detail_str}")
+                bill_content += f"   - {detail_str}\n"
+
                 subtotal += cart_item["total_price"]
 
                 if cart_item["paired_cake"]:
@@ -514,7 +530,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     unsafe_allow_html=True,
                 )
 
-            # FIX: Hiển thị mã giảm giá trực tiếp trên giao diện bill & file text
             discount_amount = 0
             if st.session_state.discount_percent > 0:
                 discount_amount = subtotal * (
