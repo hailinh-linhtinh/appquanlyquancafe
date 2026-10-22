@@ -75,8 +75,6 @@ if "customer_name" not in st.session_state:
     st.session_state.customer_name = ""
 if "primogems_db" not in st.session_state:
     st.session_state.primogems_db = {}
-if "pending_amount_db" not in st.session_state:
-    st.session_state.pending_amount_db = {}
 
 # Sơ đồ 12 bàn chuẩn theo vùng đất Teyvat
 if "table_status" not in st.session_state:
@@ -99,142 +97,155 @@ if "boardgames" not in st.session_state:
     st.session_state.boardgames = {
         "Bài Ma Sói": True,
         "Cờ Cá Ngựa": True,
+        "Cờ Tỷ Phú": False,
         "Cờ Vua": True,
         "Cờ Tướng": True,
         "Khối Rubik": False,
-        "True or Dare": True,
+        "Truth or Dare": True,
         "Bài Uno": True,
         "Mèo Nổ": False,
     }
 
 # ==========================================
-# DỮ LIỆU MENU ĐỦ 15 MÓN NƯỚC & 5 MÓN BÁNH
+# DỮ LIỆU MENU
 # ==========================================
 DRINKS_MENU = {
     "Cà Phê Muối": {
         "price": 40000,
         "elem": "hydro",
-        "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80",
+        "img": "https://cubes-asia.com/storage/blogs/2024-12/cach-lam-ca-phe-muoi-nguyen-lieu-cong-thuc-lam.jpg",
     },
     "Bạc Xỉu": {
-        "price": 40000,
+        "price": 38000,
         "elem": "cryo",
-        "img": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&auto=format&fit=crop&q=80",
+        "img": "https://kingcoffee.com.vn/wp-content/uploads/2026/01/Ty-le-pha-ca-phe-bac-xiu-1024x683.jpg",
     },
     "Cà Phê Sữa": {
-        "price": 35000,
-        "elem": "pyro",
-        "img": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&auto=format&fit=crop&q=80",
-    },
-    "Cà Phê Đen": {
         "price": 30000,
         "elem": "pyro",
-        "img": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&auto=format&fit=crop&q=80",
+        "img": "https://giacaphe.com/wp-content/uploads/2023/03/ca-phe-sua-da-2.jpg",
+    },
+    "Cà Phê Đen": {
+        "price": 28000,
+        "elem": "pyro",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh1yM41EDNB7aYHyMEXt3to5grV2GwGRtHcuQHEmTXp1fX6jVoV46A_2Bi&s=10",
     },
     "Trà Đào": {
         "price": 35000,
         "elem": "cryo",
-        "img": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80",
+        "img": "https://beptruong.edu.vn/wp-content/uploads/2020/10/tra-dao-cam-sa.jpg",
     },
     "Matcha Latte": {
         "price": 40000,
         "elem": "dendro",
-        "img": "https://images.unsplash.com/photo-1536256263959-770b48d82b08?w=600&auto=format&fit=crop&q=80",
+        "img": "https://mocktail.net/wp-content/uploads/2021/05/Matcha-Iced-Latte_ig.jpg",
     },
     "Trà Sữa Olong": {
-        "price": 35000,
+        "price": 30000,
         "elem": "pyro",
-        "img": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=600&auto=format&fit=crop&q=80",
+        "img": "https://amivietnam.com/wp-content/uploads/2024/03/54-2-508x400.png",
     },
     "Trà Sữa Gạo Rang": {
-        "price": 35000,
+        "price": 30000,
         "elem": "electro",
-        "img": "https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=600&auto=format&fit=crop&q=80",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToiB5jIgP4zf96jrlPfyvMivXWEYk-9J1sxVKomEu-iIy74NHDBt720Fpc&s=10",
     },
     "Trà Sen Vàng": {
         "price": 35000,
         "elem": "hydro",
-        "img": "https://images.unsplash.com/photo-1527661591475-527312dd65f5?w=600&auto=format&fit=crop&q=80",
+        "img": "https://bepchethai.vn/wp-content/uploads/2023/02/tra-sen-vang-machiato-3-500x500.jpg",
     },
     "Hồng Trà Kem Cheese": {
         "price": 35000,
         "elem": "cryo",
-        "img": "https://images.unsplash.com/photo-1556742049-0a67d553c2a5?w=600&auto=format&fit=crop&q=80",
+        "img": "https://thucphamplaza.com/wp-content/uploads/products_img/hong-tra-kem.jpg",
     },
     "Yaourt Việt Quất": {
-        "price": 40000,
+        "price": 38000,
         "elem": "pyro",
-        "img": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=600&auto=format&fit=crop&q=80",
+        "img": "https://file.hstatic.net/200000055918/file/yaourt-blueberry_0dae760f3a8d4d008d8ca71c0ad577a6_grande.jpg",
     },
     "Trà Sữa Thái Xanh": {
-        "price": 35000,
+        "price": 30000,
         "elem": "dendro",
-        "img": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&auto=format&fit=crop&q=80",
+        "img": "https://barona.vn/storage/meo-vat/182/cach-lam-tra-sua-thai-xanh.jpg",
     },
     "Trà Chanh Lô Hội": {
-        "price": 30000,
+        "price": 28000,
         "elem": "anemo",
-        "img": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&auto=format&fit=crop&q=80",
+        "img": "https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-1025.jpg",
     },
     "Sữa Tươi Trân Châu": {
         "price": 35000,
         "elem": "geo",
-        "img": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=600&auto=format&fit=crop&q=80",
+        "img": "https://cdn-img-v2.mybota.vn/uploadv2/web/10/10903/news/2019/09/07/03/30/1567827047_85b204df1917fe49a706.jpg",
     },
     "Phindi Hạnh Nhân": {
         "price": 40000,
         "elem": "anemo",
-        "img": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&auto=format&fit=crop&q=80",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRFfVlydJt0WTxnn3SAnQfmWK8mk-OrKW0zp5M6-Lyd_SOP8wJK79w5FM&s=10",
     },
 }
 
 DESSERTS_MENU = {
     "Mousse Chanh Dây": {
-        "price": 30000,
-        "img": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&auto=format&fit=crop&q=80",
+        "price": 35000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDf9d0k7qLRvyID6XhJSbtHH9A-eGa_ctyexpokjjyesu71qLIPMRM8qk&s=10",
     },
     "Tiramisu Việt Quất": {
-        "price": 40000,
-        "img": "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&auto=format&fit=crop&q=80",
+        "price": 35000,
+        "img": "https://cdn.hstatic.net/products/1000398438/viet_quat_8b428f1b3aa74ca9a769a7cc0b5e647c_1024x1024.jpg",
     },
     "Su Kem": {
         "price": 25000,
-        "img": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80",
+        "img": "https://eggyolk.vn/wp-content/uploads/2024/08/Cach-lam-nhan-ban-su-kem-bang-whipping.jpg",
     },
     "Tart Trứng": {
         "price": 30000,
-        "img": "https://images.unsplash.com/photo-1519869325930-281384150729?w=600&auto=format&fit=crop&q=80",
+        "img": "https://file.hstatic.net/200000721249/file/h_tart_trung_bang_noi_chien_khong_dau_b701f1d2d3d644429912379031d77916.jpg",
     },
     "Donut": {
         "price": 25000,
-        "img": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format&fit=crop&q=80",
+        "img": "https://s3-ap-southeast-1.amazonaws.com/happie-bucket/5/e/c/5ecfa090-93b6-4214-b402-ba24e3154847-origin.jpeg",
     },
 }
 
 BOARDGAMES_DATA = {
     "Bài Ma Sói": {
-        "img": "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=600&auto=format&fit=crop&q=80",
+        "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn.",
+        "img": "https://cdp-api.printgo.vn/uploads/products/IMG_5799.jpg",
     },
     "Cờ Cá Ngựa": {
-        "img": "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=600&auto=format&fit=crop&q=80",
+        "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
+        "img": "https://thanhnien.mediacdn.vn/Uploaded/phunggiao/2017_10_02/co-ca-ngua-01_ZFYX.jpg?width=600",
+    },
+    "Cờ Tỷ Phú": {
+        "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
+        "img": "https://cdn2.fptshop.com.vn/unsafe/Uploads/images/tin-tuc/172607/Originals/cach-choi-co-ty-phu-8.jpg",
     },
     "Cờ Vua": {
-        "img": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=600&auto=format&fit=crop&q=80",
+        "desc": "Đấu trí đỉnh cao trên bàn cờ vua chiến thuật.",
+        "img": "https://pos.nvncdn.com/efbd30-19981/ps/20240206_l6igYHEGT9.jpeg?v=1707214316",
     },
     "Cờ Tướng": {
-        "img": "https://images.unsplash.com/photo-1586165368502-1bad197a6461?w=600&auto=format&fit=crop&q=80",
+        "desc": "Trận chiến tướng sĩ tượng xe pháo mã truyền thống.",
+        "img": "https://www.covuacaocap.com/wp-content/uploads/Cach-choi-co-tuong-06.jpg",
     },
     "Khối Rubik": {
-        "img": "https://images.unsplash.com/photo-1591991564624-370c242e8bbd?w=600&auto=format&fit=crop&q=80",
+        "desc": "Thử thách tư duy logic và tốc độ xoay khối.",
+        "img": "https://down-vn.img.susercontent.com/file/cn-11134207-820l4-mu377cwjl53720",
     },
-    "True or Dare": {
-        "img": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&auto=format&fit=crop&q=80",
+    "Truth or Dare": {
+        "desc": "Bộ bài thử thách Thật hay Thách vui nhộn.",
+        "img": "https://vn-live-01.slatic.net/p/96cb49838d2c38b9ce928b88eb7247a4.jpg",
     },
     "Bài Uno": {
-        "img": "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=600&auto=format&fit=crop&q=80",
+        "desc": "Bài Uno lật ngược tình thế bất ngờ cùng chiến hữu.",
+        "img": "https://cdn-media.sforum.vn/storage/app/media/wp-content/uploads/2023/02/uno-01.jpg",
     },
     "Mèo Nổ": {
-        "img": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80",
+        "desc": "Game thẻ bài mèo nổ hài hước đầy may rủi.",
+        "img": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/12/cach-choi-meo-no-2.jpg",
     },
 }
 
@@ -263,7 +274,7 @@ st.markdown(
 # SIDEBAR
 # ==========================================
 with st.sidebar:
-    st.markdown("### 🌟 NƠI DỪNG CHÂN LỮ KHÁCH")
+    st.markdown("### 🌟 LỮ KHÁCH")
     current_user_gems = st.session_state.primogems_db.get(
         st.session_state.customer_name, 0
     )
@@ -273,17 +284,36 @@ with st.sidebar:
         if st.session_state.customer_name
         else "Chưa nhập tên"
     )
-    st.info(
-        f"👤 Lữ khách: **{display_name}**\n\n💎 Nguyên Thạch: **{current_user_gems} / 160 ✨**"
+
+    st.markdown(
+        f"""
+        <div style="background: rgba(22, 32, 50, 0.7); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 8px; padding: 6px 8px; margin-bottom: 4px;">
+            <div style="font-size: 0.8rem; color: #cbd5e1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">👤 <b>{display_name}</b></div>
+            <div style="font-size: 0.8rem; color: #60a5fa; margin-top: 2px;">💎 <b>{current_user_gems} / 160</b> Nguyên Thạch</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
     if current_user_gems >= 160:
-        st.success("🎉 Đủ 160 Nguyên Thạch! Đổi lượt Gacha ngay!")
+        st.success("🎉 Đủ 160 Nguyên Thạch! Đổi Gacha ngay!")
     else:
         needed = 160 - current_user_gems
-        st.caption(
-            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (80k bill = 160 💎)."
-        )
+        st.caption(f"💡 Cần thêm `{needed} 💎` đổi Gacha.")
+
+    st.markdown("---")
+    st.markdown("### ☕ THÔNG TIN QUÁN")
+    st.markdown(
+        """
+        <div style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.3;">
+        📍 <b>ĐC:</b> 0707 Teyvat, Genshin, Phú Quốc<br>
+        ⏰ <b>Mở:</b> 08:00 - 22:30<br>
+        📞 <b>Hotline:</b> 0714.082.012
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.markdown("---")
 
     nav_option = st.radio(
         "Chọn không gian:",
@@ -359,13 +389,14 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             unsafe_allow_html=True,
         )
         input_name = st.text_input(
-            "👤 Tên Lữ Khách (Nhập tên của bạn):",
+            "👤 Tên Lữ Khách:",
             value=st.session_state.customer_name,
             placeholder="Ví dụ: Aether, Lumine...",
         )
         if input_name:
             st.session_state.customer_name = input_name
 
+        # ---- PHẦN NƯỚC VÀ SỐ LƯỢNG NƯỚC RIÊNG ----
         selected_drink = st.selectbox("Chọn món nước:", drink_keys)
         drink_info = DRINKS_MENU[selected_drink]
 
@@ -376,20 +407,11 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
         size = st.selectbox(
             "Size ly", ["M (Tiêu chuẩn)", "L (+5,000đ)", "XL (+10,000đ)"]
         )
-
-        selected_cake = st.selectbox(
-            "Chọn bánh ngọt ăn kèm:", ["-- Không dùng bánh ngọt --"] + cake_keys
+        qty_drink = st.number_input(
+            "Số lượng nước", min_value=1, max_value=20, value=1, key="qty_drink"
         )
 
-        cake_data = None
-        if selected_cake != "-- Không dùng bánh ngọt --":
-            c_info = DESSERTS_MENU[selected_cake]
-            cake_data = {
-                "name": selected_cake,
-                "price": c_info["price"],
-                "desc": c_info["desc"],
-            }
-
+        # ---- ĐƯA TOPPING LÊN TRƯỚC BÁNH NGỌT ----
         selected_toppings = []
         st.markdown("✨ **Topping:**")
         top_cols = st.columns(2)
@@ -402,7 +424,25 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     )
             idx += 1
 
-        qty = st.number_input("Số lượng", min_value=1, max_value=20, value=1)
+        st.markdown("---")
+
+        # ---- PHẦN BÁNH NGỌT & SỐ LƯỢNG BÁNH RIÊNG ----
+        selected_cake = st.selectbox(
+            "Chọn bánh ngọt ăn kèm:", ["-- Không dùng bánh ngọt --"] + cake_keys
+        )
+
+        cake_data = None
+        if selected_cake != "-- Không dùng bánh ngọt --":
+            c_info = DESSERTS_MENU[selected_cake]
+            qty_cake = st.number_input(
+                "Số lượng bánh", min_value=1, max_value=20, value=1, key="qty_cake"
+            )
+            cake_data = {
+                "name": selected_cake,
+                "price": c_info["price"],
+                "qty": qty_cake,
+            }
+
         note = st.text_input("Ghi chú", placeholder="VD: ít đá...")
 
         if st.button("➕ THÊM VÀO GIỎ HÀNG", use_container_width=True):
@@ -416,7 +456,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     actual_price += 10000
 
                 topping_total = sum([t["price"] for t in selected_toppings])
-                total_item_price = (actual_price + topping_total) * qty
+                total_drink_price = (actual_price + topping_total) * qty_drink
 
                 item_order = {
                     "customer": st.session_state.customer_name,
@@ -426,9 +466,9 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     "sugar": sugar,
                     "ice": ice,
                     "toppings": selected_toppings,
-                    "qty": qty,
+                    "qty": qty_drink,
                     "note": note,
-                    "total_price": total_item_price,
+                    "total_price": total_drink_price,
                     "paired_cake": cake_data,
                 }
                 st.session_state.cart.append(item_order)
@@ -445,19 +485,28 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             st.warning("Giỏ hàng trống!")
         else:
             subtotal = 0
+            bill_content = f"=== HOA DON LIMDIM COFFEE • TEYVAT ===\n"
+            bill_content += f"Khach hang: {st.session_state.customer_name}\n"
+            bill_content += f"Thoi gian: {time.strftime('%d/%m/%Y %H:%M:%S')}\n"
+            bill_content += "-" * 40 + "\n"
+
             st.markdown(
-                f"**Lữ khách thanh toán:** {st.session_state.customer_name if st.session_state.customer_name else 'Chưa có tên'}"
+                f"**Lữ khách thanh toán:** {st.session_state.customer_name}"
             )
             for i, cart_item in enumerate(st.session_state.cart):
-                st.markdown(
-                    f"**{i+1}. {cart_item['name']}** x{cart_item['qty']} ({cart_item['size']})"
-                )
-                if cart_item["paired_cake"]:
-                    st.caption(
-                        f"🍰 Kèm: {cart_item['paired_cake']['name']} ({cart_item['paired_cake']['price']:,.0f}đ)"
-                    )
-                    subtotal += cart_item["paired_cake"]["price"]
+                line_str = f"{i+1}. {cart_item['name']} x{cart_item['qty']} ({cart_item['size']}) - {cart_item['total_price']:,.0f}đ"
+                st.markdown(f"**{line_str}**")
+                bill_content += line_str + "\n"
                 subtotal += cart_item["total_price"]
+
+                if cart_item["paired_cake"]:
+                    cake = cart_item["paired_cake"]
+                    cake_total = cake["price"] * cake["qty"]
+                    cake_str = f"   + Bánh kèm: {cake['name']} x{cake['qty']} - {cake_total:,.0f}đ"
+                    st.caption(cake_str)
+                    bill_content += cake_str + "\n"
+                    subtotal += cake_total
+
                 st.markdown(
                     "<hr style='margin: 4px 0; opacity: 0.1;'>",
                     unsafe_allow_html=True,
@@ -472,6 +521,9 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 discount_amount = 0
 
             final_total = subtotal - discount_amount
+            bill_content += "-" * 40 + "\n"
+            bill_content += f"TONG THANH TOAN: {final_total:,.0f} VND\n"
+            bill_content += "Cam on lữ khách đã ghe tham quan!"
 
             st.markdown(
                 f"<h3 style='color: #4ade80; text-align: right;'>Tổng Bill: {final_total:,.0f} VNĐ</h3>",
@@ -494,26 +546,20 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     unsafe_allow_html=True,
                 )
 
-            if st.button("🚀 XUẤT HÓA ĐƠN & TÍCH NGUYÊN THẠCH", use_container_width=True):
+            st.download_button(
+                label="📥 TẢI XUỐNG HÓA ĐƠN (FILE TXT)",
+                data=bill_content,
+                file_name=f"HoaDon_{st.session_state.customer_name}.txt",
+                mime="text/plain",
+                use_container_width=True,
+            )
+
+            if st.button("🚀 XÁC NHẬN THANH TOÁN & TÍCH NGUYÊN THẠCH", use_container_width=True):
                 if not st.session_state.customer_name.strip():
-                    st.error("❌ Vui lòng nhập tên Lữ Khách trước khi xuất hóa đơn để tích lũy Nguyên Thạch!")
+                    st.error("❌ Vui lòng nhập tên Lữ Khách trước khi thanh toán!")
                 else:
-                    # Lấy số tiền dư tích lũy trước đó (nếu có)
-                    pending_money = st.session_state.pending_amount_db.get(
-                        st.session_state.customer_name, 0
-                    )
-                    total_accumulated = pending_money + final_total
-
-                    # Cứ đạt đủ mốc 80,000đ thì nhận 160 Nguyên Thạch
-                    earned_turns = int(total_accumulated // 80000)
-                    earned_primogems = earned_turns * 160
-
-                    # Số tiền lẻ còn dư giữ lại cho lần sau
-                    remainder_money = total_accumulated % 80000
-                    st.session_state.pending_amount_db[
-                        st.session_state.customer_name
-                    ] = remainder_money
-
+                    # Mức tích lũy mới: cứ 80k đơn hàng = 160 Nguyên Thạch (1 lần quay)
+                    earned_primogems = int(final_total // 80000) * 160
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
                     )
@@ -522,15 +568,9 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     )
 
                     st.balloons()
-                    if earned_primogems > 0:
-                        st.success(
-                            f"🎉 Xuất hóa đơn thành công cho **{st.session_state.customer_name}**! +{earned_primogems} 💎 Nguyên Thạch đã cộng vào ví cá nhân! (Số tiền dư {remainder_money:,.0f}đ được lưu tích lũy lần sau)."
-                        )
-                    else:
-                        st.success(
-                            f"🎉 Xuất hóa đơn thành công cho **{st.session_state.customer_name}**! Bill chưa đạt mốc 80k, số tiền {final_total:,.0f}đ đã được lưu lại để tích lũy cho lần ghé tiếp theo."
-                        )
-
+                    st.success(
+                        f"🎉 Thanh toán thành công cho **{st.session_state.customer_name}**! +{earned_primogems} 💎 Nguyên Thạch đã cộng vào ví cá nhân!"
+                    )
                     st.session_state.cart = []
                     st.session_state.discount_code = None
                     st.session_state.discount_percent = 0
@@ -541,7 +581,11 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 # ==========================================
 elif nav_option == "✨ Cổng Gacha Wish":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    active_name = st.session_state.customer_name if st.session_state.customer_name else "Lữ Khách"
+    active_name = (
+        st.session_state.customer_name
+        if st.session_state.customer_name
+        else "Lữ Khách"
+    )
     st.markdown(f"## ✨ Cổng Cầu Nguyện của: {active_name}")
 
     current_user_gems = st.session_state.primogems_db.get(
@@ -560,7 +604,9 @@ elif nav_option == "✨ Cổng Gacha Wish":
             * **⭐⭐⭐⭐⭐ Pro:** Giảm **50%** (Tỷ lệ 5%)
             """
         )
-        st.info(f"Số Nguyên Thạch của **{active_name}**: **{current_user_gems} 💎**")
+        st.info(
+            f"Số Nguyên Thạch của **{active_name}**: **{current_user_gems} 💎**"
+        )
 
     with col_w2:
         st.markdown(
@@ -569,9 +615,13 @@ elif nav_option == "✨ Cổng Gacha Wish":
         )
         if st.button("🌠 CẦU NGUYỆN 1 LẦN (160 💎)"):
             if not st.session_state.customer_name.strip():
-                st.error("❌ Vui lòng nhập tên Lữ Khách ở phần Gọi Món trước khi quay Gacha!")
+                st.error(
+                    "❌ Vui lòng nhập tên Lữ Khách ở phần Gọi Món trước khi quay Gacha!"
+                )
             elif current_user_gems < 160:
-                st.error("❌ Bạn không đủ 160 Nguyên Thạch! Hãy xuất thêm hóa đơn (mỗi 80k = 160 Nguyên Thạch) để tích lũy.")
+                st.error(
+                    "❌ Bạn không đủ 160 Nguyên Thạch! Hãy xuất thêm hóa đơn để tích lũy."
+                )
             else:
                 st.session_state.primogems_db[
                     st.session_state.customer_name
@@ -615,7 +665,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
     st.markdown("## 🎲 Kho Trò Chơi Boardgame & Cờ Giải Trí")
     st.write(
-        "Trạng thái các tựa game tại quán để mượn chơi!"
+        "Trạng thái các tựa game tại quán để mượn chơi cùng nhóm bạn!"
     )
 
     game_keys = list(BOARDGAMES_DATA.keys())
@@ -664,7 +714,7 @@ elif nav_option == "🪑 Sơ Đồ Bàn Trống":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
     st.markdown("## 🪑 Sơ Đồ Bàn Trống")
     st.write(
-        "Trạng thái thực của 12 bàn theo các vùng đất."
+        "Trạng thái thực tế của 12 bàn theo các vùng đất trong game."
     )
 
     cols = st.columns(3)
