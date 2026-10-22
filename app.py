@@ -275,6 +275,11 @@ st.markdown(
 # ==========================================
 with st.sidebar:
     st.markdown("### 🌟 LỮ KHÁCH")
+    
+    # Tự động tặng 160 Nguyên Thạch cho lữ khách mới khi tên đã được thiết lập
+    if st.session_state.customer_name and st.session_state.customer_name not in st.session_state.primogems_db:
+        st.session_state.primogems_db[st.session_state.customer_name] = 160
+
     current_user_gems = st.session_state.primogems_db.get(
         st.session_state.customer_name, 0
     )
@@ -395,6 +400,8 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
         )
         if input_name:
             st.session_state.customer_name = input_name
+            if input_name not in st.session_state.primogems_db:
+                st.session_state.primogems_db[input_name] = 160
 
         # ---- PHẦN NƯỚC VÀ SỐ LƯỢNG NƯỚC RIÊNG ----
         selected_drink = st.selectbox("Chọn món nước:", drink_keys)
