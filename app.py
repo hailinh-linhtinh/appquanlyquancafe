@@ -75,6 +75,8 @@ if "customer_name" not in st.session_state:
     st.session_state.customer_name = ""
 if "primogems_db" not in st.session_state:
     st.session_state.primogems_db = {}
+if "pending_amount_db" not in st.session_state:
+    st.session_state.pending_amount_db = {}
 
 # Sơ đồ 12 bàn chuẩn theo vùng đất Teyvat
 if "table_status" not in st.session_state:
@@ -99,10 +101,10 @@ if "boardgames" not in st.session_state:
         "Cờ Cá Ngựa": True,
         "Cờ Tỷ Phú": False,
         "Cờ Vua": True,
-        "Cờ Tướng": True,
         "Khối Rubik": False,
-        "Truth or Dare": True,
+        "Cờ Tướng": True,
         "Bài Uno": True,
+        "Truth or Dare": True,
         "Mèo Nổ": False,
     }
 
@@ -212,27 +214,35 @@ DESSERTS_MENU = {
 
 BOARDGAMES_DATA = {
     "Bài Ma Sói": {
+        "desc": "Trò chơi suy luận tâm lý kinh điển cho hội bạn.",
         "img": "https://cdp-api.printgo.vn/uploads/products/IMG_5799.jpg",
     },
     "Cờ Cá Ngựa": {
+        "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
         "img": "https://thanhnien.mediacdn.vn/Uploaded/phunggiao/2017_10_02/co-ca-ngua-01_ZFYX.jpg?width=600",
     },
     "Cờ Tỷ Phú": {
+        "desc": "Trò chơi bàn cờ quen thuộc gắn liền tuổi thơ.",
         "img": "https://cdn2.fptshop.com.vn/unsafe/Uploads/images/tin-tuc/172607/Originals/cach-choi-co-ty-phu-8.jpg",
     },
     "Cờ Vua": {
+        "desc": "Đấu trí đỉnh cao trên bàn cờ vua chiến thuật.",
         "img": "https://pos.nvncdn.com/efbd30-19981/ps/20240206_l6igYHEGT9.jpeg?v=1707214316",
     },
     "Khối Rubik": {
+        "desc": "Thử thách tư duy logic và tốc độ xoay khối.",
         "img": "https://down-vn.img.susercontent.com/file/cn-11134207-820l4-mu377cwjl53720",
     },
     "Truth or Dare": {
+        "desc": "Bộ bài thử thách Thật hay Thách vui nhộn.",
         "img": "https://vn-live-01.slatic.net/p/96cb49838d2c38b9ce928b88eb7247a4.jpg",
     },
     "Bài Uno": {
+        "desc": "Bài Uno lật ngược tình thế bất ngờ cùng chiến hữu.",
         "img": "https://cdn-media.sforum.vn/storage/app/media/wp-content/uploads/2023/02/uno-01.jpg",
     },
     "Mèo Nổ": {
+        "desc": "Game thẻ bài mèo nổ hài hước đầy may rủi.",
         "img": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/12/cach-choi-meo-no-2.jpg",
     },
 }
@@ -264,7 +274,7 @@ st.markdown(
 with st.sidebar:
     st.markdown("### 🌟 NƠI DỪNG CHÂN LỮ KHÁCH")
 
-    # Tặng ngay 160 Nguyên Thạch khi khách nhập tên lần đầu để gacha lấy mã trước
+    # Nhập tên Lữ Khách: tặng ngay 160 Nguyên Thạch khởi đầu để Gacha trước
     input_name_sidebar = st.text_input(
         "👤 Nhập tên của bạn:",
         value=st.session_state.customer_name,
@@ -296,7 +306,7 @@ with st.sidebar:
     else:
         needed = 160 - current_user_gems
         st.caption(
-            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (8k bill = 16 💎)."
+            f"💡 Cần thêm `{needed} 💎` nữa để đổi lượt Gacha (80k bill = 160 💎)."
         )
 
     nav_option = st.radio(
@@ -372,9 +382,8 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             '<div class="genshin-card"><h3>🧋 Gọi Món</h3>',
             unsafe_allow_html=True,
         )
-        # Ô nhập tên Lữ Khách (bỏ chữ Lữ Khách Vô Danh, để trống tự điền)
         input_name = st.text_input(
-            "👤 Tên Lữ Khách (Nhập tên của bạn):",
+            "👤 Tên Lữ Khách:",
             value=st.session_state.customer_name,
             placeholder="Ví dụ: Aether, Lumine...",
         )
@@ -404,7 +413,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             cake_data = {
                 "name": selected_cake,
                 "price": c_info["price"],
-                "desc": c_info["desc"],
             }
 
         selected_toppings = []
@@ -515,7 +523,17 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 if not st.session_state.customer_name.strip():
                     st.error("❌ Vui lòng nhập tên Lữ Khách trước khi xuất hóa đơn để tích lũy Nguyên Thạch!")
                 else:
-                    earned_primogems = int(final_total // 8000) * 16
+                    # Tích lũy Nguyên Thạch theo mốc 80k (80k = 160 Nguyên Thạch)
+                    pending_money = st.session_state.pending_amount_db.get(
+                        st.session_state.customer_name, 0
+                    )
+                    total_accumulated = pending_money + final_total
+                    earned_turns = int(total_accumulated // 80000)
+                    earned_primogems = earned_turns * 160
+                    remainder_money = total_accumulated % 80000
+                    st.session_state.pending_amount_db[
+                        st.session_state.customer_name
+                    ] = remainder_money
 
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
@@ -525,9 +543,15 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     )
 
                     st.balloons()
-                    st.success(
-                        f"🎉 Xuất hóa đơn thành công cho **{st.session_state.customer_name}**! +{earned_primogems} 💎 Nguyên Thạch đã cộng vào ví cá nhân!"
-                    )
+                    if earned_primogems > 0:
+                        st.success(
+                            f"🎉 Xuất hóa đơn thành công cho **{st.session_state.customer_name}**! +{earned_primogems} 💎 Nguyên Thạch đã cộng vào ví cá nhân! (Số dư thừa {remainder_money:,.0f}đ được lưu tích lũy lần sau)."
+                        )
+                    else:
+                        st.success(
+                            f"🎉 Xuất hóa đơn thành công cho **{st.session_state.customer_name}**! Bill chưa đủ 80k, số tiền {final_total:,.0f}đ đã được lưu để tích lũy lần sau."
+                        )
+
                     st.session_state.cart = []
                     st.session_state.discount_code = None
                     st.session_state.discount_percent = 0
@@ -622,7 +646,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
     st.markdown("## 🎲 Kho Trò Chơi Boardgame & Cờ Giải Trí")
     st.write(
-        "Trạng thái các tựa game tại quán để mượn chơi!"
+        "Trạng thái các tựa game tại quán để mượn chơi cùng nhóm bạn!"
     )
 
     game_keys = list(BOARDGAMES_DATA.keys())
@@ -648,8 +672,7 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
                             "<p style='color: #4ade80; font-weight: bold; margin: 6px 0;'>🟢 CÓ SẴN ĐỂ MƯỢN</p>",
                             unsafe_allow_html=True,
                         )
-                        if st.button(f"Mượn chơi", key=f"borrow_{g_name}
-"):
+                        if st.button(f"Mượn chơi", key=f"borrow_{g_name}"):
                             st.session_state.boardgames[g_name] = False
                             st.success(f"Đã mượn {g_name}!")
                             st.rerun()
@@ -670,9 +693,9 @@ elif nav_option == "🎲 Kho Trò Chơi Boardgame & Cờ":
 # ==========================================
 elif nav_option == "🪑 Sơ Đồ Bàn Trống":
     st.markdown('<div class="genshin-card">', unsafe_allow_html=True)
-    st.markdown("## 🪑 Sơ Đồ Bàn Trống")
+    st.markdown("## 🪑 Sơ Đồ Bàn Trống (Teyvat Regions)")
     st.write(
-        "Trạng thái thực của 12 bàn theo các vùng đất."
+        "Trạng thái thực tế của 12 bàn theo các vùng đất trong game."
     )
 
     cols = st.columns(3)
