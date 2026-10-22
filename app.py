@@ -101,7 +101,7 @@ if "boardgames" not in st.session_state:
         "Cờ Vua": True,
         "Cờ Tướng": True,
         "Khối Rubik": False,
-        "True or Dare": True,
+        "Truth or Dare": True,
         "Bài Uno": True,
         "Mèo Nổ": False,
     }
@@ -116,17 +116,17 @@ DRINKS_MENU = {
         "img": "https://cubes-asia.com/storage/blogs/2024-12/cach-lam-ca-phe-muoi-nguyen-lieu-cong-thuc-lam.jpg",
     },
     "Bạc Xỉu": {
-        "price": 40000,
+        "price": 38000,
         "elem": "cryo",
         "img": "https://kingcoffee.com.vn/wp-content/uploads/2026/01/Ty-le-pha-ca-phe-bac-xiu-1024x683.jpg",
     },
     "Cà Phê Sữa": {
-        "price": 35000,
+        "price": 30000,
         "elem": "pyro",
         "img": "https://giacaphe.com/wp-content/uploads/2023/03/ca-phe-sua-da-2.jpg",
     },
     "Cà Phê Đen": {
-        "price": 30000,
+        "price": 28000,
         "elem": "pyro",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh1yM41EDNB7aYHyMEXt3to5grV2GwGRtHcuQHEmTXp1fX6jVoV46A_2Bi&s=10",
     },
@@ -141,12 +141,12 @@ DRINKS_MENU = {
         "img": "https://mocktail.net/wp-content/uploads/2021/05/Matcha-Iced-Latte_ig.jpg",
     },
     "Trà Sữa Olong": {
-        "price": 35000,
+        "price": 30000,
         "elem": "pyro",
         "img": "https://amivietnam.com/wp-content/uploads/2024/03/54-2-508x400.png",
     },
     "Trà Sữa Gạo Rang": {
-        "price": 35000,
+        "price": 30000,
         "elem": "electro",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToiB5jIgP4zf96jrlPfyvMivXWEYk-9J1sxVKomEu-iIy74NHDBt720Fpc&s=10",
     },
@@ -161,17 +161,17 @@ DRINKS_MENU = {
         "img": "https://thucphamplaza.com/wp-content/uploads/products_img/hong-tra-kem.jpg",
     },
     "Yaourt Việt Quất": {
-        "price": 40000,
+        "price": 38000,
         "elem": "pyro",
         "img": "https://file.hstatic.net/200000055918/file/yaourt-blueberry_0dae760f3a8d4d008d8ca71c0ad577a6_grande.jpg",
     },
     "Trà Sữa Thái Xanh": {
-        "price": 35000,
+        "price": 30000,
         "elem": "dendro",
         "img": "https://barona.vn/storage/meo-vat/182/cach-lam-tra-sua-thai-xanh.jpg",
     },
     "Trà Chanh Lô Hội": {
-        "price": 30000,
+        "price": 28000,
         "elem": "anemo",
         "img": "https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-1025.jpg",
     },
@@ -189,11 +189,11 @@ DRINKS_MENU = {
 
 DESSERTS_MENU = {
     "Mousse Chanh Dây": {
-        "price": 30000,
+        "price": 35000,
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDf9d0k7qLRvyID6XhJSbtHH9A-eGa_ctyexpokjjyesu71qLIPMRM8qk&s=10",
     },
     "Tiramisu Việt Quất": {
-        "price": 40000,
+        "price": 35000,
         "img": "https://cdn.hstatic.net/products/1000398438/viet_quat_8b428f1b3aa74ca9a769a7cc0b5e647c_1024x1024.jpg",
     },
     "Su Kem": {
@@ -235,7 +235,7 @@ BOARDGAMES_DATA = {
         "desc": "Thử thách tư duy logic và tốc độ xoay khối.",
         "img": "https://down-vn.img.susercontent.com/file/cn-11134207-820l4-mu377cwjl53720",
     },
-    "True or Dare": {
+    "Truth or Dare": {
         "desc": "Bộ bài thử thách Thật hay Thách vui nhộn.",
         "img": "https://vn-live-01.slatic.net/p/96cb49838d2c38b9ce928b88eb7247a4.jpg",
     },
@@ -275,25 +275,10 @@ st.markdown(
 # ==========================================
 with st.sidebar:
     st.markdown("### 🌟 LỮ KHÁCH")
-
-    # Xử lý tên Lữ Khách: khi vừa nhập tên, tặng ngay 160 Nguyên Thạch khởi đầu để khách Gacha TRƯỚC khi thanh toán
-    input_name_sidebar = st.text_input(
-        "👤 Nhập tên của bạn:",
-        value=st.session_state.customer_name,
-        placeholder="Aether, Lumine...",
-    )
-    if input_name_sidebar != st.session_state.customer_name:
-        st.session_state.customer_name = input_name_sidebar
-        if (
-            input_name_sidebar.strip()
-            and input_name_sidebar not in st.session_state.primogems_db
-        ):
-            # Tặng 160 Nguyên Thạch chào mừng (1 lượt quay Gacha miễn phí)
-            st.session_state.primogems_db[input_name_sidebar] = 160
-
     current_user_gems = st.session_state.primogems_db.get(
         st.session_state.customer_name, 0
     )
+
     display_name = (
         st.session_state.customer_name
         if st.session_state.customer_name
@@ -314,9 +299,7 @@ with st.sidebar:
         st.success("🎉 Đủ 160 Nguyên Thạch! Đổi Gacha ngay!")
     else:
         needed = 160 - current_user_gems
-        st.caption(
-            f"💡 Cần thêm `{needed} 💎` hoặc hóa đơn 80k để đổi Gacha."
-        )
+        st.caption(f"💡 Cần thêm `{needed} 💎` đổi Gacha.")
 
     st.markdown("---")
     st.markdown("### ☕ THÔNG TIN QUÁN")
@@ -402,10 +385,18 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
     with col_order_right:
         st.markdown(
-            '<div class="genshin-card"><h3>🧋 Tùy Chỉnh & Gọi Món</h3>',
+            '<div class="genshin-card"><h3>🧋 Gọi Món</h3>',
             unsafe_allow_html=True,
         )
+        input_name = st.text_input(
+            "👤 Tên Lữ Khách:",
+            value=st.session_state.customer_name,
+            placeholder="Ví dụ: Aether, Lumine...",
+        )
+        if input_name:
+            st.session_state.customer_name = input_name
 
+        # ---- PHẦN NƯỚC VÀ SỐ LƯỢNG NƯỚC RIÊNG ----
         selected_drink = st.selectbox("Chọn món nước:", drink_keys)
         drink_info = DRINKS_MENU[selected_drink]
 
@@ -420,7 +411,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             "Số lượng nước", min_value=1, max_value=20, value=1, key="qty_drink"
         )
 
-        # ---- 1. ĐẶT TOPPING LÊN TRƯỚC BÁNH NGỌT ----
+        # ---- ĐƯA TOPPING LÊN TRƯỚC BÁNH NGỌT ----
         selected_toppings = []
         st.markdown("✨ **Topping:**")
         top_cols = st.columns(2)
@@ -435,7 +426,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
         st.markdown("---")
 
-        # ---- 2. BÁNH NGỌT VÀ SỐ LƯỢNG BÁNH TÁCH RIÊNG ----
+        # ---- PHẦN BÁNH NGỌT & SỐ LƯỢNG BÁNH RIÊNG ----
         selected_cake = st.selectbox(
             "Chọn bánh ngọt ăn kèm:", ["-- Không dùng bánh ngọt --"] + cake_keys
         )
@@ -456,7 +447,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
         if st.button("➕ THÊM VÀO GIỎ HÀNG", use_container_width=True):
             if not st.session_state.customer_name.strip():
-                st.warning("⚠️ Vui lòng nhập tên Lữ Khách ở thanh bên trái trước khi thêm vào giỏ hàng!")
+                st.warning("⚠️ Vui lòng nhập tên Lữ Khách trước khi thêm vào giỏ hàng!")
             else:
                 actual_price = drink_info["price"]
                 if "L (+5,000đ)" in size:
@@ -521,21 +512,16 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     unsafe_allow_html=True,
                 )
 
-            # Áp dụng mã giảm giá nếu khách đã Gacha trước đó
             if st.session_state.discount_percent > 0:
                 discount_amount = subtotal * (
                     st.session_state.discount_percent / 100
                 )
-                st.success(
-                    f"🎁 Áp dụng Voucher giảm: -{st.session_state.discount_percent}% (Mã: {st.session_state.discount_code})"
-                )
+                st.success(f"Voucher giảm: -{st.session_state.discount_percent}%")
             else:
                 discount_amount = 0
 
             final_total = subtotal - discount_amount
             bill_content += "-" * 40 + "\n"
-            if st.session_state.discount_percent > 0:
-                bill_content += f"Giam gia: -{st.session_state.discount_percent}%\n"
             bill_content += f"TONG THANH TOAN: {final_total:,.0f} VND\n"
             bill_content += "Cam on lữ khách đã ghe tham quan!"
 
@@ -572,7 +558,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 if not st.session_state.customer_name.strip():
                     st.error("❌ Vui lòng nhập tên Lữ Khách trước khi thanh toán!")
                 else:
-                    # ---- 3. MỨC TÍCH LUỸ MỚI: 80K ĐƠN HÀNG = 160 NGUYÊN THẠCH ----
+                    # Mức tích lũy mới: cứ 80k đơn hàng = 160 Nguyên Thạch (1 lần quay)
                     earned_primogems = int(final_total // 80000) * 160
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
@@ -606,7 +592,7 @@ elif nav_option == "✨ Cổng Gacha Wish":
         st.session_state.customer_name, 0
     )
     st.write(
-        "Sử dụng Nguyên Thạch (160 💎 / lần quay) để quay Gacha lấy mã giảm giá áp dụng vào hóa đơn!"
+        "Sử dụng Nguyên Thạch tích lũy riêng của bạn (160 💎 / lần quay) để nhận mã giảm giá!"
     )
 
     col_w1, col_w2 = st.columns([1, 1])
@@ -621,8 +607,6 @@ elif nav_option == "✨ Cổng Gacha Wish":
         st.info(
             f"Số Nguyên Thạch của **{active_name}**: **{current_user_gems} 💎**"
         )
-        if current_user_gems < 160:
-            st.warning("💡 Bạn đang có sẵn 160 Nguyên Thạch chào mừng hoặc tích lũy, hãy thử quay Gacha ngay!")
 
     with col_w2:
         st.markdown(
@@ -632,11 +616,11 @@ elif nav_option == "✨ Cổng Gacha Wish":
         if st.button("🌠 CẦU NGUYỆN 1 LẦN (160 💎)"):
             if not st.session_state.customer_name.strip():
                 st.error(
-                    "❌ Vui lòng nhập tên Lữ Khách ở thanh bên trái trước khi quay Gacha!"
+                    "❌ Vui lòng nhập tên Lữ Khách ở phần Gọi Món trước khi quay Gacha!"
                 )
             elif current_user_gems < 160:
                 st.error(
-                    "❌ Bạn không đủ 160 Nguyên Thạch! Hãy thanh toán hóa đơn từ 80k để tích lũy thêm."
+                    "❌ Bạn không đủ 160 Nguyên Thạch! Hãy xuất thêm hóa đơn để tích lũy."
                 )
             else:
                 st.session_state.primogems_db[
@@ -646,14 +630,14 @@ elif nav_option == "✨ Cổng Gacha Wish":
                     time.sleep(1.2)
 
                 roll = random.randint(1, 100)
-                if roll <= 5:
+                if roll <= 10:
                     discount, tier, code = (
                         50,
                         "⭐⭐⭐⭐⭐ (Pro 5 SAO - Giảm 50%)",
                         "TEYVAT50",
                     )
                     st.balloons()
-                elif roll <= 30:
+                elif roll <= 40:
                     discount, tier, code = (
                         20,
                         "⭐⭐⭐⭐ (Vip 4 SAO - Giảm 20%)",
@@ -669,7 +653,7 @@ elif nav_option == "✨ Cổng Gacha Wish":
                 st.session_state.discount_percent = discount
                 st.session_state.discount_code = code
                 st.success(
-                    f"🌟 Chúc mừng **{active_name}** nhận được {tier}! Mã `{code}` đã sẵn sàng áp dụng vào hóa đơn của bạn."
+                    f"🌟 Chúc mừng **{active_name}** nhận được {tier}! Mã: {code}"
                 )
         st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
