@@ -565,7 +565,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 if not st.session_state.customer_name.strip():
                     st.error("❌ Vui lòng nhập tên Lữ Khách trước khi thanh toán!")
                 else:
-                    # Mức tích lũy mới: cứ 80k đơn hàng = 160 Nguyên Thạch (1 lần quay)
                     earned_primogems = int(final_total // 80000) * 160
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
@@ -581,6 +580,8 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     st.session_state.cart = []
                     st.session_state.discount_code = None
                     st.session_state.discount_percent = 0
+                    time.sleep(0.5)
+                    st.rerun()
         st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
