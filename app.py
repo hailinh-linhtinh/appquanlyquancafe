@@ -1,4 +1,5 @@
 import base64
+from datetime import datetime, timedelta, timezone
 import random
 import time
 import pandas as pd
@@ -396,7 +397,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
         if input_name:
             st.session_state.customer_name = input_name
 
-        # ---- PHẦN NƯỚC VÀ SỐ LƯỢNG NƯỚC RIÊNG ----
         selected_drink = st.selectbox("Chọn món nước:", drink_keys)
         drink_info = DRINKS_MENU[selected_drink]
 
@@ -411,7 +411,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
             "Số lượng nước", min_value=1, max_value=20, value=1, key="qty_drink"
         )
 
-        # ---- ĐƯA TOPPING LÊN TRƯỚC BÁNH NGỌT ----
         selected_toppings = []
         st.markdown("✨ **Topping:**")
         top_cols = st.columns(2)
@@ -426,7 +425,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
 
         st.markdown("---")
 
-        # ---- PHẦN BÁNH NGỌT & SỐ LƯỢNG BÁNH RIÊNG ----
         selected_cake = st.selectbox(
             "Chọn bánh ngọt ăn kèm:", ["-- Không dùng bánh ngọt --"] + cake_keys
         )
@@ -484,10 +482,14 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
         if not st.session_state.cart:
             st.warning("Giỏ hàng trống!")
         else:
+            # FIX: Lấy chuẩn thời gian thực theo múi giờ Việt Nam (UTC+7)
+            vietnam_time = datetime.now(timezone(timedelta(hours=7)))
+            time_str = vietnam_time.strftime("%d/%m/%Y %H:%M:%S")
+
             subtotal = 0
             bill_content = f"=== HOA DON LIMDIM COFFEE • TEYVAT ===\n"
             bill_content += f"Khach hang: {st.session_state.customer_name}\n"
-            bill_content += f"Thoi gian: {time.strftime('%d/%m/%Y %H:%M:%S')}\n"
+            bill_content += f"Thoi gian: {time_str}\n"
             bill_content += "-" * 40 + "\n"
 
             st.markdown(
@@ -512,18 +514,25 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                     unsafe_allow_html=True,
                 )
 
+            # FIX: Hiển thị mã giảm giá trực tiếp trên giao diện bill & file text
+            discount_amount = 0
             if st.session_state.discount_percent > 0:
                 discount_amount = subtotal * (
                     st.session_state.discount_percent / 100
                 )
-                st.success(f"Voucher giảm: -{st.session_state.discount_percent}%")
+                current_code = st.session_state.discount_code if st.session_state.discount_code else "VOUCHER"
+                st.success(f"🎁 Áp dụng mã giảm giá: **{current_code}** (-{st.session_state.discount_percent}%)")
+                
+                bill_content += "-" * 40 + "\n"
+                bill_content += f"Ma giam gia: {current_code} (-{st.session_state.discount_percent}%)\n"
+                bill_content += f"So tien giam: -{discount_amount:,.0f} VND\n"
             else:
-                discount_amount = 0
+                st.info("💡 Mẹo: Vào cổng Gacha Wish để quay mã giảm giá lên đến 50%!")
 
             final_total = subtotal - discount_amount
             bill_content += "-" * 40 + "\n"
             bill_content += f"TONG THANH TOAN: {final_total:,.0f} VND\n"
-            bill_content += "Cam on lữ khách đã ghe tham quan!"
+            bill_content += "Cam on lu khach da ghe tham quan!"
 
             st.markdown(
                 f"<h3 style='color: #4ade80; text-align: right;'>Tổng Bill: {final_total:,.0f} VNĐ</h3>",
@@ -558,7 +567,6 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 if not st.session_state.customer_name.strip():
                     st.error("❌ Vui lòng nhập tên Lữ Khách trước khi thanh toán!")
                 else:
-                    # Mức tích lũy mới: cứ 80k đơn hàng = 160 Nguyên Thạch (1 lần quay)
                     earned_primogems = int(final_total // 80000) * 160
                     curr_gems = st.session_state.primogems_db.get(
                         st.session_state.customer_name, 0
@@ -630,14 +638,14 @@ elif nav_option == "✨ Cổng Gacha Wish":
                     time.sleep(1.2)
 
                 roll = random.randint(1, 100)
-                if roll <= 10:
+                if roll <= 5:
                     discount, tier, code = (
                         50,
                         "⭐⭐⭐⭐⭐ (Pro 5 SAO - Giảm 50%)",
                         "TEYVAT50",
                     )
                     st.balloons()
-                elif roll <= 40:
+                elif roll <= 30:
                     discount, tier, code = (
                         20,
                         "⭐⭐⭐⭐ (Vip 4 SAO - Giảm 20%)",
