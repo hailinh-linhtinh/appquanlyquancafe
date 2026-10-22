@@ -306,7 +306,7 @@ with st.sidebar:
     st.markdown(
         """
         <div style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.3;">
-        📍 <b>ĐC:</b> 0707 Teyvat, Phú Quốc, Genshin<br>
+        📍 <b>ĐC:</b> 0707 Teyvat, Genshin, Phú Quốc<br>
         ⏰ <b>Mở:</b> 08:00 - 22:30<br>
         📞 <b>Hotline:</b> 0714.082.012
         </div>
@@ -443,7 +443,7 @@ if nav_option == "🛒 Khám Phá Menu & Gọi Món":
                 "qty": qty_cake,
             }
 
-        note = st.text_input("Ghi chú", placeholder="VD: ít đá...")
+        note = st.text_input("Ghi chú", placeholder="VD: thêm muỗng...")
 
         if st.button("➕ THÊM VÀO GIỎ HÀNG", use_container_width=True):
             if not st.session_state.customer_name.strip():
