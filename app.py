@@ -233,7 +233,7 @@ BOARDGAMES_DATA = {
     },
     "Cờ Tướng": {
         "desc": "Trận chiến tướng sĩ tượng xe pháo mã truyền thống.",
-        "img": "https://www.covuacaocap.com/wp-content/uploads/Cach-choi-co-tuong-06.jpg",
+        "img": "https://wiix.vn/wp-content/uploads/2024/09/bo-co-tuong-qua-tang-van-hoa-truyen-thong.jpg",
     },
     "Bài Uno": {
         "desc": "Bài Uno lật ngược tình thế bất ngờ cùng chiến hữu.",
